@@ -1,0 +1,17 @@
+# Dockerfile.dev
+FROM node:20-alpine
+
+# 1. 작업 디렉토리 생성
+WORKDIR /app
+
+# 2. 종속성 설치 위한 파일 복사
+COPY package*.json ./
+
+# 3. 종속성 설치
+RUN yarn
+
+# 4. 나머지 소스 복사
+COPY . .
+
+# 5. 개발 서버 실행
+CMD ["yarn", "dev"]
