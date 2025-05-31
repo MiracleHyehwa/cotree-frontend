@@ -9,16 +9,19 @@ interface CommonLayoutProps {
 
 export default function CommonLayout({ children, title = "" }: CommonLayoutProps) {
   return (
-    <div
-      id="main-container"
-      className="relative flex min-h-screen max-w-limit w-full flex-col items-center justify-start overflow-hidden mx-auto"
-    >
+    <div id="main-container" className="flex min-h-screen w-full flex-col items-center justify-start">
       <header id="main-header" className="sticky top-0 z-20 flex w-full flex-col items-center justify-center">
         <div className="relative z-20 flex w-full max-w-limit flex-row items-center justify-between gap-4 transition-colors bg-white h-[52px] max-h-[52px] min-h-[52px] px-24">
           <div className="absolute bottom-0 left-3 top-0 flex flex-row items-center justify-center">
             <Link to={"/"} className="fflex flex-1 items-center justify-center p-2">
               <span className="sr-only">Home</span>
-              <img src="/logo.png" width={100} height={52} alt="logo" className="object-left -ml-3 pt-1" />
+              <img
+                src="/logo.png"
+                width={60}
+                height={52}
+                alt="logo"
+                className="max-h-[52px] h-[52px] object-left pt-1"
+              />
             </Link>
           </div>
           <div className="flex-1 truncate text-center text-sm transition-colors text-muted-foreground font-bold">
@@ -44,7 +47,7 @@ export default function CommonLayout({ children, title = "" }: CommonLayoutProps
 
       <div
         id="main-content"
-        className="flex w-full max-w-limit flex-1 flex-col items-start justify-start pt-6 text-left relative pb-16 overflow-hidden"
+        className="flex w-full max-w-limit flex-1 flex-col items-stretch justify-start pb-safe-bottom pb-16"
       >
         {children}
       </div>
