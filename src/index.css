@@ -1,6 +1,26 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@import "swiper/css";
+@import "swiper/css/effect-creative";
+@import "swiper/css/free-mode";
+
+@layer theme {
+  @theme {
+    --max-w-limit: 520px;
+  }
+}
+
+@layer utilities {
+  .max-w-limit {
+    max-width: var(--max-w-limit);
+  }
+
+  .perspective-1200 {
+    perspective: 1200px;
+  }
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
