@@ -15,10 +15,6 @@
   .max-w-limit {
     max-width: var(--max-w-limit);
   }
-
-  .perspective-1200 {
-    perspective: 1200px;
-  }
 }
 
 @custom-variant dark (&:is(.dark *));
