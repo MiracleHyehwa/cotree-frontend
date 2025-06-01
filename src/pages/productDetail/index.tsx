@@ -1,4 +1,4 @@
-import HeaderBackLayout from "@/shared/layout/HeaderBackLayout";
+import { HeaderBackLayout } from "@/shared/layout";
 import ProductDetailView from "./productDetailView";
 
 export default function ProductDetailPage() {

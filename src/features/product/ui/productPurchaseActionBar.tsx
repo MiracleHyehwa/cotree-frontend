@@ -28,7 +28,7 @@ export default function ProductPurchaseActionBar({ product, children }: ProductP
   return (
     <>
       <div className="w-full max-w-limit fixed bottom-0 left-1/2 -translate-x-1/2 bg-background border-t border-border z-50">
-        <div className="max-w-limit mx-auto px-5 py-4">
+        <div className="max-w-limit mx-auto px-4 py-4">
           <div className="w-full flex gap-3">
             <Button
               className="w-1/4 h-12 rounded-lg border border-border bg-background flex items-center justify-center cursor-pointer"
