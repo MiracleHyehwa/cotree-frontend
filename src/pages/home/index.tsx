@@ -1,6 +1,6 @@
+import { CommonLayout } from "@/shared/layout";
 import { HomeBannerSwiper, HomeCategorySwiper, HomeEcoBrandSwiper } from "@/widgets/home";
 
-import CommonLayout from "@/shared/layout/commonLayout";
 import TabNavigation from "@/widgets/tab/tabNavigation";
 
 export default function HomePage() {
