@@ -3,7 +3,7 @@ import OrderCreateView from "./orderCreateView";
 
 export default function OrderCreatePage() {
   return (
-    <HeaderHomeLayout>
+    <HeaderHomeLayout title="주문/결제">
       <OrderCreateView />
     </HeaderHomeLayout>
   );

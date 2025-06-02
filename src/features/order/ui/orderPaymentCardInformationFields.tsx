@@ -1,22 +1,32 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/components/ui/select";
 import { Controller, useFormContext } from "react-hook-form";
 
-export default function OrderPaymentCardInformationForm() {
+export default function OrderPaymentCardInformationFields() {
   const { setValue, control, formState } = useFormContext();
   const { errors } = formState;
 
   const [segments, setSegments] = useState(["", "", "", ""]);
+  const refs = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+  ];
 
   const handleSegmentChange = (value: string, index: number) => {
+    const newValue = value.replace(/\D/g, "").slice(0, 4);
     const newSegments = [...segments];
-    newSegments[index] = value.replace(/\D/g, "").slice(0, 4);
+    newSegments[index] = newValue;
     setSegments(newSegments);
 
-    const joined = newSegments.join("");
-    setValue("cardNumber", joined);
+    setValue("cardNumber", newSegments.join(""));
+
+    if (newValue.length === 4 && index < 3) {
+      refs[index + 1].current?.focus();
+    }
   };
 
   return (
@@ -27,6 +37,7 @@ export default function OrderPaymentCardInformationForm() {
           {segments.map((val, i) => (
             <Input
               key={i}
+              ref={refs[i]}
               placeholder="****"
               maxLength={4}
               className="w-1/4 placeholder:text-muted-foreground/50"
