@@ -1,5 +1,5 @@
 <!-- 제목 입력하기 -->
-<!-- [FEAT/CHORE/FIX/DOCS/REFACTOR/#이슈번호] 기능제목 -->
+<!-- [FEAT/CHORE/FIX/DOCS/REFACTOR] 기능제목 -->
 
 
 <!-- 주석 부분 모두 지우고 작성 -->
