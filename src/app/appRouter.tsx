@@ -3,6 +3,7 @@ import HomePage from "@/pages/home";
 import CategoryPage from "@/pages/category";
 import ProductDetailPage from "@/pages/productDetail";
 import OrderCreatePage from "@/pages/order/create";
+import MyPage from "@/pages/mypage";
 
 export default function AppRouter() {
   return (
@@ -12,6 +13,7 @@ export default function AppRouter() {
         <Route path="/category" element={<CategoryPage />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />
         <Route path="/order/:id" element={<OrderCreatePage />} />
+        <Route path="/mypage" element={<MyPage />} />
       </Routes>
     </BrowserRouter>
   );
