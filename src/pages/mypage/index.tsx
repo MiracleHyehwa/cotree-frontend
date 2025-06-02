@@ -4,7 +4,7 @@ import { User, Gift, Package, Truck, Clock, CreditCard, RefreshCw, ChevronRight 
 const user = {
   name: "한*준",
   profileImage: "https://placehold.co/64x64.png",
-  point: 12400,
+  point: 10000,
 };
 
 const orderStatuses = [
@@ -59,6 +59,19 @@ export default function MyPage() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 px-4">
+          <div
+            className="bg-gradient-to-r from-[#A8E6CF] to-[#DCEDC1] hover:from-[#81C784] hover:to-[#A5D6A7]
+               p-4 rounded-xl flex items-center justify-between shadow-md transition-transform hover:scale-105 cursor-pointer"
+          >
+            <div className="flex items-center gap-2">
+              <span className="text-2xl">🌳</span>
+              <p className="text-base font-semibold text-foreground">내 나무 보러가기</p>
+            </div>
+            <ChevronRight className="w-4 h-4 text-foredground" />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 gap-4 px-4">
           <div className="bg-primary p-4 rounded-xl text-primary-foreground">
             <div className="flex items-center gap-2 mb-2">
               <div className="w-6 h-6 bg-primary-foreground/20 rounded-full flex items-center justify-center">
@@ -72,11 +85,11 @@ export default function MyPage() {
 
         <div className="px-4">
           <h3 className="text-lg font-bold text-foreground mb-4">주문/배송 조회</h3>
-          <div className="grid grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 gap-3">
             {orderStatuses.map(({ label, count, icon: Icon }) => (
               <div
                 key={label}
-                className="text-center p-4 bg-muted/50 rounded-xl hover:bg-muted transition-colors cursor-pointer group"
+                className="text-center p-4 bg-muted rounded-xl hover:bg-muted transition-colors cursor-pointer group"
               >
                 <div className="flex justify-center mb-3">
                   <div className="w-12 h-12 bg-background rounded-full flex items-center justify-center border border-border">
