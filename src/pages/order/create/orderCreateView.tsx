@@ -4,7 +4,8 @@ import { OrderPaymentMethodButtonList, OrderPaymentTypeRadioGroup, OrderProductL
 import {
   OrderAgreementConfirmationCheckbox,
   OrderPaymentActionBar,
-  OrderPaymentCardInformationForm,
+  OrderPaymentCardInformationFields,
+  OrderRecipientFields,
   OrderShippingAddressPostcode,
   OrderShippingAddressRegistrationSection,
 } from "@/features/order/ui";
@@ -58,9 +59,11 @@ export default function OrderCreateView() {
   });
 
   const onSubmit = (data: OrderFormValues) => {
-    const { cardNumber, shippingAddress, products, totalAmount } = data;
+    const { recipientName, recipientPhone, cardNumber, shippingAddress, products, totalAmount } = data;
 
     const payload = {
+      recipientName,
+      recipientPhone,
       cardNumber,
       shippingAddress,
       products,
@@ -78,7 +81,7 @@ export default function OrderCreateView() {
             <OrderShippingAddressPostcode open={open} setOpen={setOpen} onSelect={onSelect} />
           )}
         </OrderShippingAddressRegistrationSection>
-
+        <OrderRecipientFields />
         <OrderProductListSection products={products} />
         <section className="space-y-4">
           <h2 className="font-semibold text-lg">결제수단</h2>
@@ -93,7 +96,7 @@ export default function OrderCreateView() {
             ]}
           />
 
-          <OrderPaymentCardInformationForm />
+          <OrderPaymentCardInformationFields />
         </section>
 
         <section className="space-y-3">

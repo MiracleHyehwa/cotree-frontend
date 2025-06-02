@@ -1,6 +1,8 @@
 import { z } from "zod";
 
 export const orderFormSchema = z.object({
+  recipientName: z.string().min(1, "이름을 입력해주세요"),
+  recipientPhone: z.string().regex(/^010\d{8}$/, "전화번호 형식이 올바르지 않습니다"),
   cardNumber: z.string().min(16, "카드 번호는 16자리를 입력해주세요"),
   cardType: z.string().min(1, "카드사를 선택해주세요"),
   installment: z.string().min(1, "할부 개월을 선택해주세요"),
