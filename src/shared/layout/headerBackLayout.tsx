@@ -25,7 +25,7 @@ export default function HeaderBackLayout({ children, title = "" }: HeaderBackLay
           </div>
 
           <div className="absolute bottom-0 right-4 top-0 flex flex-row items-center justify-center gap-4">
-            <Link to={"#"} className="relative -m-2 flex h-10 w-10 items-center justify-center p-2">
+            <Link to={"/cart"} className="relative -m-2 flex h-10 w-10 items-center justify-center p-2">
               <span className="sr-only">ShoppingCart</span>
               <ShoppingCart className="!w-6 !h-6 text-black" />
             </Link>
