@@ -37,7 +37,7 @@ export default function CommonLayout({ children, title = "" }: CommonLayoutProps
               <span className="sr-only">Search</span>
               <Search className="!w-6 !h-6 text-black" />
             </Button>
-            <Link to={"/"} className="relative -m-2 flex h-10 w-10 items-center justify-center p-2">
+            <Link to={"/cart"} className="relative -m-2 flex h-10 w-10 items-center justify-center p-2">
               <span className="sr-only">ShoppingCart</span>
               <ShoppingCart className="!w-6 !h-6 text-black" />
             </Link>
