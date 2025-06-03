@@ -72,7 +72,7 @@ export default function ShoppingCartPage() {
       {cartItems.length === 0 ? (
         <CartEmptyState />
       ) : (
-        <>
+        <div className="w-full max-w-limit">
           <div className="flex items-center justify-between border-b px-4 py-3">
             <div className="flex items-center gap-2">
               <Checkbox checked={isAllSelected} onCheckedChange={handleSelectAll} />
@@ -90,7 +90,7 @@ export default function ShoppingCartPage() {
           />
 
           <CartOrderActionBar selectedCount={selectedCount} />
-        </>
+        </div>
       )}
     </HeaderHomeLayout>
   );
