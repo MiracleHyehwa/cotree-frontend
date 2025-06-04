@@ -11,6 +11,7 @@ import {
 } from "@/features/order/ui";
 import { FormProvider, useForm } from "react-hook-form";
 import { orderFormSchema, OrderFormValues } from "@/features/order/model/schema";
+import { useAuthenticatedNavigate } from "@/features/auth/hooks";
 
 const DISCOUNT = 0;
 const USED_POINT = 0;
@@ -38,6 +39,8 @@ const products = [
 ];
 
 export default function OrderCreateView() {
+  const navigate = useAuthenticatedNavigate();
+
   const [isChecked, setIsChecked] = useState(false);
 
   const productTotal = products.reduce((sum, p) => sum + p.price * p.quantity, 0);
@@ -69,8 +72,8 @@ export default function OrderCreateView() {
       products,
       totalAmount,
     };
-
-    console.log("백엔드 전송:", payload);
+    console.log(`백엔드 데이터 전송 : ${payload}`);
+    navigate("/order/completed/1");
   };
 
   return (
