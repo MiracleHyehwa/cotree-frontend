@@ -1,6 +1,6 @@
 import { SearchProvider } from "@/features/search/context";
 import { SearchInput, SearchRecentKeyword, SearchResult, SearchContent } from "@/features/search/ui";
-import SearchLayout from "@/shared/layout/searchLayout";
+import { SearchLayout } from "@/shared/layout";
 
 export default function SearchPage() {
   return (
