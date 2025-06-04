@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/shared/components/ui/button";
 import { ShoppingCart } from "lucide-react";
+import { useAuth } from "@/features/auth/hooks";
 
 interface ProductPurchaseActionBarProps {
   product: {
@@ -16,7 +17,16 @@ interface ProductPurchaseActionBarProps {
 }
 
 export default function ProductPurchaseActionBar({ product, children }: ProductPurchaseActionBarProps) {
+  const { isAuthenticated, openAuthDrawer } = useAuth();
+
   const [open, setOpen] = useState(false);
+
+  const handleAddToCart = () => {
+    if (!isAuthenticated) {
+      openAuthDrawer("/cart");
+      return;
+    }
+  };
 
   const handleOpenDrawer = () => {
     if (document.activeElement instanceof HTMLElement) {
@@ -33,6 +43,7 @@ export default function ProductPurchaseActionBar({ product, children }: ProductP
             <Button
               className="w-1/4 h-12 rounded-lg border border-border bg-background flex items-center justify-center cursor-pointer"
               variant="link"
+              onClick={handleAddToCart}
             >
               <ShoppingCart className="w-5 h-5 text-muted-foreground" />
             </Button>

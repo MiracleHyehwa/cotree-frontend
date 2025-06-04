@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription } from "@/shared/components/ui/drawer";
 import { Button } from "@/shared/components/ui/button";
+import { useAuth, useAuthenticatedNavigate } from "@/features/auth/hooks";
 
 interface ProductPurchaseDrawerProps {
   open: boolean;
@@ -13,8 +14,30 @@ interface ProductPurchaseDrawerProps {
 }
 
 export default function ProductPurchaseDrawer({ open, setOpen, product }: ProductPurchaseDrawerProps) {
+  const { isAuthenticated, openAuthDrawer } = useAuth();
+
   const [quantity, setQuantity] = useState(1);
   const finalPrice = product.price - product.discount;
+  const navigate = useAuthenticatedNavigate();
+
+  const handlePurchase = () => {
+    setOpen(false);
+    setTimeout(() => {
+      navigate("/order/1");
+    }, 300);
+  };
+
+  const handleAddToCart = () => {
+    if (!isAuthenticated) {
+      setOpen(false);
+      setTimeout(() => {
+        openAuthDrawer("/cart");
+      }, 300);
+      return;
+    }
+
+    console.log("장바구니에 담김");
+  };
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
@@ -58,10 +81,14 @@ export default function ProductPurchaseDrawer({ open, setOpen, product }: Produc
           </div>
 
           <div className="grid grid-cols-2 gap-3 pt-4">
-            <Button className="h-12 text-base font-medium" onClick={() => setOpen(false)}>
+            <Button className="h-12 text-base font-medium" onClick={handlePurchase}>
               바로 구매
             </Button>
-            <Button className="h-12 rounded-lg border border-border bg-background text-foreground" variant="link">
+            <Button
+              className="h-12 rounded-lg border border-border bg-background text-foreground"
+              variant="link"
+              onClick={handleAddToCart}
+            >
               장바구니 담기
             </Button>
           </div>
