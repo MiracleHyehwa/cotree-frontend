@@ -1,6 +1,7 @@
 import { Button } from "@/shared/components/ui/button";
 import { Search, ShoppingCart } from "lucide-react";
 import { AuthLink } from "@/features/auth/ui";
+import { useAuthenticatedNavigate } from "@/features/auth/hooks";
 
 interface CommonLayoutProps {
   children: React.ReactNode;
@@ -8,6 +9,8 @@ interface CommonLayoutProps {
 }
 
 export default function CommonLayout({ children, title = "" }: CommonLayoutProps) {
+  const navigate = useAuthenticatedNavigate();
+
   return (
     <div id="main-container" className="flex min-h-screen w-full flex-col items-center justify-start">
       <header id="main-header" className="sticky top-0 z-20 flex w-full flex-col items-center justify-center">
@@ -33,6 +36,7 @@ export default function CommonLayout({ children, title = "" }: CommonLayoutProps
               type="button"
               className="relative -m-2 flex w-8 h-8 items-center justify-center p-2 cursor-pointer"
               variant="link"
+              onClick={() => navigate("/search")}
             >
               <span className="sr-only">Search</span>
               <Search className="!w-6 !h-6 text-black" />
