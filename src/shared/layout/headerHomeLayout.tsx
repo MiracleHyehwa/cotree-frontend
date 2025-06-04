@@ -1,6 +1,7 @@
-import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/shared/components/ui/button";
 import { ArrowLeft, Home } from "lucide-react";
+import { AuthLink } from "@/features/auth/ui";
+import { useAuthenticatedNavigate } from "@/features/auth/hooks/useAuthenticateNavigate";
 
 interface HeaderBackLayoutProps {
   children: React.ReactNode;
@@ -8,7 +9,7 @@ interface HeaderBackLayoutProps {
 }
 
 export default function HeaderHomeLayout({ children, title = "" }: HeaderBackLayoutProps) {
-  const navigate = useNavigate();
+  const navigate = useAuthenticatedNavigate();
 
   return (
     <div id="main-container" className="flex min-h-screen w-full flex-col items-center justify-start">
@@ -25,10 +26,10 @@ export default function HeaderHomeLayout({ children, title = "" }: HeaderBackLay
           </div>
 
           <div className="absolute bottom-0 right-4 top-0 flex flex-row items-center justify-center gap-4">
-            <Link to={"/"} className="relative -m-2 flex h-10 w-10 items-center justify-center p-2">
+            <AuthLink to={"/"} className="relative -m-2 flex h-10 w-10 items-center justify-center p-2">
               <span className="sr-only">홈</span>
               <Home className="!w-6 !h-6 text-black" />
-            </Link>
+            </AuthLink>
           </div>
         </div>
       </header>

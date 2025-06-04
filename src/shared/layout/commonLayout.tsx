@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
 import { Button } from "@/shared/components/ui/button";
 import { Search, ShoppingCart } from "lucide-react";
+import { AuthLink } from "@/features/auth/ui";
 
 interface CommonLayoutProps {
   children: React.ReactNode;
@@ -13,7 +13,7 @@ export default function CommonLayout({ children, title = "" }: CommonLayoutProps
       <header id="main-header" className="sticky top-0 z-20 flex w-full flex-col items-center justify-center">
         <div className="relative z-20 flex w-full max-w-limit flex-row items-center justify-between gap-4 transition-colors bg-white h-[52px] max-h-[52px] min-h-[52px] px-24">
           <div className="absolute bottom-0 left-3 top-0 flex flex-row items-center justify-center">
-            <Link to={"/"} className="fflex flex-1 items-center justify-center p-2">
+            <AuthLink to={"/"} className="fflex flex-1 items-center justify-center p-2">
               <span className="sr-only">Home</span>
               <img
                 src="/logo.png"
@@ -22,7 +22,7 @@ export default function CommonLayout({ children, title = "" }: CommonLayoutProps
                 alt="logo"
                 className="max-h-[52px] h-[52px] object-left pt-1"
               />
-            </Link>
+            </AuthLink>
           </div>
           <div className="flex-1 truncate text-center text-sm transition-colors text-muted-foreground font-bold">
             {title}
@@ -37,10 +37,10 @@ export default function CommonLayout({ children, title = "" }: CommonLayoutProps
               <span className="sr-only">Search</span>
               <Search className="!w-6 !h-6 text-black" />
             </Button>
-            <Link to={"/cart"} className="relative -m-2 flex h-10 w-10 items-center justify-center p-2">
+            <AuthLink to={"/cart"} className="relative -m-2 flex h-10 w-10 items-center justify-center p-2">
               <span className="sr-only">ShoppingCart</span>
               <ShoppingCart className="!w-6 !h-6 text-black" />
-            </Link>
+            </AuthLink>
           </div>
         </div>
       </header>
