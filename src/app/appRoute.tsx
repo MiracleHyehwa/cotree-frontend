@@ -5,6 +5,7 @@ import MyPage from "@/pages/mypage";
 import OrderCompletedPage from "@/pages/order/complete";
 import OrderCreatePage from "@/pages/order/create";
 import ProductDetailPage from "@/pages/productDetail";
+import SearchPage from "@/pages/search";
 import ShoppingCartPage from "@/pages/shoppingCart";
 
 export const appRoutes = [
@@ -16,4 +17,5 @@ export const appRoutes = [
   { path: "/cart", element: <ShoppingCartPage />, isPublic: false },
   { path: "/mypage", element: <MyPage />, isPublic: false },
   { path: "/login", element: <LoginPage />, isPublic: true },
+  { path: "/search", element: <SearchPage />, isPublic: true },
 ];
