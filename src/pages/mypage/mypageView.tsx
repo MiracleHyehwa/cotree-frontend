@@ -1,3 +1,4 @@
+import { useAuthenticatedNavigate } from "@/features/auth/hooks";
 import { User, Gift, Package, Truck, Clock, CreditCard, RefreshCw, ChevronRight } from "lucide-react";
 
 const user = {
@@ -7,10 +8,9 @@ const user = {
 };
 
 const orderStatuses = [
-  { label: "주문접수", count: 0, icon: Clock },
-  { label: "결제완료", count: 0, icon: CreditCard },
-  { label: "상품준비중", count: 0, icon: Package },
-  { label: "배송완료", count: 0, icon: Truck },
+  { label: "주문대기", count: 0, icon: Clock, to: "/order?status=PENDING" },
+  { label: "결제완료", count: 0, icon: CreditCard, to: "/order?status=PAID" },
+  { label: "배송완료", count: 0, icon: Truck, to: "/order?status=DELIVERED" },
 ];
 
 const menuItems = [
@@ -18,6 +18,7 @@ const menuItems = [
     label: "주문내역",
     icon: Package,
     description: "주문한 상품을 확인하세요",
+    to: "/order?status=ALL",
   },
   {
     label: "취소/교환/반품 조회",
@@ -37,6 +38,8 @@ const menuItems = [
 ];
 
 export default function MyPageView() {
+  const navigate = useAuthenticatedNavigate();
+
   return (
     <section className="py-6 space-y-6">
       <div className="flex items-center gap-4 px-4">
@@ -82,22 +85,18 @@ export default function MyPageView() {
           <p className="text-2xl font-bold">{user.point.toLocaleString()}P</p>
         </div>
       </div>
-
       <div className="px-4">
         <h3 className="text-lg font-bold text-foreground mb-4">주문/배송 조회</h3>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-3 gap-4">
           {orderStatuses.map(({ label, count, icon: Icon }) => (
             <div
               key={label}
-              className="text-center p-4 bg-muted rounded-xl hover:bg-muted transition-colors cursor-pointer group"
+              onClick={() => navigate(`/order?status=${encodeURIComponent(label)}`)}
+              className="flex flex-col items-center justify-center bg-gray-100 rounded-xl aspect-square hover:shadow transition-shadow cursor-pointer"
             >
-              <div className="flex justify-center mb-3">
-                <div className="w-12 h-12 bg-background rounded-full flex items-center justify-center border border-border">
-                  <Icon className="w-5 h-5 text-muted-foreground group-hover:text-primary" />
-                </div>
-              </div>
-              <p className="text-2xl font-bold text-foreground mb-1">{count}</p>
-              <p className="text-xs text-muted-foreground">{label}</p>
+              <Icon className="w-6 h-6 text-primary mb-2" />
+              <p className="text-2xl font-bold text-foreground">{count}</p>
+              <p className="text-sm text-muted-foreground mt-1">{label}</p>
             </div>
           ))}
         </div>
