@@ -94,7 +94,7 @@ export default function OrderCompletedPage() {
         </div>
       </div>
 
-      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-limit border-t border-border z-50">
+      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-limit border-t border-border bg-background z-50">
         <div className="flex gap-3 p-4">
           <Button variant="outline" className="flex-1 h-12 cursor-pointer">
             주문 상세 보기
