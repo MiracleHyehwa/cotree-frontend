@@ -3,11 +3,11 @@ import { SearchContext } from "./searchContext";
 
 const STORAGE_KEY = "COTREE-RECENT_KEYWORD";
 
-interface Props {
+interface SearchProviderProps {
   children: ReactNode;
 }
 
-export default function SearchProvider({ children }: Props) {
+export default function SearchProvider({ children }: SearchProviderProps) {
   const [inputValue, setInputValue] = useState("");
   const [recentKeywords, setRecentKeywords] = useState<string[]>([]);
   const [isComposing, setIsComposing] = useState(false);

@@ -38,7 +38,8 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = useCallback(() => {
     console.log(`pendingNavigation : ${pendingNavigation}`);
-    window.location.href = "http://localhost:8080/oauth2/authorization/kakao";
+    setIsAuthenticated(true);
+    // window.location.href = "http://localhost:8080/oauth2/authorization/kakao";
   }, []);
 
   const logout = useCallback(() => {
