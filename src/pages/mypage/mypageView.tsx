@@ -88,10 +88,10 @@ export default function MyPageView() {
       <div className="px-4">
         <h3 className="text-lg font-bold text-foreground mb-4">주문/배송 조회</h3>
         <div className="grid grid-cols-3 gap-4">
-          {orderStatuses.map(({ label, count, icon: Icon }) => (
+          {orderStatuses.map(({ label, count, icon: Icon, to }) => (
             <div
               key={label}
-              onClick={() => navigate(`/order?status=${encodeURIComponent(label)}`)}
+              onClick={() => navigate(`${to}`)}
               className="flex flex-col items-center justify-center bg-gray-100 rounded-xl aspect-square hover:shadow transition-shadow cursor-pointer"
             >
               <Icon className="w-6 h-6 text-primary mb-2" />
