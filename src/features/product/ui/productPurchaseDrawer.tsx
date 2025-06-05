@@ -46,11 +46,7 @@ export default function ProductPurchaseDrawer({ open, setOpen, product }: Produc
         <DrawerDescription className="sr-only">상품 구매 수량 선택</DrawerDescription>
 
         <DrawerHeader className="px-4 pt-4 pb-0 relative">
-          <Button
-            onClick={() => setOpen(false)}
-            variant="link"
-            className="absolute right-4 top-4 w-6 h-6 p-0 text-muted-foreground hover:text-foreground"
-          >
+          <Button onClick={() => setOpen(false)} variant="ghost" className="absolute right-4 top-4 cursor-pointer">
             ✕
           </Button>
         </DrawerHeader>
@@ -62,13 +58,13 @@ export default function ProductPurchaseDrawer({ open, setOpen, product }: Produc
             <div className="flex items-center gap-4">
               <Button
                 onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                variant="link"
-                className="w-8 h-8 p-0 text-lg"
+                variant="outline"
+                className="text-lg cursor-pointer"
               >
                 −
               </Button>
               <span className="text-lg font-medium min-w-[20px] text-center">{quantity}</span>
-              <Button onClick={() => setQuantity((q) => q + 1)} variant="link" className="w-8 h-8 p-0 text-lg">
+              <Button onClick={() => setQuantity((q) => q + 1)} variant="outline" className=" text-lg cursor-pointer">
                 +
               </Button>
             </div>
@@ -81,14 +77,10 @@ export default function ProductPurchaseDrawer({ open, setOpen, product }: Produc
           </div>
 
           <div className="grid grid-cols-2 gap-3 pt-4">
-            <Button className="h-12 text-base font-medium" onClick={handlePurchase}>
+            <Button className="h-12 text-base font-medium cursor-pointer" onClick={handlePurchase}>
               바로 구매
             </Button>
-            <Button
-              className="h-12 rounded-lg border border-border bg-background text-foreground"
-              variant="link"
-              onClick={handleAddToCart}
-            >
+            <Button className="h-12 rounded-lg cursor-pointer" variant="outline" onClick={handleAddToCart}>
               장바구니 담기
             </Button>
           </div>

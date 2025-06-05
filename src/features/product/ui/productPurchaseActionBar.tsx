@@ -41,13 +41,13 @@ export default function ProductPurchaseActionBar({ product, children }: ProductP
         <div className="max-w-limit mx-auto px-4 py-4">
           <div className="w-full flex gap-3">
             <Button
-              className="w-1/4 h-12 rounded-lg border border-border bg-background flex items-center justify-center cursor-pointer"
-              variant="link"
+              className="w-1/4 h-12 bg-background flex items-center justify-center cursor-pointer"
+              variant="outline"
               onClick={handleAddToCart}
             >
               <ShoppingCart className="w-5 h-5 text-muted-foreground" />
             </Button>
-            <Button className="w-3/4 h-12" onClick={handleOpenDrawer}>
+            <Button className="w-3/4 h-12 cursor-pointer" onClick={handleOpenDrawer}>
               구매하기
             </Button>
           </div>

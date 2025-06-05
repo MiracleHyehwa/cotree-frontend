@@ -45,7 +45,10 @@ export default function OrderStatusList({ status }: OrderStatusListProps) {
           <div className="text-lg text-foreground font-semibold">{order.date}</div>
 
           <div className="flex items-center justify-between text-sm text-muted-foreground border-b pb-2">
-            <span className="text-primary font-mono font-semibold text-sm">주문번호 {order.orderId}</span>
+            <span className="font-mono font-semibold text-sm">
+              주문번호
+              <span className="text-primary ml-2">{order.orderId}</span>
+            </span>
           </div>
 
           {order.items.map((item, idx) => {
@@ -59,13 +62,13 @@ export default function OrderStatusList({ status }: OrderStatusListProps) {
                 />
                 <div className="flex-1 flex flex-col justify-between">
                   <div>
-                    <div className="text-sm font-medium text-gray-900">{item.name}</div>
+                    <div className="text-sm font-medium text-foreground">{item.name}</div>
                     <div className="text-xs text-muted-foreground mt-1">옵션: {item.option}</div>
                     <div className="text-sm font-semibold mt-2">
                       {item.price.toLocaleString()}원 / {item.quantity}개
                     </div>
                   </div>
-                  <div className="text-xs text-proimary mt-1">{status}</div>
+                  <div className="text-xs text-muted-foreground mt-1">{status}</div>
                 </div>
               </div>
             );

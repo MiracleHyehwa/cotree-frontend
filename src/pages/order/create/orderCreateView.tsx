@@ -50,6 +50,7 @@ export default function OrderCreateView() {
     resolver: zodResolver(orderFormSchema),
     defaultValues: {
       cardNumber: "",
+      recipientPhone: "",
       cardType: "",
       installment: "1",
       shippingAddress: "",

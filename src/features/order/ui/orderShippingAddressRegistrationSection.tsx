@@ -23,7 +23,7 @@ export default function OrderShippingAddressRegistrationSection({ children }: Pr
       <section className="space-y-3">
         <div className="flex items-center justify-between">
           <h2 className="font-semibold text-lg">배송지 정보</h2>
-          <Button size="sm" variant="link" onClick={() => setOpen(true)}>
+          <Button size="sm" variant="ghost" className="cursor-pointer" onClick={() => setOpen(true)}>
             {address ? "변경" : "등록"}
           </Button>
         </div>

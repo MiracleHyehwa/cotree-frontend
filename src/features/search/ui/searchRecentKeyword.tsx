@@ -16,7 +16,7 @@ export default function SearchRecentKeyword() {
           <Button
             type="button"
             variant="link"
-            className="text-xs text-primary cursor-pointer"
+            className="text-xs text-muted-foreground cursor-pointer"
             onClick={clearRecentKeywords}
           >
             모두 지우기
@@ -44,10 +44,9 @@ export default function SearchRecentKeyword() {
           {recentKeywords.map((keyword) => (
             <Button
               key={keyword}
-              size="sm"
-              variant="link"
+              variant="outline"
               onClick={() => setInputValue(keyword)}
-              className="flex-shrink-0 whitespace-nowrap min-w-max rounded-full border px-3 py-2 text-sm text-foreground"
+              className="flex-shrink-0 whitespace-nowrap min-w-max rounded-full border text-sm text-foreground cursor-pointer"
             >
               {keyword}
             </Button>

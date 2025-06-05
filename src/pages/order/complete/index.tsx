@@ -94,12 +94,12 @@ export default function OrderCompletedPage() {
         </div>
       </div>
 
-      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-limit bg-background border-t border-border z-50">
+      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-limit border-t border-border z-50">
         <div className="flex gap-3 p-4">
-          <Button variant="link" className="flex-1 h-12 cursor-pointer">
+          <Button variant="outline" className="flex-1 h-12 cursor-pointer">
             주문 상세 보기
           </Button>
-          <Button className="flex-1 h-12">쇼핑 계속 하기</Button>
+          <Button className="flex-1 h-12 cursor-pointer">쇼핑 계속 하기</Button>
         </div>
       </div>
     </CommonLayout>

@@ -30,7 +30,7 @@ export default function SearchInput() {
         <Button
           type="button"
           className="flex h-10 w-10 items-center justify-center p-2 cursor-pointer"
-          variant="link"
+          variant="ghost"
           onClick={() => navigate(-1)}
         >
           <ArrowLeft className="!w-6 !h-6" />
@@ -52,7 +52,7 @@ export default function SearchInput() {
                 onCompositionEnd={handleCompositionEnd}
               />
               <div className="flex flex-row items-center justify-center gap-1 pr-2">
-                <Button size="icon" variant="link" className="text-foreground cursor-pointer" onClick={handleSearch}>
+                <Button size="icon" variant="ghost" className="text-foreground cursor-pointer" onClick={handleSearch}>
                   <SearchIcon className="w-6 h-6" />
                 </Button>
               </div>

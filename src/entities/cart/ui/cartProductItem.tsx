@@ -46,13 +46,13 @@ export default function CartProductItem({ item, onSelect, onDelete }: CartProduc
           </div>
 
           {item.isGreen && (
-            <div className="text-xs text-emerald-600 font-medium mt-1">
+            <div className="text-xs text-foreground font-medium mt-1">
               🌿 그린포인트 {point.toLocaleString()}P 적립 예정
             </div>
           )}
         </div>
 
-        <Button size="icon" variant="link" className="shrink-0 mt-1 cursor-pointer" onClick={onDelete}>
+        <Button size="icon" variant="ghost" className="shrink-0 mt-1 cursor-pointer" onClick={onDelete}>
           <Trash2 size={16} className="cursor-pointer" />
         </Button>
       </div>

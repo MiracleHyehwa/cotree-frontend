@@ -17,7 +17,7 @@ export default function OrderPaymentMethodButtonList({ methods }: OrderPaymentMe
         <Button
           key={label}
           disabled={disabled}
-          className={`text-sm border rounded-md px-3 py-2
+          className={`text-sm rounded-md px-3 py-2 cursor-pointer
             ${selected ? "bg-primary text-white font-semibold" : "bg-muted text-muted-foreground"}
             ${disabled ? "opacity-50 cursor-not-allowed" : ""}
           `}
