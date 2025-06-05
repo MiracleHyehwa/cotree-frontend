@@ -1,11 +1,11 @@
 import { OrderHistoryProvider } from "@/features/order/context";
 import { OrderStatusContent, OrderStatusList } from "@/features/order/ui";
-import { HeaderBackLayout } from "@/shared/layout";
+import OnlyHeaderBackLayout from "@/shared/layout/onlyHeaderBackLayout";
 
 export default function OrderHistoryPage() {
   return (
     <OrderHistoryProvider>
-      <HeaderBackLayout>
+      <OnlyHeaderBackLayout title="주문/결제 내역">
         <OrderStatusContent>
           <OrderStatusContent.When status="PENDING">
             <OrderStatusList status="PENDING" />
@@ -20,7 +20,7 @@ export default function OrderHistoryPage() {
             <OrderStatusList status="ALL" />
           </OrderStatusContent.When>
         </OrderStatusContent>
-      </HeaderBackLayout>
+      </OnlyHeaderBackLayout>
     </OrderHistoryProvider>
   );
 }

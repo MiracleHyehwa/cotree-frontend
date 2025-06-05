@@ -1,5 +1,5 @@
 import { useAuthenticatedNavigate } from "@/features/auth/hooks";
-import { User, Gift, Package, Truck, Clock, CreditCard, RefreshCw, ChevronRight } from "lucide-react";
+import { User, Package, Truck, Clock, CreditCard, ChevronRight } from "lucide-react";
 
 const user = {
   name: "한*준",
@@ -20,20 +20,12 @@ const menuItems = [
     description: "주문한 상품을 확인하세요",
     to: "/order?status=ALL",
   },
-  {
-    label: "취소/교환/반품 조회",
-    icon: RefreshCw,
-    description: "취소, 교환, 반품 현황",
-  },
-  {
-    label: "쿠폰함",
-    icon: Gift,
-    description: "사용 가능한 쿠폰 확인",
-  },
+
   {
     label: "포인트 내역",
     icon: User,
     description: "포인트 적립/사용 내역",
+    to: "/mypage/points",
   },
 ];
 
@@ -105,9 +97,12 @@ export default function MyPageView() {
       <section className="w-full">
         <h3 className="text-lg font-bold text-foreground px-4">빠른 메뉴</h3>
         <ul className="w-full divide-y divide-border">
-          {menuItems.map(({ label, description, icon: Icon }) => (
+          {menuItems.map(({ label, description, icon: Icon, to }) => (
             <li key={label}>
-              <button className="w-full flex items-center justify-between hover:bg-muted/50 transition-colors py-4 px-4">
+              <button
+                className="w-full flex items-center justify-between hover:bg-muted/50 transition-colors py-4 px-4 cursor-pointer"
+                onClick={() => navigate(to)}
+              >
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 bg-muted rounded-full flex items-center justify-center shrink-0">
                     <Icon className="w-5 h-5 text-muted-foreground" />
