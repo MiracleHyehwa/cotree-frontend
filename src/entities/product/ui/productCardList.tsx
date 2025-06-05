@@ -1,8 +1,14 @@
 import { sampleProductMock } from "../mocks/sampleProductMock";
-import { ProductCard } from "@/entities/product/ui";
-import { Product } from "@/entities/product/model";
+import { ProductCategory } from "@/features/product/context";
+import { Product } from "../model";
+import ProductCard from "./productCard";
 
-export default function ProductCardList() {
+interface ProductCardListProps {
+  category?: ProductCategory;
+}
+
+export default function ProductCardList({ category }: ProductCardListProps) {
+  console.log(category);
   const products: Product[] = sampleProductMock;
 
   return (
