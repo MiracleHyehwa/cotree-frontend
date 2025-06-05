@@ -17,7 +17,7 @@ const CATEGORIES = [
   { key: "SNACK", label: "과자와 초콜릿, 캔디" },
 ];
 
-export default function CategoryTabsSwiper() {
+export default function ProductCategoryFilterTabs() {
   const [active, setActive] = useState("ALL");
 
   return (

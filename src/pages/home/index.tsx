@@ -4,7 +4,7 @@ import {
   HomeCategorySwiper,
   HomeEcoBrandSwiper,
   HomeRecommendedProductSection,
-} from "@/widgets/home";
+} from "@/pages/home/sections";
 
 import TabNavigation from "@/widgets/tab/tabNavigation";
 
