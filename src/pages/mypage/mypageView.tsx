@@ -1,5 +1,5 @@
 import { useAuthenticatedNavigate } from "@/features/auth/hooks";
-import { User, Package, Truck, Clock, CreditCard, ChevronRight } from "lucide-react";
+import { User, Package, Truck, Clock, CreditCard, ChevronRight, Gift } from "lucide-react";
 
 const user = {
   name: "한*준",
@@ -26,6 +26,12 @@ const menuItems = [
     icon: User,
     description: "포인트 적립/사용 내역",
     to: "/mypage/points",
+  },
+  {
+    label: "받은 리워드",
+    icon: Gift,
+    description: "지급된 리워드를 확인하세요",
+    to: "/mypage/rewards",
   },
 ];
 

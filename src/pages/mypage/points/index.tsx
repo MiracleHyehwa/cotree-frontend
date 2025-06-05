@@ -1,5 +1,5 @@
+import { OnlyHeaderBackLayout } from "@/shared/layout";
 import PointHistoryView from "./pointHistoryView";
-import OnlyHeaderBackLayout from "@/shared/layout/onlyHeaderBackLayout";
 
 export default function PointHistoryPage() {
   return (
