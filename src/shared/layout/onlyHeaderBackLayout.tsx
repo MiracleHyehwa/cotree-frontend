@@ -1,6 +1,6 @@
 import { Button } from "@/shared/components/ui/button";
 import { ArrowLeft } from "lucide-react";
-import { useAuthenticatedNavigate } from "@/features/auth/hooks/useAuthenticateNavigate";
+import { useNavigate } from "react-router-dom";
 
 interface OnlyHeaderBackLayoutProps {
   children: React.ReactNode;
@@ -8,7 +8,7 @@ interface OnlyHeaderBackLayoutProps {
 }
 
 export default function OnlyHeaderBackLayout({ children, title = "" }: OnlyHeaderBackLayoutProps) {
-  const navigate = useAuthenticatedNavigate();
+  const navigate = useNavigate();
 
   return (
     <div id="main-container" className="flex min-h-screen w-full flex-col items-center justify-start">

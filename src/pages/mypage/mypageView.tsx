@@ -1,5 +1,5 @@
-import { useAuthenticatedNavigate } from "@/features/auth/hooks";
 import { User, Package, Truck, Clock, CreditCard, ChevronRight, Gift } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const user = {
   name: "한*준",
@@ -36,7 +36,7 @@ const menuItems = [
 ];
 
 export default function MyPageView() {
-  const navigate = useAuthenticatedNavigate();
+  const navigate = useNavigate();
 
   return (
     <section className="py-6 space-y-6">

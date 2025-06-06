@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/shared/components/ui/button";
 import { ShoppingCart } from "lucide-react";
-import { useAuth } from "@/features/auth/hooks";
 
 interface ProductPurchaseActionBarProps {
   product: {
@@ -17,15 +16,11 @@ interface ProductPurchaseActionBarProps {
 }
 
 export default function ProductPurchaseActionBar({ product, children }: ProductPurchaseActionBarProps) {
-  const { isAuthenticated, openAuthDrawer } = useAuth();
-
   const [open, setOpen] = useState(false);
 
   const handleAddToCart = () => {
-    if (!isAuthenticated) {
-      openAuthDrawer("/cart");
-      return;
-    }
+    // 장바구니 추가 로직 생략
+    console.log("장바구니 추가 버튼 클릭");
   };
 
   const handleOpenDrawer = () => {

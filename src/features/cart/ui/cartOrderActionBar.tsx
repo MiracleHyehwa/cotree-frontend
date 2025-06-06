@@ -1,12 +1,12 @@
-import { useAuthenticatedNavigate } from "@/features/auth/hooks";
 import { Button } from "@/shared/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 interface CartOrderActionBarProps {
   selectedCount: number;
 }
 
 export default function CartOrderActionBar({ selectedCount }: CartOrderActionBarProps) {
-  const navigate = useAuthenticatedNavigate();
+  const navigate = useNavigate();
 
   const handleOrderClick = () => {
     if (selectedCount > 0) {

@@ -11,7 +11,7 @@ import {
 } from "@/features/order/ui";
 import { FormProvider, useForm } from "react-hook-form";
 import { orderFormSchema, OrderFormValues } from "@/features/order/model/schema";
-import { useAuthenticatedNavigate } from "@/features/auth/hooks";
+import { useNavigate } from "react-router-dom";
 
 const DISCOUNT = 0;
 const USED_POINT = 0;
@@ -39,7 +39,7 @@ const products = [
 ];
 
 export default function OrderCreateView() {
-  const navigate = useAuthenticatedNavigate();
+  const navigate = useNavigate();
 
   const [isChecked, setIsChecked] = useState(false);
 
