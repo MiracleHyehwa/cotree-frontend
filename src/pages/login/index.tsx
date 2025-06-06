@@ -1,28 +1,21 @@
-import { useAuth, useAuthenticatedNavigate } from "@/features/auth/hooks";
 import { Button } from "@/shared/components/ui/button";
 import { LoginLayout } from "@/shared/layout";
-import { useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 export default function LoginPage() {
-  const { isAuthenticated, login } = useAuth();
-  const navigate = useAuthenticatedNavigate();
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const redirectTo = searchParams.get("redirect") ?? "/";
 
   const handleLogin = () => {
-    login();
+    window.location.href = `http://localhost:8080/oauth2/authorization/kakao?redirect=${encodeURIComponent(
+      redirectTo
+    )}`;
   };
 
   const handleCancel = () => {
     navigate(-1);
   };
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate(redirectTo, { replace: true });
-    }
-  }, [isAuthenticated, redirectTo, navigate]);
 
   return (
     <LoginLayout>

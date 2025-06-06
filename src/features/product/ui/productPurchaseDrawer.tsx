@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription } from "@/shared/components/ui/drawer";
 import { Button } from "@/shared/components/ui/button";
-import { useAuth, useAuthenticatedNavigate } from "@/features/auth/hooks";
+import { useNavigate } from "react-router-dom";
 
 interface ProductPurchaseDrawerProps {
   open: boolean;
@@ -14,11 +14,9 @@ interface ProductPurchaseDrawerProps {
 }
 
 export default function ProductPurchaseDrawer({ open, setOpen, product }: ProductPurchaseDrawerProps) {
-  const { isAuthenticated, openAuthDrawer } = useAuth();
-
   const [quantity, setQuantity] = useState(1);
   const finalPrice = product.price - product.discount;
-  const navigate = useAuthenticatedNavigate();
+  const navigate = useNavigate();
 
   const handlePurchase = () => {
     setOpen(false);
@@ -28,17 +26,11 @@ export default function ProductPurchaseDrawer({ open, setOpen, product }: Produc
   };
 
   const handleAddToCart = () => {
-    if (!isAuthenticated) {
-      setOpen(false);
-      setTimeout(() => {
-        openAuthDrawer("/cart");
-      }, 300);
-      return;
-    }
-
-    console.log("장바구니에 담김");
+    setOpen(false);
+    setTimeout(() => {
+      navigate("/cart"); // 인증은 서버가 판단
+    }, 300);
   };
-
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerContent className="max-w-limit mx-auto w-full">

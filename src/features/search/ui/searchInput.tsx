@@ -2,10 +2,10 @@ import { Input } from "@/shared/components/ui/input";
 import { Button } from "@/shared/components/ui/button";
 import { ArrowLeft, SearchIcon } from "lucide-react";
 import { useSearchContext } from "../hooks/useSearchContext";
-import { useAuthenticatedNavigate } from "@/features/auth/hooks";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchInput() {
-  const navigate = useAuthenticatedNavigate();
+  const navigate = useNavigate();
   const { isComposing, inputValue, setInputValue, saveKeyword, handleCompositionStart, handleCompositionEnd } =
     useSearchContext();
 

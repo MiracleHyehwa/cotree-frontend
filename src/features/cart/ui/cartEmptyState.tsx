@@ -1,9 +1,9 @@
-import { useAuthenticatedNavigate } from "@/features/auth/hooks";
 import { Button } from "@/shared/components/ui/button";
 import { ShoppingCart } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function CartEmptyState() {
-  const navigate = useAuthenticatedNavigate();
+  const navigate = useNavigate();
 
   return (
     <div className="flex flex-col items-center justify-center py-20 text-muted-foreground text-sm w-full max-w-limit">

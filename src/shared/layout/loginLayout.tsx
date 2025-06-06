@@ -1,4 +1,4 @@
-import { AuthLink } from "@/features/auth/ui";
+import { Link } from "react-router-dom";
 
 interface LoginLayoutProps {
   children: React.ReactNode;
@@ -11,7 +11,7 @@ export default function LoginLayout({ children, title = "" }: LoginLayoutProps) 
       <header id="main-header" className="sticky top-0 z-20 flex w-full flex-col items-center justify-center">
         <div className="relative z-20 flex w-full max-w-limit flex-row items-center justify-between gap-4 transition-colors bg-white h-[52px] max-h-[52px] min-h-[52px] px-24">
           <div className="absolute bottom-0 left-3 top-0 flex flex-row items-center justify-center">
-            <AuthLink to={"/"} className="fflex flex-1 items-center justify-center p-2">
+            <Link to={"/"} className="fflex flex-1 items-center justify-center p-2">
               <span className="sr-only">Home</span>
               <img
                 src="/logo.png"
@@ -20,7 +20,7 @@ export default function LoginLayout({ children, title = "" }: LoginLayoutProps) 
                 alt="logo"
                 className="max-h-[52px] h-[52px] object-left pt-1"
               />
-            </AuthLink>
+            </Link>
           </div>
           <div className="flex-1 truncate text-center text-sm transition-colors text-muted-foreground font-bold">
             {title}
