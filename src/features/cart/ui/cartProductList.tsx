@@ -1,4 +1,4 @@
-import { CartItem } from "../model";
+import { CartItem } from "@/entities/cart/model";
 import CartProductItem from "./cartProductItem";
 
 interface CartProductListProps {
