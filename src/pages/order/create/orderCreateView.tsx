@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { OrderPaymentMethodButtonList, OrderPaymentTypeRadioGroup, OrderProductListSection } from "@/entities/order/ui";
 import {
   OrderAgreementConfirmationCheckbox,
   OrderPaymentActionBar,
-  OrderPaymentCardInformationFields,
+  OrderPaymentForm,
+  OrderProductSummary,
   OrderRecipientFields,
+  OrderShippingAddressField,
   OrderShippingAddressPostcode,
-  OrderShippingAddressRegistrationSection,
 } from "@/features/order/ui";
 import { FormProvider, useForm } from "react-hook-form";
 import { orderFormSchema, OrderFormValues } from "@/features/order/model/schema";
@@ -80,17 +80,16 @@ export default function OrderCreateView() {
   return (
     <FormProvider {...methods}>
       <div className="w-full max-w-limit mx-auto px-4 py-6 space-y-8">
-        <OrderShippingAddressRegistrationSection>
+        <OrderShippingAddressField>
           {({ open, setOpen, onSelect }) => (
             <OrderShippingAddressPostcode open={open} setOpen={setOpen} onSelect={onSelect} />
           )}
-        </OrderShippingAddressRegistrationSection>
+        </OrderShippingAddressField>
         <OrderRecipientFields />
-        <OrderProductListSection products={products} />
-        <section className="space-y-4">
-          <h2 className="font-semibold text-lg">결제수단</h2>
-          <OrderPaymentTypeRadioGroup value="general" disabled={true} />
-          <OrderPaymentMethodButtonList
+        <OrderProductSummary products={products} />
+        <OrderPaymentForm title="결제수단">
+          <OrderPaymentForm.TypeOptions value="general" disabled />
+          <OrderPaymentForm.MethodSelector
             methods={[
               { label: "신용카드", disabled: false, selected: true },
               { label: "간편결제", disabled: true },
@@ -99,14 +98,9 @@ export default function OrderCreateView() {
               { label: "실시간 계좌이체", disabled: true },
             ]}
           />
-
-          <OrderPaymentCardInformationFields />
-        </section>
-
-        <section className="space-y-3">
-          <h2 className="font-semibold text-lg">주문 정보 확인</h2>
-          <OrderAgreementConfirmationCheckbox checked={isChecked} onChange={setIsChecked} />
-        </section>
+          <OrderPaymentForm.CardFields />
+        </OrderPaymentForm>
+        <OrderAgreementConfirmationCheckbox checked={isChecked} onChange={setIsChecked} />
       </div>
 
       <OrderPaymentActionBar totalAmount={total} disabled={!isChecked} onClick={methods.handleSubmit(onSubmit)} />

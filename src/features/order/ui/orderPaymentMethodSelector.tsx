@@ -6,11 +6,11 @@ interface PaymentMethod {
   selected?: boolean;
 }
 
-interface OrderPaymentMethodButtonListProps {
+interface OrderPaymentMethodSelectorProps {
   methods: PaymentMethod[];
 }
 
-export default function OrderPaymentMethodButtonList({ methods }: OrderPaymentMethodButtonListProps) {
+export default function OrderPaymentMethodSelector({ methods }: OrderPaymentMethodSelectorProps) {
   return (
     <div className="grid grid-cols-3 gap-2">
       {methods.map(({ label, disabled, selected }) => (

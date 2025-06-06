@@ -4,7 +4,7 @@ import { Label } from "@/shared/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/components/ui/select";
 import { Controller, useFormContext } from "react-hook-form";
 
-export default function OrderPaymentCardInformationFields() {
+export default function OrderPaymentCardInputFields() {
   const { setValue, control, formState } = useFormContext();
   const { errors } = formState;
 
