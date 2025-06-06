@@ -1,5 +1,10 @@
-import { ProductDetailContent, ProductImageSlider, ProductMetaInfo, ProductSummaryBlock } from "@/entities/product/ui";
-import { ProductPurchaseActionBar, ProductPurchaseDrawer } from "@/features/product/ui";
+import {
+  ProductDetailLayout,
+  ProductImageSlider,
+  ProductPurchaseActionBar,
+  ProductPurchaseBottomSheet,
+} from "@/features/product/ui";
+import { DetailItem } from "../../features/product/ui/productDetailDescription";
 
 const product = {
   id: 1,
@@ -41,18 +46,21 @@ const product = {
 export default function ProductDetailView() {
   return (
     <>
-      <div className="w-full max-w-limit mx-auto bg-background pb-12">
-        <ProductImageSlider images={product.images} isGreen={product.isGreen} />
-        <div className="px-4 py-6">
-          <ProductSummaryBlock product={product} />
-          <div className="h-px bg-border my-4" />
-          <ProductMetaInfo code={product.code} origin={product.origin} deliveryInfo={product.delivery.info} />
-          <div className="h-px bg-border my-4" />
-          <ProductDetailContent details={product.details as Array<{ type: "text" | "image"; content: string }>} />
-        </div>
-      </div>
+      <ProductImageSlider images={product.images} isGreen={product.isGreen} />
+      <ProductDetailLayout>
+        <ProductDetailLayout.Summary product={product} />
+        <ProductDetailLayout.Divider />
+        <ProductDetailLayout.MetaInfo
+          code={product.code}
+          origin={product.origin}
+          deliveryInfo={product.delivery.info}
+        />
+        <ProductDetailLayout.Divider />
+        <ProductDetailLayout.Description details={product.details as DetailItem[]} />
+      </ProductDetailLayout>
+
       <ProductPurchaseActionBar product={product}>
-        {({ open, setOpen, product }) => <ProductPurchaseDrawer open={open} setOpen={setOpen} product={product} />}
+        {({ open, setOpen, product }) => <ProductPurchaseBottomSheet open={open} setOpen={setOpen} product={product} />}
       </ProductPurchaseActionBar>
     </>
   );

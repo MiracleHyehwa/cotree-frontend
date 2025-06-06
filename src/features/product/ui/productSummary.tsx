@@ -1,11 +1,11 @@
-import { ProductSummary } from "@/entities/product/model";
+import type { ProductSummary } from "@/entities/product/model";
 import { Badge } from "@/shared/components/ui/badge";
 
 interface ProductSummaryProps {
   product: ProductSummary;
 }
 
-export default function ProductSummaryBlock({ product }: ProductSummaryProps) {
+export default function ProductSummary({ product }: ProductSummaryProps) {
   const { name, subtitle, brand, price, discount, points, isGreen } = product;
   const discountRate = Math.round((discount / price) * 100);
   const finalPrice = price - discount;

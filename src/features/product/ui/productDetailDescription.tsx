@@ -1,16 +1,15 @@
-interface DetailItem {
+export interface DetailItem {
   type: "text" | "image";
   content: string;
 }
 
-interface ProductDetailContentProps {
+interface ProductDetailDescriptionProps {
   details: DetailItem[];
 }
 
-export default function ProductDetailContent({ details }: ProductDetailContentProps) {
+export default function ProductDetailDescription({ details }: ProductDetailDescriptionProps) {
   return (
-    <div className="space-y-4 mt-8">
-      <h3 className="font-medium text-foreground">상세정보</h3>
+    <div className="space-y-3 mt-4">
       {details.map((item, index) => {
         if (item.type === "text") {
           return (

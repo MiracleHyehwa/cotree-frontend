@@ -1,4 +1,9 @@
-export { default as ProductPurchaseDrawer } from "./productPurchaseDrawer";
+export { default as ProductPurchaseBottomSheet } from "./productPurchaseBottomSheet";
 export { default as ProductPurchaseActionBar } from "./productPurchaseActionBar";
 export { default as ProductCategoryFilterTabs } from "./productCategoryFilterTabs";
 export { default as ProductCategoryFilter } from "./productCategoryFilter";
+export { default as ProductDetailLayout } from "./productDetailLayout";
+export { default as ProductDetailDescription } from "./productDetailDescription";
+export { default as ProductImageSlider } from "./productImageSlider";
+export { default as ProductSummary } from "./productSummary";
+export { default as ProductMetaInfo } from "./productMetaInfo";
