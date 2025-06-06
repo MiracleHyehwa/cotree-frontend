@@ -1,17 +1,18 @@
+import { lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import HomePage from "@/pages/home";
-import CategoryPage from "@/pages/category";
-import ProductDetailPage from "@/pages/productDetail";
-import OrderHistoryPage from "@/pages/order";
-import OrderCreatePage from "@/pages/order/create";
-import OrderCompletedPage from "@/pages/order/completed";
-import CartPage from "@/pages/cart";
-import MyPage from "@/pages/mypage";
-import PointHistoryPage from "@/pages/mypage/points";
-import RewardHistoryPage from "@/pages/mypage/rewards";
-import LoginPage from "@/pages/login";
-import SearchPage from "@/pages/search";
+const HomePage = lazy(() => import("@/pages/home"));
+const CategoryPage = lazy(() => import("@/pages/category"));
+const ProductDetailPage = lazy(() => import("@/pages/productDetail"));
+const OrderHistoryPage = lazy(() => import("@/pages/order"));
+const OrderCreatePage = lazy(() => import("@/pages/order/create"));
+const OrderCompletedPage = lazy(() => import("@/pages/order/completed"));
+const CartPage = lazy(() => import("@/pages/cart"));
+const MyPage = lazy(() => import("@/pages/mypage"));
+const PointHistoryPage = lazy(() => import("@/pages/mypage/points"));
+const RewardHistoryPage = lazy(() => import("@/pages/mypage/rewards"));
+const LoginPage = lazy(() => import("@/pages/login"));
+const SearchPage = lazy(() => import("@/pages/search"));
 
 export default function AppRouter() {
   return (
