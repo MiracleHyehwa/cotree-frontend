@@ -1,5 +1,5 @@
 import { CommonLayout } from "@/shared/layout";
-import MyPageView from "./mypageView";
+import MyPageView from "./myPageView";
 
 export default function MyPage() {
   return (

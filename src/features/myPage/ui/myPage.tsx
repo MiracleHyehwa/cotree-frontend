@@ -73,7 +73,6 @@ function OrderStatus({ children }: { children: ReactNode }) {
 }
 
 function OrderStatusItem({ status, count }: { status: "PENDING" | "PAID" | "DELIVERED"; count: number }) {
-  const navigate = useNavigate();
   const statusInfo = {
     PENDING: { label: "주문대기", icon: Clock },
     PAID: { label: "결제완료", icon: CreditCard },
