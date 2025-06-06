@@ -8,11 +8,11 @@ interface OrderProduct {
   quantity: number;
 }
 
-interface OrderProductListSectionProps {
+interface OrderProductSummaryProps {
   products: OrderProduct[];
 }
 
-export default function OrderProductListSection({ products }: OrderProductListSectionProps) {
+export default function OrderProductSummary({ products }: OrderProductSummaryProps) {
   return (
     <section className="space-y-3">
       <h2 className="font-semibold text-lg">주문상품</h2>

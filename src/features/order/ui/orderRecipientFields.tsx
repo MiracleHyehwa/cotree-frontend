@@ -25,7 +25,7 @@ export default function OrderRecipientFields() {
   };
 
   return (
-    <section className="space-y-4">
+    <div className="space-y-4">
       <h2 className="font-semibold text-lg">받는 사람 정보</h2>
 
       <div className="space-y-2">
@@ -67,6 +67,6 @@ export default function OrderRecipientFields() {
           )}
         </div>
       </div>
-    </section>
+    </div>
   );
 }
