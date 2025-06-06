@@ -1,9 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription } from "@/shared/components/ui/drawer";
 import { Button } from "@/shared/components/ui/button";
-import { useNavigate } from "react-router-dom";
 
-interface ProductPurchaseDrawerProps {
+interface ProductPurchaseBottomSheetProps {
   open: boolean;
   setOpen: (open: boolean) => void;
   product: {
@@ -13,7 +13,7 @@ interface ProductPurchaseDrawerProps {
   };
 }
 
-export default function ProductPurchaseDrawer({ open, setOpen, product }: ProductPurchaseDrawerProps) {
+export default function ProductPurchaseBottomSheet({ open, setOpen, product }: ProductPurchaseBottomSheetProps) {
   const [quantity, setQuantity] = useState(1);
   const finalPrice = product.price - product.discount;
   const navigate = useNavigate();
