@@ -5,7 +5,7 @@ import CategoryPage from "@/pages/category";
 import ProductDetailPage from "@/pages/productDetail";
 import OrderHistoryPage from "@/pages/order";
 import OrderCreatePage from "@/pages/order/create";
-import OrderCompletedPage from "@/pages/order/complete";
+import OrderCompletedPage from "@/pages/order/completed";
 import ShoppingCartPage from "@/pages/shoppingCart";
 import MyPage from "@/pages/mypage";
 import PointHistoryPage from "@/pages/mypage/points";
