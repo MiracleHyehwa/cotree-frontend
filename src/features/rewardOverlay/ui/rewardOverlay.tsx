@@ -64,10 +64,10 @@ RewardOverlay.Close = function Close() {
   const { setShowOverlay } = useRewardOverlayContext();
 
   return (
-    <div className="absolute inset-x-0 -bottom-28 flex justify-center z-10 px-4">
+    <div className="absolute inset-x-0 -bottom-20 flex justify-center z-10 px-4">
       <Button
         onClick={() => setShowOverlay(false)}
-        className="text-white underline text-sm hover:opacity-80 w-full max-w-[320px]"
+        className="text-primary-foreground text-sm hover:opacity-80 w-full max-w-[320px] cursor-pointer"
       >
         닫기
       </Button>

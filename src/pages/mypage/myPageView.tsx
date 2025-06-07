@@ -46,7 +46,6 @@ export default function MyPageView() {
           <MyPage.OrderStatus.Item key={status} status={status} count={count} />
         ))}
       </MyPage.OrderStatus>
-
       <MyPage.QuickMenu>
         {menuItems.map((item) => (
           <MyPage.QuickMenu.Item key={item.label} {...item} />
