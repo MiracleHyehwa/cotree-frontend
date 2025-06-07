@@ -13,7 +13,7 @@ export default function HeaderHomeLayout({ children, title = "" }: HeaderBackLay
   return (
     <div id="main-container" className="flex min-h-screen w-full flex-col items-center justify-start">
       <header id="main-header" className="sticky top-0 z-20 flex w-full flex-col items-center justify-center">
-        <div className="relative z-20 flex w-full max-w-limit flex-row items-center justify-between gap-4 transition-colors bg-white h-[52px] max-h-[52px] min-h-[52px] px-24">
+        <div className="relative z-20 flex w-full max-w-limit flex-row items-center justify-between gap-4 transition-colors bg-background h-[52px] max-h-[52px] min-h-[52px] px-24">
           <div className="absolute bottom-0 left-3 top-0 flex flex-row items-center justify-center">
             <Button onClick={() => navigate(-1)} className="w-8 h-8 p-2 cursor-pointer" variant={"link"}>
               <span className="sr-only">뒤로가기</span>

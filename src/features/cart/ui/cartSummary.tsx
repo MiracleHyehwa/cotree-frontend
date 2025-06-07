@@ -7,7 +7,7 @@ interface CartSummaryProps {
 
 export default function CartSummary({ totalPrice, totalDiscount, finalTotalPrice, totalPoints }: CartSummaryProps) {
   return (
-    <div className="px-4 py-3 space-y-2 border-b text-base">
+    <div className="px-4 py-3 space-y-2 text-base">
       <div className="flex justify-between">
         <span>총 상품금액</span>
         <span>{totalPrice.toLocaleString()}원</span>

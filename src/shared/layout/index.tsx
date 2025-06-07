@@ -4,3 +4,4 @@ export { default as HeaderHomeLayout } from "./headerHomeLayout";
 export { default as LoginLayout } from "./loginLayout";
 export { default as SearchLayout } from "./searchLayout";
 export { default as OnlyHeaderBackLayout } from "./onlyHeaderBackLayout";
+export { default as BottomNavigation } from "./bottomNavigation";

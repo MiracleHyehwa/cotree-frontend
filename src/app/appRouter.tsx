@@ -20,27 +20,21 @@ export default function AppRouter() {
       <Routes>
         <Route path="/" element={<HomePage />} />
 
-        {/* 상품 */}
         <Route path="/category" element={<CategoryPage />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />
 
-        {/* 주문 */}
         <Route path="/order/completed/:id" element={<OrderCompletedPage />} />
         <Route path="/order/:id" element={<OrderCreatePage />} />
         <Route path="/order" element={<OrderHistoryPage />} />
 
-        {/* 장바구니 */}
         <Route path="/cart" element={<CartPage />} />
 
-        {/* 마이페이지 */}
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/mypage/points" element={<PointHistoryPage />} />
         <Route path="/mypage/rewards" element={<RewardHistoryPage />} />
 
-        {/* 인증 */}
         <Route path="/login" element={<LoginPage />} />
 
-        {/* 검색 */}
         <Route path="/search" element={<SearchPage />} />
       </Routes>
     </BrowserRouter>

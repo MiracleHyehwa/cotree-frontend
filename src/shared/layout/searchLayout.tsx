@@ -1,6 +1,7 @@
 import { Search } from "lucide-react";
 import { ReactNode } from "react";
 import { useSearchParams } from "react-router-dom";
+import { BottomNavigation } from "@/shared/layout";
 
 interface SearchLayoutProps {
   children: ReactNode;
@@ -15,7 +16,7 @@ export default function SearchLayout({ children }: SearchLayoutProps) {
   return (
     <div id="main-container" className="flex min-h-screen w-full flex-col items-center justify-start">
       <div className="fixed inset-0 flex flex-col items-center justify-start overflow-y-auto z-30 overscroll-none">
-        <div className="flex w-full max-w-limit flex-1 flex-col items-stretch justify-start pt-[52px] pb-safe-bottom">
+        <div className="flex w-full max-w-limit flex-1 flex-col items-stretch justify-start pt-[52px] pb-safe-bottom pb-16">
           {hasKeyword && (
             <div className="sticky top-[52px] z-10 backdrop-blur-xl bg-background border-b border-border">
               <div className="flex w-full max-w-limit h-[56px] items-center px-4">
@@ -34,7 +35,7 @@ export default function SearchLayout({ children }: SearchLayoutProps) {
           {children}
         </div>
       </div>
-
+      {hasKeyword && <BottomNavigation />}
       <div id="scroll-background" className="pointer-events-none -z-50 flex flex-col items-center">
         <div className="fixed inset-0 -z-50 bg-gray-100" />
         <div className="fixed bottom-0 top-0 -z-40 w-full bg-white max-w-limit" />

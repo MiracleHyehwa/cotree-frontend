@@ -1,13 +1,15 @@
+import { Link, useNavigate } from "react-router-dom";
+import { BottomNavigation } from "@/shared/layout";
 import { Button } from "@/shared/components/ui/button";
 import { Search, ShoppingCart } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
 
 interface CommonLayoutProps {
   children: React.ReactNode;
   title?: string;
+  withBottomNav?: boolean;
 }
 
-export default function CommonLayout({ children, title = "" }: CommonLayoutProps) {
+export default function CommonLayout({ children, title = "", withBottomNav = false }: CommonLayoutProps) {
   const navigate = useNavigate();
 
   return (
@@ -54,6 +56,7 @@ export default function CommonLayout({ children, title = "" }: CommonLayoutProps
       >
         {children}
       </div>
+      {withBottomNav && <BottomNavigation />}
 
       <div id="scroll-background" className="pointer-events-none -z-50 flex flex-col items-center">
         <div className="fixed inset-0 -z-50 bg-gray-100" />

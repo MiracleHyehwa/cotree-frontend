@@ -9,7 +9,7 @@ import {
 
 export default function HomePage() {
   return (
-    <CommonLayout>
+    <CommonLayout withBottomNav>
       <TabNavigation />
       <HomeBannerSwiper />
       <HomeCategorySwiper />

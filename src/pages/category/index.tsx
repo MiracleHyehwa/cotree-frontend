@@ -7,7 +7,7 @@ import { ProductCategoryFilterProvider } from "@/features/product/context";
 export default function CategoryPage() {
   return (
     <ProductCategoryFilterProvider>
-      <CommonLayout>
+      <CommonLayout withBottomNav title="카테고리">
         <ProductCategoryFilterTabs />
         <ProductCategoryFilter>
           {CATEGORIES.map(({ key }) => (

@@ -3,7 +3,7 @@ import MyPageView from "./myPageView";
 
 export default function MyPage() {
   return (
-    <CommonLayout title="마이페이지">
+    <CommonLayout title="마이페이지" withBottomNav>
       <MyPageView />
     </CommonLayout>
   );
