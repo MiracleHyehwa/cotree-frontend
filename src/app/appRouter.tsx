@@ -1,5 +1,6 @@
 import { lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ScrollToTop } from "@/shared/components";
 
 const HomePage = lazy(() => import("@/pages/home"));
 const EcoPage = lazy(() => import("@/pages/eco"));
@@ -16,10 +17,12 @@ const RewardHistoryPage = lazy(() => import("@/pages/mypage/rewards"));
 const LoginPage = lazy(() => import("@/pages/login"));
 const SearchPage = lazy(() => import("@/pages/search"));
 const NotFoundPage = lazy(() => import("@/pages/notFound"));
+const OnboardingPage = lazy(() => import("@/pages/onboarding"));
 
 export default function AppRouter() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/eco" element={<EcoPage />} />
@@ -39,6 +42,7 @@ export default function AppRouter() {
         <Route path="/mypage/rewards" element={<RewardHistoryPage />} />
 
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/login/onboarding" element={<OnboardingPage />} />
 
         <Route path="/search" element={<SearchPage />} />
         <Route path="/*" element={<NotFoundPage />} />
