@@ -24,7 +24,7 @@ export default function ProductCardGrid() {
               )}
             </div>
 
-            <div className="pt-2 px-2 pb-3 space-y-1">
+            <div className="pt-2 pb-3 space-y-1">
               <div className="text-xs text-muted-foreground">{brand.name}</div>
               <div className="text-sm font-medium leading-snug break-words line-clamp-2">{name}</div>
               {hasDiscount && (

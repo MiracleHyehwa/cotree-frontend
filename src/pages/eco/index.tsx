@@ -9,7 +9,7 @@ export default function EcoPage() {
       <TabNavigation />
       <div className="w-full max-w-limit px-4">
         <ProductCard.List products={sampleProductMock}>
-          <ProductCard.Featured />
+          <ProductCard.Highlighted />
         </ProductCard.List>
       </div>
     </CommonLayout>
