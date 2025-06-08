@@ -1,1 +1,1 @@
-export * from "./useProductFilterContext";
+export * from "./useProductVariantsContext";
