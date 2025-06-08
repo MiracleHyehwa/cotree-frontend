@@ -2,6 +2,7 @@ import { lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const HomePage = lazy(() => import("@/pages/home"));
+const EcoPage = lazy(() => import("@/pages/eco"));
 const CategoryPage = lazy(() => import("@/pages/category"));
 const ProductDetailPage = lazy(() => import("@/pages/productDetail"));
 const OrderHistoryPage = lazy(() => import("@/pages/order"));
@@ -19,6 +20,7 @@ export default function AppRouter() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/eco" element={<EcoPage />} />
 
         <Route path="/category" element={<CategoryPage />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />
