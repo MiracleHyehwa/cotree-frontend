@@ -6,7 +6,7 @@ export default function ProductCardListFeatured() {
   const { products } = useProductVariantsContext();
 
   return (
-    <div className="grid grid-cols-1 gap-4 px-4 py-6">
+    <div className="grid grid-cols-1 gap-4 py-4">
       {products.map((product) => {
         const { id, name, price, discount, image_url } = product;
         const finalPrice = price - discount;
@@ -26,7 +26,7 @@ export default function ProductCardListFeatured() {
                 <div className="text-xl font-bold text-primary">{finalPrice.toLocaleString()}원</div>
               </div>
             </div>
-            <div className="px-4 pb-4">
+            <div className=" pb-4">
               <Button size="sm" variant="secondary" className="w-full">
                 구매하러 가기
               </Button>

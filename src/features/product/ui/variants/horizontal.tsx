@@ -6,7 +6,7 @@ export default function ProductCardListHorizontal() {
   const { products } = useProductVariantsContext();
 
   return (
-    <div className="w-full max-w-limit divide-y px-4 py-2 bg-background">
+    <div className="w-full max-w-limit divide-y bg-background">
       {products.map((product) => {
         const { id, name, price, discount, brand, image_url, is_green } = product;
         const finalPrice = price - discount;

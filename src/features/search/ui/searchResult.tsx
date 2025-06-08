@@ -9,10 +9,8 @@ export default function SearchResult() {
   const filtered = sampleProductMock.filter((product) => product.name.toLowerCase().includes(keyword.toLowerCase()));
 
   return (
-    <div className="w-full max-w-limit space-y-4">
-      <ProductCard.List products={filtered}>
-        <ProductCard.Grid />
-      </ProductCard.List>
-    </div>
+    <ProductCard.List products={filtered}>
+      <ProductCard.Grid />
+    </ProductCard.List>
   );
 }

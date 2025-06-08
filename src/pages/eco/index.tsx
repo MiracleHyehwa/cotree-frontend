@@ -1,9 +1,17 @@
+import { sampleProductMock } from "@/features/product/mocks/sampleProductMock";
+import { ProductCard } from "@/features/product/ui/variants";
 import { CommonLayout } from "@/shared/layout";
+import { TabNavigation } from "../home/sections";
 
 export default function EcoPage() {
   return (
     <CommonLayout withBottomNav title="친환경">
-      <div className="w-full max-w-limit px-4 py-6">gd</div>
+      <TabNavigation />
+      <div className="w-full max-w-limit px-4">
+        <ProductCard.List products={sampleProductMock}>
+          <ProductCard.Featured />
+        </ProductCard.List>
+      </div>
     </CommonLayout>
   );
 }

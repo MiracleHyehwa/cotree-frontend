@@ -9,17 +9,17 @@ interface SlotProps {
 }
 
 export default function SearchView({ children }: { children: React.ReactNode }) {
-  return <div className="flex flex-col w-full px-4 gap-6 pt-6 max-w-limit mx-auto">{children}</div>;
+  return <div className="flex flex-col w-full px-4 gap-6 max-w-limit mx-auto">{children}</div>;
 }
 
 function EmptyRecentKeywordMessage() {
   return (
-    <p className="text-sm text-muted-foreground w-full max-wlimit text-center shrink-0">최근 검색어가 없습니다.</p>
+    <p className="text-sm text-muted-foreground w-full max-wlimit text-center shrink-0 py-4">최근 검색어가 없습니다.</p>
   );
 }
 
 function EmptyResultMessage() {
-  return <p className="text-sm text-muted-foreground w-full max-w-limit shrink-0">일치하는 결과가 없습니다.</p>;
+  return <p className="text-sm text-muted-foreground w-full max-w-limit shrink-0 py-4">일치하는 결과가 없습니다.</p>;
 }
 
 function WhenIdle({ children }: SlotProps) {
