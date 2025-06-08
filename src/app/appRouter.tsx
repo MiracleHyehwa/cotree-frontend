@@ -15,6 +15,7 @@ const PointHistoryPage = lazy(() => import("@/pages/mypage/points"));
 const RewardHistoryPage = lazy(() => import("@/pages/mypage/rewards"));
 const LoginPage = lazy(() => import("@/pages/login"));
 const SearchPage = lazy(() => import("@/pages/search"));
+const NotFoundPage = lazy(() => import("@/pages/notFound"));
 
 export default function AppRouter() {
   return (
@@ -40,6 +41,7 @@ export default function AppRouter() {
         <Route path="/login" element={<LoginPage />} />
 
         <Route path="/search" element={<SearchPage />} />
+        <Route path="/*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );
