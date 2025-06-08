@@ -6,24 +6,42 @@ export default function ProductCardListHorizontal() {
   const { products } = useProductVariantsContext();
 
   return (
-    <div className="w-full max-w-limit divide-y bg-background">
-      {products.map((product) => {
+    <div className="w-full max-w-limit bg-background divide-y py-4">
+      {products.map((product, index) => {
         const { id, name, price, discount, brand, image_url, is_green } = product;
         const finalPrice = price - discount;
+        const discountPercent = discount > 0 ? Math.round((discount / price) * 100) : 0;
 
         return (
-          <Link key={id} to={`/product/${id}`} className="flex gap-4 py-4 bg-background items-center w-full">
-            <div className="w-[100px] h-[100px] relative flex-shrink-0">
-              <img src={image_url} alt={name} className="w-full h-full object-cover rounded-md" />
-              {is_green === "Y" && (
-                <Badge className="absolute bottom-1 right-1 bg-primary text-white border-none text-xs">친환경</Badge>
-              )}
+          <Link
+            key={id}
+            to={`/product/${id}`}
+            className={`flex gap-4 group items-start py-4 ${index === 0 ? "pt-0" : ""}`}
+          >
+            <div className="w-[140px] h-[140px] relative overflow-hidden rounded-md flex-shrink-0">
+              <img
+                src={image_url}
+                alt={name}
+                className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300"
+              />
+              {is_green === "Y" && <Badge className="absolute bottom-2 right-2 text-xs font-semibold">친환경</Badge>}
             </div>
 
-            <div className="flex flex-col justify-between gap-1">
+            <div className="flex flex-col justify-between flex-1 min-w-0">
               <div className="text-xs text-muted-foreground">{brand.name}</div>
-              <div className="text-sm font-medium line-clamp-2">{name}</div>
-              <div className="text-sm font-bold text-foreground">{finalPrice.toLocaleString()}원</div>
+              <div className="mt-1 text-sm font-medium text-foreground leading-tight line-clamp-2">{name}</div>
+
+              <div className="mt-2 space-y-1">
+                {discount > 0 && (
+                  <div className="flex flex-col gap-1 items-start">
+                    <span className="text-sm text-muted-foreground line-through">{price.toLocaleString()}원</span>
+                    <span className="px-2 py-0.5 text-xs bg-destructive/10 text-destructive rounded-full font-semibold w-fit">
+                      -{discountPercent}%
+                    </span>
+                  </div>
+                )}
+                <span className="text-lg font-bold">{finalPrice.toLocaleString()}원</span>
+              </div>
             </div>
           </Link>
         );
