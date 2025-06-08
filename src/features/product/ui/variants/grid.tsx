@@ -6,7 +6,7 @@ export default function ProductCardGrid() {
   const { products } = useProductVariantsContext();
 
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="grid grid-cols-2 gap-4 py-4">
       {products.map((product) => {
         const { id, name, price, discount, origin, image_url, brand, is_green } = product;
         const finalPrice = price - discount;
@@ -24,7 +24,7 @@ export default function ProductCardGrid() {
               )}
             </div>
 
-            <div className="pt-2 px-2 pb-3 space-y-1">
+            <div className="pt-2 pb-3 space-y-1">
               <div className="text-xs text-muted-foreground">{brand.name}</div>
               <div className="text-sm font-medium leading-snug break-words line-clamp-2">{name}</div>
               {hasDiscount && (

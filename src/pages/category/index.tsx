@@ -7,9 +7,11 @@ export default function CategoryPage() {
   return (
     <CommonLayout withBottomNav title="카테고리">
       <ProductCategoryFilterTabs />
-      <ProductCard.List products={sampleProductMock}>
-        <ProductCard.Featured />
-      </ProductCard.List>
+      <div className="w-full max-w-limit px-4">
+        <ProductCard.List products={sampleProductMock}>
+          <ProductCard.Grid />
+        </ProductCard.List>
+      </div>
     </CommonLayout>
   );
 }

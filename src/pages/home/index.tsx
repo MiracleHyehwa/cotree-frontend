@@ -4,8 +4,8 @@ import {
   HomeCategorySwiper,
   HomeEcoBrandSwiper,
   HomeRecommendedProductSection,
-  TabNavigation,
 } from "@/pages/home/sections";
+import { TabNavigation } from "@/shared/tabs";
 
 export default function HomePage() {
   return (

@@ -10,7 +10,6 @@ interface Tab {
 
 const TABS: Tab[] = [
   { label: "홈", key: "home", path: "/" },
-  { label: "카테고리", key: "category", path: "/category" },
   { label: "친환경", key: "eco", path: "/eco" },
   { label: "추천", key: "recommend", path: "/recommend" },
 ];
