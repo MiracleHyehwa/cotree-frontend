@@ -37,7 +37,7 @@ function GreenTree({ onClick }: { onClick: () => void }) {
   text-primary-foreground p-4 rounded-xl flex items-center justify-between
   transition-all duration-300 ease-in-out cursor-pointer"
       >
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2" onClick={onClick}>
           <span className="text-2xl">🌳</span>
           <p className="text-base font-semibold text-muted">내 나무 보러가기</p>
         </div>
