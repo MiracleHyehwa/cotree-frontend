@@ -1,10 +1,6 @@
 import * as THREE from "three";
-import { RNG } from "./rng";
-import { TreeOptions } from "./treeOptions";
-import { Branch } from "./branch";
+import { Billboard, Branch, getBarkTexture, getLeafTexture, RNG, TreeOptions } from "@/entities/environment/tree";
 import { loadPreset, TreePresetName } from "./presets";
-import { Billboard } from "./enums";
-import { getBarkTexture, getLeafTexture } from "./textures";
 
 type WindShaderMaterial = THREE.Material & {
   userData: {

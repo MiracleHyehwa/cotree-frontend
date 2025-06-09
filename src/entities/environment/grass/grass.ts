@@ -1,7 +1,7 @@
-import { simplex2d } from "@/shared/lib/noise";
 import * as THREE from "three";
+import { simplex2d } from "@/shared/lib/noise";
 import { GLTFLoader } from "three/examples/jsm/Addons.js";
-import { GrassOptions } from "./grassOptions";
+import { GrassOptions } from "@/entities/environment/grass";
 
 type WindShaderMaterial = THREE.Material & {
   userData: {

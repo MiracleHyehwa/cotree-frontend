@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
-import { RockOptions } from "./rockOptions";
+import { RockOptions } from "@/entities/environment/rocks";
 
 /**
  * 텍스처가 완전히 로드될 때까지 대기

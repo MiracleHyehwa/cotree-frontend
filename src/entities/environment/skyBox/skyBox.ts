@@ -2,7 +2,7 @@ import * as THREE from "three";
 import fragmentShader from "./shaders/skybox.frag?raw";
 import vertexShader from "./shaders/skybox.vert?raw";
 import { degToRad } from "three/src/math/MathUtils.js";
-import { SkyboxOptions } from "./skyBoxOptions";
+import { SkyboxOptions } from "@/entities/environment/skyBox";
 
 /**
  * Skybox 클래스

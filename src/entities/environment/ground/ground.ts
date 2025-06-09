@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { GrassOptions } from "../grass/grassOptions";
+import { GrassOptions } from "@/entities/environment/grass";
 
 /**
  * 지면(Ground)을 표현하는 클래스
