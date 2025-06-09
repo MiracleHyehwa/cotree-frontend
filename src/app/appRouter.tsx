@@ -18,6 +18,7 @@ const LoginPage = lazy(() => import("@/pages/login"));
 const SearchPage = lazy(() => import("@/pages/search"));
 const NotFoundPage = lazy(() => import("@/pages/notFound"));
 const OnboardingPage = lazy(() => import("@/pages/onboarding"));
+const EnvironmentPage = lazy(() => import("@/pages/mypage/environment"));
 
 export default function AppRouter() {
   return (
@@ -40,6 +41,7 @@ export default function AppRouter() {
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/mypage/points" element={<PointHistoryPage />} />
         <Route path="/mypage/rewards" element={<RewardHistoryPage />} />
+        <Route path="/mypage/environment" element={<EnvironmentPage />} />
 
         <Route path="/login" element={<LoginPage />} />
         <Route path="/login/onboarding" element={<OnboardingPage />} />

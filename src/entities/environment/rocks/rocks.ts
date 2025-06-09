@@ -60,7 +60,7 @@ export class Rocks extends THREE.Group {
     dracoLoader.setDecoderPath("https://www.gstatic.com/draco/versioned/decoders/1.5.7/");
     loader.setDRACOLoader(dracoLoader);
 
-    const paths = ["./environment/rock1.glb", "./environment/rock2.glb", "./environment/rock3.glb"];
+    const paths = ["/environment/rock1.glb", "/environment/rock2.glb", "/environment/rock3.glb"];
 
     const meshes = await Promise.all(
       paths.map(async (path) => {

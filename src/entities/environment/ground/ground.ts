@@ -41,9 +41,9 @@ export class Ground extends THREE.Mesh {
 
     const loader = new THREE.TextureLoader();
     const [grass, dirt, dirtN] = await Promise.all([
-      loader.loadAsync("./environment/grass.jpg"),
-      loader.loadAsync("./environment/dirt_color.jpg"),
-      loader.loadAsync("./environment/dirt_normal.jpg"),
+      loader.loadAsync("/environment/grass.jpg"),
+      loader.loadAsync("/environment/dirt_color.jpg"),
+      loader.loadAsync("/environment/dirt_normal.jpg"),
     ]);
 
     [grass, dirt].forEach((t) => {

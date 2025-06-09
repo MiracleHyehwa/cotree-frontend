@@ -87,10 +87,10 @@ export class Grass extends THREE.Object3D {
       return model;
     };
 
-    this.grassModel = await loadModel("grass.glb");
-    this.flowerModels["flower_white"] = await loadModel("./environment/flower_white.glb");
-    this.flowerModels["flower_blue"] = await loadModel("./environment/flower_blue.glb");
-    this.flowerModels["flower_yellow"] = await loadModel("./environment/flower_yellow.glb");
+    this.grassModel = await loadModel("/environment/grass.glb");
+    this.flowerModels["flower_white"] = await loadModel("/environment/flower_white.glb");
+    this.flowerModels["flower_blue"] = await loadModel("/environment/flower_blue.glb");
+    this.flowerModels["flower_yellow"] = await loadModel("/environment/flower_yellow.glb");
   }
 
   /**

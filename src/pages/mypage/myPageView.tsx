@@ -1,5 +1,6 @@
 import { MyPage } from "@/features/myPage/ui";
 import { User, Package, Gift } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const user = {
   name: "한*준",
@@ -35,10 +36,11 @@ const menuItems = [
 ];
 
 export default function MyPageView() {
+  const navigate = useNavigate();
   return (
     <MyPage>
       <MyPage.Profile user={user} />
-      <MyPage.GreenTree onClick={() => console.log("나무 보러가기")} />
+      <MyPage.GreenTree onClick={() => navigate("/mypage/environment")} />
       <MyPage.Points value={user.point} />
 
       <MyPage.OrderStatus>
