@@ -8,39 +8,6 @@ import { useIsMobile } from "@/shared/hooks/use-mobile";
 import { useEffect, useState } from "react";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 
-const chartData = [
-  { date: "2024-06-01", used: 1200, rewarded: 800 },
-  { date: "2024-06-02", used: 900, rewarded: 1500 },
-  { date: "2024-06-03", used: 700, rewarded: 600 },
-  { date: "2024-06-04", used: 1100, rewarded: 900 },
-  { date: "2024-06-05", used: 500, rewarded: 300 },
-  { date: "2024-06-06", used: 1300, rewarded: 1500 },
-  { date: "2024-06-07", used: 1000, rewarded: 1200 },
-  { date: "2024-06-08", used: 950, rewarded: 1000 },
-  { date: "2024-06-09", used: 800, rewarded: 850 },
-  { date: "2024-06-10", used: 780, rewarded: 700 },
-  { date: "2024-06-11", used: 1200, rewarded: 1300 },
-  { date: "2024-06-12", used: 670, rewarded: 720 },
-  { date: "2024-06-13", used: 910, rewarded: 890 },
-  { date: "2024-06-14", used: 600, rewarded: 1000 },
-  { date: "2024-06-15", used: 890, rewarded: 950 },
-  { date: "2024-06-16", used: 1100, rewarded: 1150 },
-  { date: "2024-06-17", used: 740, rewarded: 660 },
-  { date: "2024-06-18", used: 980, rewarded: 900 },
-  { date: "2024-06-19", used: 620, rewarded: 700 },
-  { date: "2024-06-20", used: 900, rewarded: 850 },
-  { date: "2024-06-21", used: 780, rewarded: 870 },
-  { date: "2024-06-22", used: 650, rewarded: 600 },
-  { date: "2024-06-23", used: 1020, rewarded: 1100 },
-  { date: "2024-06-24", used: 940, rewarded: 960 },
-  { date: "2024-06-25", used: 890, rewarded: 930 },
-  { date: "2024-06-26", used: 750, rewarded: 720 },
-  { date: "2024-06-27", used: 970, rewarded: 890 },
-  { date: "2024-06-28", used: 840, rewarded: 860 },
-  { date: "2024-06-29", used: 620, rewarded: 750 },
-  { date: "2024-06-30", used: 1100, rewarded: 1200 },
-];
-
 const chartConfig = {
   visitors: {
     label: "포인트 사용/적립 추이",
