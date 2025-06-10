@@ -44,7 +44,7 @@ export default function SearchInput() {
                 id="cotree-search"
                 enterKeyHint="search"
                 placeholder="찾고 싶은 식품을 검색해보세요!"
-                className="flex-1 h-full bg-transparent text-sm text-foreground placeholder-muted-foreground border-none autofill-hide appearance-none focus-visible:ring-0 focus-visible:outline-none"
+                className="flex-1 h-full bg-transparent !text-base text-foreground placeholder:text-sm not-first:placeholder-muted-foreground border-none autofill-hide appearance-none focus-visible:ring-0 focus-visible:outline-none leading-tight"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyDown={handleKeyDown}
