@@ -1,10 +1,11 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/components/ui/select";
 import { Controller, useFormContext } from "react-hook-form";
 
 export default function OrderPaymentCardInputFields() {
+  const [isTouched, setIsTouched] = useState(false);
   const { setValue, control, formState } = useFormContext();
   const { errors } = formState;
 
@@ -27,7 +28,19 @@ export default function OrderPaymentCardInputFields() {
     if (newValue.length === 4 && index < 3) {
       refs[index + 1].current?.focus();
     }
+
+    if (index === 3 && newValue.length === 4 && !isTouched) {
+      setIsTouched(true);
+      refs[index].current?.blur();
+    }
   };
+
+  useEffect(() => {
+    const joinedLength = segments.join("").length;
+    if (joinedLength < 16 && isTouched) {
+      setIsTouched(false);
+    }
+  }, [segments, isTouched]);
 
   return (
     <div className="space-y-4 mt-4">
@@ -36,11 +49,12 @@ export default function OrderPaymentCardInputFields() {
         <div className="flex gap-2">
           {segments.map((val, i) => (
             <Input
+              inputMode="numeric"
               key={i}
               ref={refs[i]}
               placeholder="****"
               maxLength={4}
-              className="w-1/4 placeholder:text-muted-foreground/50"
+              className="w-1/4 placeholder:text-muted-foreground/50 text-base"
               value={val}
               onChange={(e) => handleSegmentChange(e.target.value, i)}
             />
