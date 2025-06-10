@@ -19,6 +19,7 @@ const SearchPage = lazy(() => import("@/pages/search"));
 const NotFoundPage = lazy(() => import("@/pages/notFound"));
 const OnboardingPage = lazy(() => import("@/pages/onboarding"));
 const EnvironmentPage = lazy(() => import("@/pages/mypage/environment"));
+const AdminPage = lazy(() => import("@/pages/admin"));
 
 export default function AppRouter() {
   return (
@@ -47,6 +48,8 @@ export default function AppRouter() {
         <Route path="/login/onboarding" element={<OnboardingPage />} />
 
         <Route path="/search" element={<SearchPage />} />
+        <Route path="/admin" element={<AdminPage />} />
+
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
