@@ -52,10 +52,6 @@
   display: none;
 }
 
-.pb-safe-bottom {
-  padding-bottom: calc(env(safe-area-inset-bottom) + 0px);
-}
-
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
