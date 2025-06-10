@@ -1,9 +1,10 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
 import { useFormContext } from "react-hook-form";
 
 export default function OrderRecipientFields() {
+  const [isTouched, setIsTouched] = useState(false);
   const { setValue, register, formState } = useFormContext();
   const { errors } = formState;
 
@@ -22,7 +23,19 @@ export default function OrderRecipientFields() {
     if (sanitized.length === (index === 0 ? 3 : 4) && index < 2) {
       refs[index + 1].current?.focus();
     }
+
+    if (index === 2 && sanitized.length === 4 && !isTouched) {
+      setIsTouched(true);
+      refs[index].current?.blur();
+    }
   };
+
+  useEffect(() => {
+    const totalLength = segments.join("").length;
+    if (totalLength < 11 && isTouched) {
+      setIsTouched(false);
+    }
+  }, [segments, isTouched]);
 
   return (
     <div className="space-y-4">
