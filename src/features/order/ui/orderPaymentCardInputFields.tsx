@@ -36,11 +36,12 @@ export default function OrderPaymentCardInputFields() {
         <div className="flex gap-2">
           {segments.map((val, i) => (
             <Input
+              inputMode="numeric"
               key={i}
               ref={refs[i]}
               placeholder="****"
               maxLength={4}
-              className="w-1/4 placeholder:text-muted-foreground/50"
+              className="w-1/4 placeholder:text-muted-foreground/50 text-base"
               value={val}
               onChange={(e) => handleSegmentChange(e.target.value, i)}
             />

@@ -55,7 +55,7 @@ export default function OrderRecipientFields() {
                 inputMode="numeric"
                 placeholder={i === 0 ? "010" : "1234"}
                 maxLength={i === 0 ? 3 : 4}
-                className="w-1/3 placeholder:text-muted-foreground/50"
+                className="w-1/3 placeholder:text-muted-foreground/50 text-base"
                 value={val}
                 ref={refs[i]}
                 onChange={(e) => handleSegmentChange(e.target.value, i)}
