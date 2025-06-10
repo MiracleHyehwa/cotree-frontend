@@ -1,10 +1,11 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/components/ui/select";
 import { Controller, useFormContext } from "react-hook-form";
 
 export default function OrderPaymentCardInputFields() {
+  const [isTouched, setIsTouched] = useState(false);
   const { setValue, control, formState } = useFormContext();
   const { errors } = formState;
 
@@ -27,7 +28,19 @@ export default function OrderPaymentCardInputFields() {
     if (newValue.length === 4 && index < 3) {
       refs[index + 1].current?.focus();
     }
+
+    if (index === 3 && newValue.length === 4 && !isTouched) {
+      setIsTouched(true);
+      refs[index].current?.blur();
+    }
   };
+
+  useEffect(() => {
+    const joinedLength = segments.join("").length;
+    if (joinedLength < 16 && isTouched) {
+      setIsTouched(false);
+    }
+  }, [segments, isTouched]);
 
   return (
     <div className="space-y-4 mt-4">
