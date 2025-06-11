@@ -1,6 +1,7 @@
 import { useEnvironmentContext } from "@/features/environment/hooks";
 import { calculateExpPercent } from "@/features/environment/utils";
 import { Button } from "@/shared/components/ui/button";
+import { cn } from "@/shared/lib/utils";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
 
@@ -62,12 +63,17 @@ TreeActionBar.Buttons = function Buttons({ children, visible }: { children: Reac
 };
 
 TreeActionBar.GiveWater = function GiveWater() {
-  const { isReady, increaseExp } = useEnvironmentContext();
+  const { isReady, increaseExp, remainingWaterUnit } = useEnvironmentContext();
+  const isDisabled = !isReady || remainingWaterUnit <= 0;
 
   return (
-    <Button onClick={() => increaseExp(100)} disabled={!isReady} variant="default" className="cursor-pointer">
-      <span className="text-sm font-medium text-white">물 주기</span>
-      <span className="text-xs text-foreground/70 mt-0.5">3개 남음</span>
+    <Button
+      onClick={() => increaseExp(100)}
+      disabled={isDisabled}
+      variant="default"
+      className={cn("h-12", isDisabled ? "cursor-not-allowed" : "cursor-pointer")}
+    >
+      물주기 ({remainingWaterUnit}번 남았어요)
     </Button>
   );
 };

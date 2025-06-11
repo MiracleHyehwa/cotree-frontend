@@ -7,10 +7,16 @@ import type { Grass } from "@/entities/environment/grass";
 interface EnvironmentProviderProps {
   children: React.ReactNode;
   initialExp: number;
+  initialRemainingWaterUnit: number;
 }
 
-export default function EnvironmentProvider({ children, initialExp }: EnvironmentProviderProps) {
+export default function EnvironmentProvider({
+  children,
+  initialExp,
+  initialRemainingWaterUnit,
+}: EnvironmentProviderProps) {
   const [exp, setExp] = useState(initialExp);
+  const [remainingWaterUnit, setRemainingWaterUnit] = useState(initialRemainingWaterUnit);
 
   const baseTreeRef = useRef<Tree>(null);
   const grassRef = useRef<Grass>(null);
@@ -20,6 +26,7 @@ export default function EnvironmentProvider({ children, initialExp }: Environmen
     (amount: number) => {
       const newExp = exp + amount;
       setExp(newExp);
+      setRemainingWaterUnit((prev) => Math.max(prev - 1, 0));
 
       const baseTree = baseTreeRef.current;
       const grass = grassRef.current;
@@ -36,6 +43,7 @@ export default function EnvironmentProvider({ children, initialExp }: Environmen
   const value: EnvironmentContextValue = {
     exp,
     setExp,
+    remainingWaterUnit,
     increaseExp,
     baseTreeRef,
     grassRef,

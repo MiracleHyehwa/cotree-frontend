@@ -8,6 +8,7 @@ import LoadingOverlay from "@/features/environment/ui/loadingOverlay";
 export default function EnvironmentView() {
   const { data, isLoading } = useMyTree();
 
+  console.log(data);
   if (isLoading || !data) {
     return (
       <EnvironmentLayout>
@@ -21,7 +22,7 @@ export default function EnvironmentView() {
   }
 
   return (
-    <EnvironmentProvider initialExp={data.exp}>
+    <EnvironmentProvider initialExp={data.exp} initialRemainingWaterUnit={data.remainingWaterUnit}>
       <EnvironmentCanvas />
 
       <TreeActionBar>
