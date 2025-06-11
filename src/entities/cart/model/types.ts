@@ -1,10 +1,11 @@
 export interface CartItem {
-  id: number;
-  image: string;
-  name: string;
-  brand: string;
+  basketItemId: number;
+  itemId: number;
+  itemName: string;
+  brandName: string;
   price: number;
   discount: number;
   quantity: number;
-  isGreen: boolean;
+  thumbnailImage: string;
+  isGreen: "Y" | "N";
 }

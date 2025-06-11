@@ -1,8 +1,12 @@
 import { ReactNode } from "react";
 import { useCartContext } from "@/features/cart/hooks";
-import { CartEmptyState, CartProductList, CartSummary } from "@/features/cart/ui";
+import { CartEmptyState, CartSummary } from "@/features/cart/ui";
 import { Checkbox } from "@/shared/components/ui/checkbox";
 import { Button } from "@/shared/components/ui/button";
+import { Trash2 } from "lucide-react";
+import { Badge } from "@/shared/components/ui/badge";
+import { Link } from "react-router-dom";
+import { useDeleteCartItem } from "@/entities/cart/api/hooks";
 
 interface CartContentProps {
   children: ReactNode;
@@ -47,17 +51,82 @@ function CheckboxSlot() {
 }
 
 function List() {
+  const { mutate: mutateDeleteCartItem } = useDeleteCartItem();
   const { cartItems, setCartItems } = useCartContext();
 
-  const handleSelectItem = (id: number, checked: boolean | "indeterminate") => {
-    setCartItems((prev) => prev.map((item) => (item.id === id ? { ...item, selected: checked === true } : item)));
+  const handleSelectItem = (basketItemId: number, checked: boolean | "indeterminate") => {
+    setCartItems((prev) =>
+      prev.map((item) => (item.basketItemId === basketItemId ? { ...item, selected: checked === true } : item))
+    );
   };
 
-  const handleDeleteItem = (id: number) => {
-    setCartItems((prev) => prev.filter((item) => item.id !== id));
-  };
+  return (
+    <>
+      {cartItems.map((item) => {
+        const finalPrice = item.price - item.discount;
+        const point = item.isGreen === "Y" ? Math.floor(finalPrice * 0.05 * item.quantity) : 0;
 
-  return <CartProductList items={cartItems} onSelectItem={handleSelectItem} onDeleteItem={handleDeleteItem} />;
+        return (
+          <div key={item.basketItemId} className="border-b px-4 py-4">
+            <div className="flex items-start gap-4">
+              <Checkbox
+                checked={item.selected}
+                onCheckedChange={(checked) => handleSelectItem(item.basketItemId, checked)}
+                className="shrink-0"
+              />
+
+              <img
+                src={item.thumbnailImage}
+                alt={item.itemName}
+                className="w-32 h-32 object-cover rounded-md border shrink-0"
+              />
+
+              <div className="flex-1 space-y-1">
+                <div className="flex items-center gap-2">
+                  {item.isGreen === "Y" && <Badge className="text-xs bg-primary text-primary-foreground">친환경</Badge>}
+                  <span className="text-sm font-semibold text-foreground">{item.brandName}</span>
+                </div>
+
+                <Link to={`/product/${item.itemId}`} className="block">
+                  <div className="text-sm font-medium text-foreground leading-snug line-clamp-2 hover:underline">
+                    {item.itemName}
+                  </div>
+                </Link>
+
+                <div className="text-xs text-muted-foreground">수량: {item.quantity}</div>
+
+                <div className="mt-1">
+                  <div className="text-base font-bold text-foreground">
+                    {(finalPrice * item.quantity).toLocaleString()}원
+                  </div>
+                  {item.discount > 0 && (
+                    <div className="text-xs text-gray-400 line-through">
+                      {(item.price * item.quantity).toLocaleString()}원
+                    </div>
+                  )}
+                </div>
+
+                {item.isGreen === "Y" && (
+                  <div className="text-xs text-foreground font-medium mt-1">
+                    🌿 그린포인트 {point.toLocaleString()}P 적립 예정
+                  </div>
+                )}
+              </div>
+
+              <Button
+                size="icon"
+                variant="ghost"
+                className="shrink-0 mt-1 cursor-pointer"
+                onClick={() => mutateDeleteCartItem(item.basketItemId)}
+              >
+                <Trash2 size={16} className="cursor-pointer" />
+              </Button>
+            </div>
+          </div>
+        );
+      })}
+    </>
+  );
 }
 
 function Summary() {
@@ -68,7 +137,7 @@ function Summary() {
   const totalDiscount = selectedItems.reduce((sum, item) => sum + item.discount * item.quantity, 0);
   const finalTotalPrice = totalPrice - totalDiscount;
   const totalPoints = selectedItems.reduce((sum, item) => {
-    const point = item.isGreen ? Math.floor((item.price - item.discount) * 0.05 * item.quantity) : 0;
+    const point = item.isGreen === "Y" ? Math.floor((item.price - item.discount) * 0.05 * item.quantity) : 0;
     return sum + point;
   }, 0);
 
