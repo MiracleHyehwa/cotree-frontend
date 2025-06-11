@@ -1,5 +1,14 @@
 import ky from "ky";
-import { AuthApiError, AuthErrorCode, CartApiError, CartError, CartErrorCode } from "@/shared/lib/api/errors";
+import {
+  AuthApiError,
+  AuthErrorCode,
+  CartApiError,
+  CartError,
+  CartErrorCode,
+  EnvironmentApiError,
+  EnvironmentError,
+  EnvironmentErrorCode,
+} from "@/shared/lib/api/errors";
 import { refreshAccessToken } from "@/shared/lib/api/auth";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -40,6 +49,10 @@ export const api = ky.create({
 
           if (code in CartError) {
             throw new CartApiError(code as CartErrorCode, status);
+          }
+
+          if (code in EnvironmentError) {
+            throw new EnvironmentApiError(code as EnvironmentErrorCode, status);
           }
 
           throw new Error("알 수 없는 에러가 발생했습니다.");
