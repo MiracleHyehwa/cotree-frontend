@@ -1,5 +1,4 @@
 import { Button } from "@/shared/components/ui/button";
-import { HeaderHomeLayout } from "@/shared/layout";
 import { useNavigate } from "react-router-dom";
 
 export default function ErrorFallback({ resetErrorBoundary }: { error: Error; resetErrorBoundary: () => void }) {
