@@ -6,6 +6,7 @@ import { Button } from "@/shared/components/ui/button";
 import { Trash2 } from "lucide-react";
 import { Badge } from "@/shared/components/ui/badge";
 import { Link } from "react-router-dom";
+import { useDeleteCartItem } from "@/entities/cart/api/hooks";
 
 interface CartContentProps {
   children: ReactNode;
@@ -50,16 +51,13 @@ function CheckboxSlot() {
 }
 
 function List() {
+  const { mutate: mutateDeleteCartItem } = useDeleteCartItem();
   const { cartItems, setCartItems } = useCartContext();
 
   const handleSelectItem = (basketItemId: number, checked: boolean | "indeterminate") => {
     setCartItems((prev) =>
       prev.map((item) => (item.basketItemId === basketItemId ? { ...item, selected: checked === true } : item))
     );
-  };
-
-  const handleDeleteItem = (basketItemId: number) => {
-    setCartItems((prev) => prev.filter((item) => item.basketItemId !== basketItemId));
   };
 
   return (
@@ -119,7 +117,7 @@ function List() {
                 size="icon"
                 variant="ghost"
                 className="shrink-0 mt-1 cursor-pointer"
-                onClick={() => handleDeleteItem(item.basketItemId)}
+                onClick={() => mutateDeleteCartItem(item.basketItemId)}
               >
                 <Trash2 size={16} className="cursor-pointer" />
               </Button>
