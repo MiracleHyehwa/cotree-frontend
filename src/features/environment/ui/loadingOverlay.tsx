@@ -11,7 +11,7 @@ function LoadingOverlay({ children }: LoadingOverlayRootProps) {
 
 LoadingOverlay.WhenLoading = function WhenLoading({ children }: { children: React.ReactNode }) {
   const { isReady } = useEnvironmentContext();
-  const showOverlay = useDelayedUnmount(!isReady, 200);
+  const showOverlay = useDelayedUnmount(!isReady, 400);
 
   if (!showOverlay) return null;
 
