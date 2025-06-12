@@ -1,42 +1,24 @@
+import { usePointHistory, usePointSummary } from "@/entities/greenpoint/api/hooks";
+import { useInfiniteScroll } from "@/shared/hooks";
 import PointHistory from "@/features/myPage/ui/pointHistory";
-
-const dummy = [
-  { date: "2025.06.01", amount: 1000 },
-  { date: "2025.06.02", amount: -500 },
-  { date: "2025.06.03", amount: 1500 },
-  { date: "2025.06.01", amount: 1000 },
-  { date: "2025.06.02", amount: -500 },
-  { date: "2025.06.03", amount: 1500 },
-  { date: "2025.06.04", amount: -700 },
-  { date: "2025.06.01", amount: 1000 },
-  { date: "2025.06.02", amount: -500 },
-  { date: "2025.06.03", amount: 1500 },
-  { date: "2025.06.04", amount: -700 },
-  { date: "2025.06.01", amount: 1000 },
-  { date: "2025.06.02", amount: -500 },
-  { date: "2025.06.03", amount: 1500 },
-  { date: "2025.06.04", amount: -700 },
-  { date: "2025.06.01", amount: 1000 },
-  { date: "2025.06.02", amount: -500 },
-  { date: "2025.06.03", amount: 1500 },
-  { date: "2025.06.04", amount: -700 },
-  { date: "2025.06.01", amount: 1000 },
-  { date: "2025.06.02", amount: -500 },
-  { date: "2025.06.03", amount: 1500 },
-  { date: "2025.06.04", amount: -700 },
-
-  { date: "2025.06.04", amount: -700 },
-];
+import Spinner from "@/shared/components/ui/spinner";
 
 export default function PointHistoryView() {
-  const total = dummy.reduce((sum, item) => sum + item.amount, 0);
+  const { data: summary } = usePointSummary();
+  const { data: pointHistories, fetchNextPage, hasNextPage, isFetchingNextPage } = usePointHistory(summary.totalCount);
+  const { ref } = useInfiniteScroll({ fetchNextPage, hasNextPage, isFetchingNextPage });
+  const histories = pointHistories?.pages.flat() ?? [];
 
   return (
-    <PointHistory items={dummy}>
-      <PointHistory.Header>
-        <PointHistory.Title />
-        <PointHistory.Stats total={total} count={dummy.length} />
-      </PointHistory.Header>
-    </PointHistory>
+    <>
+      <PointHistory histories={histories}>
+        <PointHistory.Header>
+          <PointHistory.Title />
+          <PointHistory.Stats remainPoint={summary.remainPoint} count={summary.totalCount} />
+        </PointHistory.Header>
+      </PointHistory>
+      <div ref={ref} className="h-8" />
+      {isFetchingNextPage && <Spinner />}
+    </>
   );
 }
