@@ -8,6 +8,9 @@ import {
   EnvironmentApiError,
   EnvironmentError,
   EnvironmentErrorCode,
+  GreenPointApiError,
+  GreenPointError,
+  GreenPointErrorCode,
 } from "@/shared/lib/api/errors";
 import { refreshAccessToken } from "@/shared/lib/api/auth";
 
@@ -53,6 +56,10 @@ export const api = ky.create({
 
           if (code in EnvironmentError) {
             throw new EnvironmentApiError(code as EnvironmentErrorCode, status);
+          }
+
+          if (code in GreenPointError) {
+            throw new GreenPointApiError(code as GreenPointErrorCode, status);
           }
 
           throw new Error("알 수 없는 에러가 발생했습니다.");

@@ -19,6 +19,16 @@ export const EnvironmentError = {
     devMessage: "잘못된 경험치 값 - 음수 혹은 null",
     message: "잘못된 경험치 값입니다.",
   },
+  TR005: {
+    code: "TR005",
+    devMessage: "잘못된 액션 - 존재하지 않는 명령",
+    message: "유효하지 않은 요청입니다.",
+  },
+  TR006: {
+    code: "TR006",
+    devMessage: "트리 최대 경험치 도달",
+    message: "더 이상 성장할 수 없습니다.",
+  },
 } as const;
 
 export type EnvironmentErrorCode = keyof typeof EnvironmentError;

@@ -1,6 +1,9 @@
+import { useGiveWater } from "@/entities/environment/api/hooks";
+import { MAX_EXP } from "@/entities/environment/constants";
 import { useEnvironmentContext } from "@/features/environment/hooks";
 import { calculateExpPercent } from "@/features/environment/utils";
 import { Button } from "@/shared/components/ui/button";
+import { cn } from "@/shared/lib/utils";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
 
@@ -19,7 +22,7 @@ export function TreeActionBar({ children }: TreeActionBarProps) {
         ${visible ? "translate-y-0" : "translate-y-[calc(100%-4rem)]"}
       `}
     >
-      <div className="relative mx-auto max-w-limit rounded-t bg-background/90 backdrop-blur-md shadow-lg px-4 pt-4 pb-8 space-y-4">
+      <div className="relative mx-auto max-w-limit bg-background/90 backdrop-blur-md shadow-lg px-4 pt-4 pb-4 space-y-4">
         <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-50">
           <Button
             size="icon"
@@ -58,16 +61,42 @@ TreeActionBar.Progress = function Progress() {
 TreeActionBar.Buttons = function Buttons({ children, visible }: { children: React.ReactNode; visible: boolean }) {
   if (!visible) return null;
 
-  return <div className="grid grid-cols-1 gap-3">{children}</div>;
+  return <div className="grid grid-cols-2 gap-3">{children}</div>;
 };
 
 TreeActionBar.GiveWater = function GiveWater() {
-  const { isReady, increaseExp } = useEnvironmentContext();
+  const { isReady, remainingWaterUnit, exp } = useEnvironmentContext();
+  const { mutate: giveWater, isPending } = useGiveWater();
+  const isDisabled = !isReady || remainingWaterUnit <= 0 || exp >= MAX_EXP;
 
   return (
-    <Button onClick={() => increaseExp(100)} disabled={!isReady} variant="default" className="cursor-pointer">
-      <span className="text-sm font-medium text-white">물 주기</span>
-      <span className="text-xs text-foreground/70 mt-0.5">3개 남음</span>
-    </Button>
+    <>
+      <Button
+        onClick={() => giveWater({ action: "GIVE_WATER" })}
+        disabled={isDisabled || isPending}
+        variant="default"
+        className={cn(
+          "h-12 relative",
+          "flex flex-col justify-center items-center leading-tight gap-0.5",
+          isDisabled || isPending ? "!cursor-not-allowed opacity-80" : "cursor-pointer"
+        )}
+      >
+        <span className="text-sm font-medium leading-none">{isPending ? "물 주는 중..." : "물 주기"}</span>
+        <span className="text-xs text-foreground leading-none">{remainingWaterUnit}회 가능</span>
+      </Button>
+      <Button
+        onClick={() => giveWater({ action: "GIVE_ALL_WATER" })}
+        disabled={isDisabled}
+        variant="outline"
+        className={cn(
+          "h-12",
+          "flex flex-col justify-center items-center leading-tight gap-0.5",
+          isDisabled || isPending ? "!cursor-not-allowed opacity-80" : "cursor-pointer"
+        )}
+      >
+        <span className="text-sm font-medium leading-none">🌧️ 비 내리기</span>
+        <span className="text-xs text-muted-foreground leading-none">모든 포인트 사용</span>
+      </Button>
+    </>
   );
 };

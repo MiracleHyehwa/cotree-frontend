@@ -21,7 +21,7 @@ export default function EnvironmentView() {
   }
 
   return (
-    <EnvironmentProvider initialExp={data.exp}>
+    <EnvironmentProvider initialExp={data.exp} initialRemainingWaterUnit={data.remainingWaterUnit}>
       <EnvironmentCanvas />
 
       <TreeActionBar>

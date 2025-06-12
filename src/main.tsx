@@ -13,8 +13,9 @@ const queryClient = new QueryClient({
     onError: (error, _variables, _context, mutation) => {
       if (error instanceof BaseApiError) {
         const mode = mutation.meta?.displayMode;
+        const position = mutation.meta?.position ? "top-right" : "bottom-right";
         if (mode === "toast") {
-          toast.error(error.message);
+          toast.error(error.message, { position: position });
         }
       }
     },

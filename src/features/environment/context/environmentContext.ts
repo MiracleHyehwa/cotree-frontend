@@ -5,7 +5,9 @@ import type { Tree } from "@/entities/environment/tree";
 export interface EnvironmentContextValue {
   exp: number;
   setExp: (v: number) => void;
-  increaseExp: (amount: number) => void;
+  syncGrowthFromExp: (exp: number) => void;
+  setRemainingWaterUnit: (v: number) => void;
+  remainingWaterUnit: number;
   baseTreeRef: RefObject<Tree | null>;
   grassRef: RefObject<Grass | null>;
   isReady: boolean;
