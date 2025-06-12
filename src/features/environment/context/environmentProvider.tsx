@@ -22,29 +22,23 @@ export default function EnvironmentProvider({
   const grassRef = useRef<Grass>(null);
   const [isReady, setIsReady] = useState(false);
 
-  const increaseExp = useCallback(
-    (amount: number) => {
-      const newExp = exp + amount;
-      setExp(newExp);
-      setRemainingWaterUnit((prev) => Math.max(prev - 1, 0));
+  const syncGrowthFromExp = useCallback((exp: number) => {
+    const baseTree = baseTreeRef.current;
+    const grass = grassRef.current;
 
-      const baseTree = baseTreeRef.current;
-      const grass = grassRef.current;
+    if (!baseTree || !grass) return;
 
-      if (!baseTree || !grass) return;
-
-      baseTree.queueGrowthFromExp(newExp);
-      const targetGrassAmount = calculateGrassAmount(newExp);
-      grass.setGrassAmount(targetGrassAmount);
-    },
-    [exp]
-  );
+    baseTree.queueGrowthFromExp(exp);
+    const targetGrassAmount = calculateGrassAmount(exp);
+    grass.setGrassAmount(targetGrassAmount);
+  }, []);
 
   const value: EnvironmentContextValue = {
     exp,
     setExp,
     remainingWaterUnit,
-    increaseExp,
+    setRemainingWaterUnit,
+    syncGrowthFromExp,
     baseTreeRef,
     grassRef,
     isReady,
