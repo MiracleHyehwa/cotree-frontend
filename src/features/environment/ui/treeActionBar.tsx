@@ -1,7 +1,7 @@
 import { useGiveWater } from "@/entities/environment/api/hooks";
 import { MAX_EXP } from "@/entities/environment/constants";
 import { useEnvironmentContext } from "@/features/environment/hooks";
-import { calculateExpPercent } from "@/features/environment/utils";
+import { calculateExpPercent, calculateLevel } from "@/features/environment/utils";
 import { Button } from "@/shared/components/ui/button";
 import { cn } from "@/shared/lib/utils";
 import { ChevronDown, ChevronUp } from "lucide-react";
@@ -42,7 +42,7 @@ export function TreeActionBar({ children }: TreeActionBarProps) {
 
 TreeActionBar.Level = function Level() {
   const { exp } = useEnvironmentContext();
-  const level = Math.floor(exp / 1000) + 1;
+  const level = calculateLevel(exp);
 
   return <span className="font-semibold">레벨 {level} 자라나무</span>;
 };
