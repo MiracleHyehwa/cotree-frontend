@@ -23,5 +23,7 @@ export const useGiveWater = (displayMode: DisplayMode = "toast") => {
       syncGrowthFromExp(serverExp);
       setRemainingWaterUnit(serverUnit);
     },
+
+    meta: { displayMode, position: "top-right" },
   });
 };

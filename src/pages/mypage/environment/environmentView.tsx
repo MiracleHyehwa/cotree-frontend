@@ -8,7 +8,6 @@ import LoadingOverlay from "@/features/environment/ui/loadingOverlay";
 export default function EnvironmentView() {
   const { data, isLoading } = useMyTree();
 
-  console.log(data);
   if (isLoading || !data) {
     return (
       <EnvironmentLayout>
