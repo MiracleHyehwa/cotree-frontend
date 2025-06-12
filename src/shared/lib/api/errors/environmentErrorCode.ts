@@ -6,26 +6,21 @@ export const EnvironmentError = {
   },
   TR002: {
     code: "TR002",
-    devMessage: "트리 생성 실패 - DB 저장 오류",
-    message: "나무 생성에 실패했습니다.",
-  },
-  TR003: {
-    code: "TR003",
     devMessage: "트리 경험치 업데이트 실패 - update 쿼리 실패",
     message: "경험치 업데이트에 실패했습니다.",
   },
-  TR004: {
-    code: "TR004",
+  TR003: {
+    code: "TR003",
     devMessage: "잘못된 경험치 값 - 음수 혹은 null",
     message: "잘못된 경험치 값입니다.",
   },
-  TR005: {
-    code: "TR005",
+  TR004: {
+    code: "TR004",
     devMessage: "잘못된 액션 - 존재하지 않는 명령",
     message: "유효하지 않은 요청입니다.",
   },
-  TR006: {
-    code: "TR006",
+  TR005: {
+    code: "TR005",
     devMessage: "트리 최대 경험치 도달",
     message: "더 이상 성장할 수 없습니다.",
   },
