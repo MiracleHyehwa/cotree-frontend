@@ -9,3 +9,5 @@ export interface CartItem {
   thumbnailImage: string;
   isGreen: "Y" | "N";
 }
+
+export type CartItemResponse = CartItem[];
