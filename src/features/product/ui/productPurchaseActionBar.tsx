@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { Button } from "@/shared/components/ui/button";
 import { ShoppingCart } from "lucide-react";
+import { ProductDetail } from "@/entities/product/model";
 
 interface ProductPurchaseActionBarProps {
-  product: {
-    name: string;
-    price: number;
-    discount: number;
-  };
+  product: ProductDetail;
+
   children?: (state: {
     open: boolean;
     setOpen: (open: boolean) => void;
@@ -19,7 +17,6 @@ export default function ProductPurchaseActionBar({ product, children }: ProductP
   const [open, setOpen] = useState(false);
 
   const handleAddToCart = () => {
-    // 장바구니 추가 로직 생략
     console.log("장바구니 추가 버튼 클릭");
   };
 

@@ -12,7 +12,7 @@ export default function ProductImageSlider({ images, isGreen }: ProductImageSlid
 
   return (
     <div className="relative">
-      <div className="aspect-[3/4] w-full bg-background">
+      <div className="aspect-square w-full bg-background">
         <Swiper slidesPerView={1} onSlideChange={(swiper) => setCurrentIndex(swiper.realIndex + 1)}>
           {images.map((img, idx) => (
             <SwiperSlide key={idx}>
@@ -26,7 +26,7 @@ export default function ProductImageSlider({ images, isGreen }: ProductImageSlid
       </div>
       {isGreen === "Y" && (
         <div className="absolute top-4 left-4 z-10">
-          <Badge className="text-xs px-2 py-1">친환경 인증</Badge>
+          <Badge className="text-xs px-2 py-1">친환경</Badge>
         </div>
       )}
     </div>

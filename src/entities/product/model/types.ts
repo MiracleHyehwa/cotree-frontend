@@ -15,12 +15,11 @@ export type ProductListResponse = Product[];
 
 export interface ProductSummary {
   name: string;
-  subtitle: string;
-  brand: { name: string };
   price: number;
-  discount: number;
-  points: string;
-  isGreen?: string;
+  brandName: string;
+  discountRate: number;
+  salePrice: number;
+  isGreen: "Y" | "N";
 }
 
 export interface ProductMeta {
@@ -31,12 +30,22 @@ export interface ProductMeta {
   };
 }
 
-export interface ProductDetail extends ProductSummary, ProductMeta {
+export type ProductDetailItem = { type: "text"; content: string } | { type: "image"; content: string };
+
+export interface ProductDetail {
   id: number;
-  images: string[];
-  caution: string;
-  details: {
-    type: "text" | "image";
-    content: string;
-  }[];
+  name: string;
+  price: number;
+  salePrice: number;
+  discountRate: number;
+  origin: string;
+  thumbnailImage: string;
+  brandName: string;
+  isGreen: "Y" | "N";
+  quantity: number;
+  description: ProductDetailItem[];
+}
+
+export interface RawProductDetail extends Omit<ProductDetail, "description"> {
+  description: string;
 }

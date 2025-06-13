@@ -1,7 +1,7 @@
 import { BaseApiError, DisplayMode } from "@/shared/lib/api/errors/baseApiError";
 import { api } from "@/shared/lib/api/ky";
 import { ApiResponse } from "@/shared/model/commonApiResponse";
-import { ProductListResponse } from "../model";
+import { ProductDetailItem, ProductListResponse, RawProductDetail } from "../model";
 
 export const getProductsByCategory = async (
   categoryId: string,
@@ -26,6 +26,32 @@ export const getEcoProducts = async (displayMode: DisplayMode = "fallback"): Pro
   try {
     const res = await api.get("items/eco?page=1").json<ApiResponse<ProductListResponse>>();
     return res.data;
+  } catch (err) {
+    if (err instanceof BaseApiError) {
+      err.displayMode = displayMode;
+    }
+    throw err;
+  }
+};
+
+export const getProductDetail = async (id: string, displayMode: DisplayMode = "fallback") => {
+  try {
+    const res = await api.get(`items/${id}`).json<ApiResponse<RawProductDetail>>();
+    const raw = res.data;
+
+    const parsedDescription: ProductDetailItem[] = JSON.parse(raw.description).map((item: any) => {
+      if (typeof item.text === "string") {
+        return { type: "text", content: item.text };
+      }
+      if (typeof item.image === "string") {
+        return { type: "image", content: item.image };
+      }
+    });
+
+    return {
+      ...raw,
+      description: parsedDescription,
+    };
   } catch (err) {
     if (err instanceof BaseApiError) {
       err.displayMode = displayMode;

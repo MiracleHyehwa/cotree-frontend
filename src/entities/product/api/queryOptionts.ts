@@ -1,4 +1,4 @@
-import { getEcoProducts, getProductsByCategory } from "./get";
+import { getEcoProducts, getProductDetail, getProductsByCategory } from "./get";
 import { DisplayMode } from "@/shared/lib/api/errors/baseApiError";
 
 export const productKeys = {
@@ -17,6 +17,14 @@ export const productQueryOptions = {
   getEcoProducts: (displayMode: DisplayMode = "fallback") => ({
     queryKey: productKeys.getEcoProducts,
     queryFn: () => getEcoProducts(displayMode),
+    meta: { displayMode },
+  }),
+
+  getProductDetail: (id: string, displayMode: DisplayMode = "fallback") => ({
+    queryKey: ["products", "detail", id] as const,
+    queryFn: () => getProductDetail(id, displayMode),
+    staleTime: 1000 * 60 * 60 * 24,
+    gcTime: 1000 * 60 * 60 * 24,
     meta: { displayMode },
   }),
 };

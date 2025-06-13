@@ -1,10 +1,7 @@
-export interface DetailItem {
-  type: "text" | "image";
-  content: string;
-}
+import { ProductDetailItem } from "@/entities/product/model";
 
 interface ProductDetailDescriptionProps {
-  details: DetailItem[];
+  details: ProductDetailItem[];
 }
 
 export default function ProductDetailDescription({ details }: ProductDetailDescriptionProps) {

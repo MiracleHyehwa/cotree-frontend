@@ -29,3 +29,7 @@ export const useProductsByCategory = (categoryId: string, displayMode: DisplayMo
 export const useEcoProducts = (displayMode: DisplayMode = "fallback") => {
   return useSuspenseQuery<ProductListResponse>(productQueryOptions.getEcoProducts(displayMode));
 };
+
+export const useProductDetail = (id: string, displayMode: DisplayMode = "fallback") => {
+  return useSuspenseQuery(productQueryOptions.getProductDetail(id, displayMode));
+};

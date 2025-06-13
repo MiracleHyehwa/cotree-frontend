@@ -1,5 +1,5 @@
 interface ProductMetaInfoProps {
-  code: string;
+  code: number;
   origin: string;
   deliveryInfo: string;
 }
