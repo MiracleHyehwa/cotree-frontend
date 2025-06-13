@@ -1,4 +1,4 @@
-import { InfiniteData, useSuspenseInfiniteQuery } from "@tanstack/react-query";
+import { InfiniteData, useSuspenseInfiniteQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { DisplayMode } from "@/shared/lib/api/errors/baseApiError";
 import { productQueryOptions } from "./queryOptionts";
 import { ProductListResponse } from "../model";
@@ -24,4 +24,8 @@ export const useProductsByCategory = (categoryId: string, displayMode: DisplayMo
 
     meta: { displayMode },
   });
+};
+
+export const useEcoProducts = (displayMode: DisplayMode = "fallback") => {
+  return useSuspenseQuery<ProductListResponse>(productQueryOptions.getEcoProducts(displayMode));
 };

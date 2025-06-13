@@ -17,7 +17,7 @@ export default function HomeCategorySwiper() {
                 alt={category.name}
                 className="w-16 h-16 mb-2 rounded-full border border-gray-200 object-contain"
               />
-              <span className="text-sm font-medium line-clamp-1 w-full text-center">{category.name}</span>{" "}
+              <span className="text-sm font-medium line-clamp-1 w-full text-center">{category.name}</span>
             </Link>
           </SwiperSlide>
         ))}

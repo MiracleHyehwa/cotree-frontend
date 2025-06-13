@@ -21,3 +21,15 @@ export const getProductsByCategory = async (
     throw err;
   }
 };
+
+export const getEcoProducts = async (displayMode: DisplayMode = "fallback"): Promise<ProductListResponse> => {
+  try {
+    const res = await api.get("items/eco?page=1").json<ApiResponse<ProductListResponse>>();
+    return res.data;
+  } catch (err) {
+    if (err instanceof BaseApiError) {
+      err.displayMode = displayMode;
+    }
+    throw err;
+  }
+};
