@@ -20,7 +20,7 @@ export default function ProductListByCategory({ categoryId }: ProductListByCateg
       <ProductCard.List key={validCategoryId} products={products}>
         <ProductCard.Grid />
       </ProductCard.List>
-      <div ref={ref} className="h-8" />
+      <div ref={ref} className="h-12" />
       {isFetchingNextPage && <Spinner />}
     </div>
   );
