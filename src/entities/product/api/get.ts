@@ -1,7 +1,13 @@
 import { BaseApiError, DisplayMode } from "@/shared/lib/api/errors/baseApiError";
 import { api } from "@/shared/lib/api/ky";
 import { ApiResponse } from "@/shared/model/commonApiResponse";
-import { ProductDetail, ProductDetailItem, ProductListResponse, RawProductDetail } from "../model";
+import {
+  GetSearchedProductsParams,
+  ProductDetail,
+  ProductDetailItem,
+  ProductListResponse,
+  RawProductDetail,
+} from "../model";
 
 export const getProductsByCategory = async (
   categoryId: string,
@@ -68,6 +74,34 @@ export const getProductDetail = async (id: string, displayMode: DisplayMode = "f
       ...raw,
       description: parsedDescription,
     } satisfies ProductDetail;
+  } catch (err) {
+    if (err instanceof BaseApiError) {
+      err.displayMode = displayMode;
+    }
+    throw err;
+  }
+};
+
+export const getSearchedProducts = async (
+  { keyword, categoryId, isGreen, page }: GetSearchedProductsParams,
+  displayMode: DisplayMode = "fallback"
+): Promise<ProductListResponse> => {
+  try {
+    const searchParams: Record<string, string> = {
+      keyword,
+      page: String(page),
+    };
+
+    if (categoryId !== 0) {
+      searchParams.categoryId = String(categoryId);
+    }
+
+    if (isGreen != null) {
+      searchParams.isGreen = isGreen;
+    }
+
+    const res = await api.get("items/search", { searchParams }).json<ApiResponse<ProductListResponse>>();
+    return res.data;
   } catch (err) {
     if (err instanceof BaseApiError) {
       err.displayMode = displayMode;

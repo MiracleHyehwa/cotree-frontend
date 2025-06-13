@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+import { ProductCard } from "@/features/product/ui/variants";
 import { SearchFilterProvider, SearchProvider } from "@/features/search/context";
 import { SearchView } from "@/features/search/ui";
 import { SearchLayout } from "@/shared/layout";
@@ -28,7 +30,9 @@ export default function SearchPage() {
 
             <SearchView.WhenActive>
               <SearchView.WhenHasResults>
-                <SearchView.ResultList />
+                <Suspense fallback={<ProductCard.GridSkeleton />}>
+                  <SearchView.ResultList />
+                </Suspense>
               </SearchView.WhenHasResults>
 
               <SearchView.WhenNoResults>

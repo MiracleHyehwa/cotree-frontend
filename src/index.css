@@ -322,7 +322,7 @@
   left: 0;
   width: 25px;
   height: 22px;
-  background: url("./ico-checklist.png") no-repeat 0 0;
+  background: url("/assets/ico-checklist.png") no-repeat 0 0;
 }
 
 .ptxt.square {

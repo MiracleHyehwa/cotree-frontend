@@ -1,11 +1,17 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Input } from "@/shared/components/ui/input";
 import { Button } from "@/shared/components/ui/button";
 import { ArrowLeft, SearchIcon } from "lucide-react";
 import { useSearchContext } from "../hooks/useSearchContext";
+import { useSearchFilterContext } from "../hooks";
+import { useEffect } from "react";
 
 export default function SearchInput() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const { resetFilters } = useSearchFilterContext();
+
   const { isComposing, inputValue, setInputValue, saveKeyword, handleCompositionStart, handleCompositionEnd } =
     useSearchContext();
 
@@ -23,6 +29,13 @@ export default function SearchInput() {
       handleSearch();
     }
   };
+
+  useEffect(() => {
+    const keyword = new URLSearchParams(location.search).get("keyword");
+    if (!keyword) {
+      resetFilters();
+    }
+  }, [location.search, resetFilters]);
 
   return (
     <div className="fixed left-0 right-0 top-0 z-20 flex flex-col items-center justify-center h-[52px] min-h-[52px] max-h-[52px]">
