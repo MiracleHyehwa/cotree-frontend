@@ -1,6 +1,7 @@
 import { useEcoProducts } from "@/entities/product/api/hooks";
 import { Product } from "@/entities/product/model";
 import { Badge } from "@/shared/components/ui/badge";
+import { Link } from "react-router-dom";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -43,7 +44,7 @@ export default function HomeEcoProductSwiper() {
             <SwiperSlide key={idx} className="w-full flex-shrink-0">
               <div className="bg-background shadow overflow-hidden">
                 {main && (
-                  <div className="relative w-full h-48">
+                  <Link to={`/product/${main.id}`} className="relative w-full h-48 block">
                     <img src={main.thumbnailImage} alt={main.name} className="w-full h-full object-cover" />
 
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
@@ -60,12 +61,16 @@ export default function HomeEcoProductSwiper() {
                         priceClass: "text-white",
                       })}
                     </div>
-                  </div>
+                  </Link>
                 )}
 
                 <div className="divide-y">
                   {subs.map((product) => (
-                    <div key={product.id} className="flex gap-4 py-4 items-center">
+                    <Link
+                      key={product.id}
+                      to={`/product/${product.id}`}
+                      className="flex gap-4 py-4 items-center hover:bg-accent transition-colors"
+                    >
                       <img
                         src={product.thumbnailImage}
                         alt={product.name}
@@ -81,7 +86,7 @@ export default function HomeEcoProductSwiper() {
                           })}
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   ))}
                 </div>
               </div>
