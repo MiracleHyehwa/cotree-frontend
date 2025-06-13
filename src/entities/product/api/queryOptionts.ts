@@ -1,10 +1,11 @@
-import { getEcoProducts, getProductDetail, getProductsByCategory } from "./get";
+import { getEcoProductByPage, getEcoProducts, getProductDetail, getProductsByCategory } from "./get";
 import { DisplayMode } from "@/shared/lib/api/errors/baseApiError";
 
 export const productKeys = {
   all: ["products"] as const,
   getProductsbyCategoryPage: (categoryId: string) => [...productKeys.all, "byCategoryPage", categoryId] as const,
   getEcoProducts: ["products", "eco"] as const,
+  getEcoProductsByPage: ["products", "ecoPage"] as const,
 };
 
 export const productQueryOptions = {
@@ -17,6 +18,12 @@ export const productQueryOptions = {
   getEcoProducts: (displayMode: DisplayMode = "fallback") => ({
     queryKey: productKeys.getEcoProducts,
     queryFn: () => getEcoProducts(displayMode),
+    meta: { displayMode },
+  }),
+
+  getEcoProductsByPage: (page: number, displayMode: DisplayMode = "fallback") => ({
+    queryKey: productKeys.getEcoProductsByPage,
+    queryFn: () => getEcoProductByPage(page, displayMode),
     meta: { displayMode },
   }),
 

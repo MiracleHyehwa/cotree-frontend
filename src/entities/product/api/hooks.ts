@@ -30,6 +30,28 @@ export const useEcoProducts = (displayMode: DisplayMode = "fallback") => {
   return useSuspenseQuery<ProductListResponse>(productQueryOptions.getEcoProducts(displayMode));
 };
 
+export const useEcoProductByPage = (displayMode: DisplayMode = "fallback") => {
+  return useSuspenseInfiniteQuery<
+    ProductListResponse,
+    Error,
+    InfiniteData<ProductListResponse>,
+    (string | number)[],
+    number
+  >({
+    queryKey: ["products", "ecoInfinite"],
+    queryFn: ({ pageParam = 1 }) => {
+      return productQueryOptions.getEcoProductsByPage(pageParam, displayMode).queryFn();
+    },
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) => {
+      return lastPage.length === 0 ? undefined : allPages.length + 1;
+    },
+    staleTime: 0,
+    gcTime: 0,
+    meta: { displayMode },
+  });
+};
+
 export const useProductDetail = (id: string, displayMode: DisplayMode = "fallback") => {
   return useSuspenseQuery(productQueryOptions.getProductDetail(id, displayMode));
 };

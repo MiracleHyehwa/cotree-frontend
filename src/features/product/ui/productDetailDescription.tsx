@@ -7,6 +7,7 @@ interface ProductDetailDescriptionProps {
 export default function ProductDetailDescription({ details }: ProductDetailDescriptionProps) {
   return (
     <div className="space-y-3 mt-4">
+      {/* <div dangerouslySetInnerHTML={{ __html: html }} /> */}
       {details.map((item, index) => {
         if (item.type === "text") {
           return (
