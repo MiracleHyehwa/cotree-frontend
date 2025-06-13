@@ -10,11 +10,11 @@ import { TabNavigation } from "@/shared/tabs";
 export default function HomePage() {
   return (
     <CommonLayout withBottomNav>
-      <TabNavigation />
-      <HomeBannerSwiper />
+      {/* <TabNavigation /> */}
+      {/* <HomeBannerSwiper /> */}
       <HomeCategorySwiper />
-      <HomeEcoBrandSwiper />
-      <HomeRecommendedProductSection />
+      {/* <HomeEcoBrandSwiper /> */}
+      {/* <HomeRecommendedProductSection /> */}
     </CommonLayout>
   );
 }
