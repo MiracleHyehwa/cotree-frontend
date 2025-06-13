@@ -1,7 +1,7 @@
 import { BaseApiError, DisplayMode } from "@/shared/lib/api/errors/baseApiError";
 import { api } from "@/shared/lib/api/ky";
 import { ApiResponse } from "@/shared/model/commonApiResponse";
-import { ProductDetailItem, ProductListResponse, RawProductDetail } from "../model";
+import { ProductDetail, ProductDetailItem, ProductListResponse, RawProductDetail } from "../model";
 
 export const getProductsByCategory = async (
   categoryId: string,
@@ -54,19 +54,12 @@ export const getProductDetail = async (id: string, displayMode: DisplayMode = "f
     const res = await api.get(`items/${id}`).json<ApiResponse<RawProductDetail>>();
     const raw = res.data;
 
-    const parsedDescription: ProductDetailItem[] = JSON.parse(raw.description).map((item) => {
-      if (typeof item.text === "string") {
-        return { type: "text", content: item.text };
-      }
-      if (typeof item.image === "string") {
-        return { type: "image", content: item.image };
-      }
-    });
+    const parsedDescription = JSON.parse(raw.description) as ProductDetailItem[];
 
     return {
       ...raw,
       description: parsedDescription,
-    };
+    } satisfies ProductDetail;
   } catch (err) {
     if (err instanceof BaseApiError) {
       err.displayMode = displayMode;
