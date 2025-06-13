@@ -7,7 +7,8 @@ interface ProductSummaryProps {
 
 export default function ProductSummary({ product }: ProductSummaryProps) {
   const { name, price, salePrice, discountRate, brandName, isGreen } = product;
-  const point = Math.floor(salePrice * 0.01);
+  const showDiscount = salePrice > 0 && discountRate > 0;
+  const point = isGreen === "Y" ? Math.floor(salePrice * 0.01) : 0;
 
   return (
     <div>
@@ -18,14 +19,20 @@ export default function ProductSummary({ product }: ProductSummaryProps) {
       <h1 className="text-lg font-medium text-foreground leading-tight">{name}</h1>
 
       <div className="mb-4">
-        <div className="flex items-baseline gap-2 mb-1">
-          <span className="text-sm text-muted-foreground line-through">{price.toLocaleString("ko-KR")}원</span>
-        </div>
-        <div className="flex items-baseline gap-2">
-          <span className="text-xl font-bold text-primary">{discountRate}%</span>
-          <span className="text-2xl font-bold text-foreground">{salePrice.toLocaleString("ko-KR")}원</span>
-        </div>
-        <p className="text-sm text-muted-foreground mt-1">{point}P 적립</p>
+        {showDiscount && (
+          <>
+            <div className="flex items-baseline gap-2 mb-1">
+              <span className="text-sm text-muted-foreground line-through">{price.toLocaleString("ko-KR")}원</span>
+            </div>
+            <div className="flex items-baseline gap-2">
+              <span className="text-xl font-bold text-primary">{discountRate}%</span>
+              <span className="text-2xl font-bold text-foreground">{salePrice.toLocaleString("ko-KR")}원</span>
+            </div>
+          </>
+        )}
+        {!showDiscount && <span className="text-2xl font-bold text-foreground">{price.toLocaleString("ko-KR")}원</span>}
+
+        {point > 0 && <p className="text-sm text-muted-foreground mt-1">{point}P 적립</p>}
       </div>
     </div>
   );

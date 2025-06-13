@@ -3,8 +3,8 @@ import { cn } from "@/shared/lib/utils";
 import { useOnboardingContext } from "../hooks";
 
 const genderOptions = [
-  { value: "male", label: "남성" },
-  { value: "female", label: "여성" },
+  { value: "M", label: "남성" },
+  { value: "F", label: "여성" },
 ];
 
 const ageOptions = [
