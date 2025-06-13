@@ -1,7 +1,6 @@
 import React from "react";
 import { useSearchParams } from "react-router-dom";
 import { useSearchContext } from "../hooks/useSearchContext";
-import { sampleProductMock } from "@/features/product/mocks/sampleProductMock";
 import {
   GreenFilterToggle,
   SearchFilterBottomSheet,
@@ -55,22 +54,6 @@ function WhenNoRecentKeywords({ children }: SlotProps) {
   return <>{children}</>;
 }
 
-function WhenHasResults({ children }: SlotProps) {
-  const [params] = useSearchParams();
-  const keyword = params.get("keyword")?.trim() ?? "";
-  const filtered = sampleProductMock.filter((product) => product.name.toLowerCase().includes(keyword.toLowerCase()));
-  if (filtered.length === 0) return null;
-  return <>{children}</>;
-}
-
-function WhenNoResults({ children }: SlotProps) {
-  const [params] = useSearchParams();
-  const keyword = params.get("keyword")?.trim() ?? "";
-  const filtered = sampleProductMock.filter((product) => product.name.toLowerCase().includes(keyword.toLowerCase()));
-  if (filtered.length > 0) return null;
-  return <>{children}</>;
-}
-
 SearchView.Input = SearchInput;
 SearchView.RecentKeywords = SearchRecentKeyword;
 SearchView.ResultList = SearchResult;
@@ -80,8 +63,6 @@ SearchView.WhenIdle = WhenIdle;
 SearchView.WhenActive = WhenActive;
 SearchView.WhenHasRecentKeywords = WhenHasRecentKeywords;
 SearchView.WhenNoRecentKeywords = WhenNoRecentKeywords;
-SearchView.WhenHasResults = WhenHasResults;
-SearchView.WhenNoResults = WhenNoResults;
 SearchView.FilterTrigger = SearchFilterTrigger;
 SearchView.FilterBottomSheet = SearchFilterBottomSheet;
 SearchView.GreenToggle = GreenFilterToggle;

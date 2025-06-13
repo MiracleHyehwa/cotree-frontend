@@ -4,6 +4,7 @@ import { ProductCard } from "@/features/product/ui/variants";
 import { useSearchedProducts } from "@/entities/product/api/hooks";
 import { useInfiniteScroll } from "@/shared/hooks";
 import Spinner from "@/shared/components/ui/spinner";
+import SearchView from "./searchView";
 
 export default function SearchResult() {
   const { categoryId, isGreen } = useSearchFilterContext();
@@ -20,6 +21,10 @@ export default function SearchResult() {
   });
   const { ref } = useInfiniteScroll({ fetchNextPage, hasNextPage, isFetchingNextPage });
   const products = data?.pages.flat() ?? [];
+
+  if (products.length === 0) {
+    return <SearchView.EmptyResultMessage />;
+  }
 
   return (
     <>

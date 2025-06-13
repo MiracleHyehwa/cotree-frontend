@@ -29,15 +29,9 @@ export default function SearchPage() {
             </SearchView.WhenIdle>
 
             <SearchView.WhenActive>
-              <SearchView.WhenHasResults>
-                <Suspense fallback={<ProductCard.GridSkeleton />}>
-                  <SearchView.ResultList />
-                </Suspense>
-              </SearchView.WhenHasResults>
-
-              <SearchView.WhenNoResults>
-                <SearchView.EmptyResultMessage />
-              </SearchView.WhenNoResults>
+              <Suspense fallback={<ProductCard.GridSkeleton />}>
+                <SearchView.ResultList />
+              </Suspense>
             </SearchView.WhenActive>
           </SearchView>
         </SearchLayout>
