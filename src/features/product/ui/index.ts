@@ -7,3 +7,6 @@ export { default as ProductDetailDescription } from "./productDetailDescription"
 export { default as ProductImageSlider } from "./productImageSlider";
 export { default as ProductSummary } from "./productSummary";
 export { default as ProductMetaInfo } from "./productMetaInfo";
+export { default as ProductDetailSkeleton } from "./productDetailSkeleton";
+export { default as RecommendProductList } from "./recommendProductList";
+export { default as EcoProductList } from "./ecoProductList";

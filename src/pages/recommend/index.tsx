@@ -1,10 +1,10 @@
+import { Suspense } from "react";
 import { CommonLayout } from "@/shared/layout";
 import { TabNavigation } from "@/shared/tabs";
-import { Suspense } from "react";
 import { ProductCard } from "@/features/product/ui/variants";
 import { ErrorBoundary } from "react-error-boundary";
 import { ErrorFallback } from "@/shared/components";
-import RecommendProductList from "@/features/product/ui/recommendProductList";
+import { RecommendProductList } from "@/features/product/ui";
 
 export default function RecommendPage() {
   return (

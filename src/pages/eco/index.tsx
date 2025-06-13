@@ -1,10 +1,10 @@
+import { Suspense } from "react";
 import { ProductCard } from "@/features/product/ui/variants";
 import { ErrorFallback } from "@/shared/components";
 import { CommonLayout } from "@/shared/layout";
 import { TabNavigation } from "@/shared/tabs";
-import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import EcoProductList from "@/features/product/ui/ecoProductList";
+import { EcoProductList } from "@/features/product/ui";
 
 export default function EcoPage() {
   return (
