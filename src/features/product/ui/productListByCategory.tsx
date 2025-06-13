@@ -1,13 +1,14 @@
 import { useProductsByCategory } from "@/entities/product/api/hooks";
 import { useInfiniteScroll } from "@/shared/hooks";
-import { useSearchParams } from "react-router-dom";
 import { ProductCard } from "./variants";
 import Spinner from "@/shared/components/ui/spinner";
 
-export default function ProductListByCategory() {
-  const [searchParams] = useSearchParams();
-  const categoryId = searchParams.get("type");
-  const validCategoryId = categoryId || "1";
+interface ProductListByCategoryProps {
+  categoryId: string;
+}
+
+export default function ProductListByCategory({ categoryId }: ProductListByCategoryProps) {
+  const validCategoryId = categoryId || "0";
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useProductsByCategory(validCategoryId);
   const { ref } = useInfiniteScroll({ fetchNextPage, hasNextPage, isFetchingNextPage });
