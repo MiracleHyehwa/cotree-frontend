@@ -14,7 +14,7 @@ export const useInfiniteScroll = ({
   hasNextPage,
   isFetchingNextPage,
   threshold = 0.6,
-  rootMargin = "100px",
+  rootMargin = "200px",
 }: UseInfiniteScrollOptions) => {
   const fetchingRef = useRef(false);
   const { ref, inView } = useInView({ threshold, rootMargin });

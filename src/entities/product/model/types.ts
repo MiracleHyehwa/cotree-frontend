@@ -2,12 +2,16 @@ export interface Product {
   id: number;
   name: string;
   price: number;
-  discount: number;
+  salePrice: number;
+  discountRate: number;
   origin: string;
-  image_url: string;
-  brand: { name: string };
-  is_green: string;
+  thumbnailImage: string;
+  brandName: string;
+  isGreen: "Y" | "N";
+  quantity: number;
 }
+
+export type ProductListResponse = Product[];
 
 export interface ProductSummary {
   name: string;

@@ -1,9 +1,9 @@
 import { Suspense } from "react";
 import { ProductCategoryFilterTabs } from "@/features/product/ui";
 import { CommonLayout } from "@/shared/layout";
-import { ProductCard } from "@/features/product/ui/variants";
-import { sampleProductMock } from "@/features/product/mocks/sampleProductMock";
 import ProductCategoryFilterTabsSkeleton from "@/features/product/ui/productCategoryFilterTabsSkleton";
+import ProductListByCategory from "@/features/product/ui/productListByCategory";
+import { ProductCard } from "@/features/product/ui/variants";
 
 export default function CategoryPage() {
   return (
@@ -11,11 +11,9 @@ export default function CategoryPage() {
       <Suspense fallback={<ProductCategoryFilterTabsSkeleton />}>
         <ProductCategoryFilterTabs />
       </Suspense>
-      <div className="w-full max-w-limit px-4">
-        <ProductCard.List products={sampleProductMock}>
-          <ProductCard.Grid />
-        </ProductCard.List>
-      </div>
+      <Suspense fallback={<ProductCard.GridSkeleton />}>
+        <ProductListByCategory />
+      </Suspense>
     </CommonLayout>
   );
 }
