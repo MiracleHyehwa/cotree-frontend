@@ -24,6 +24,7 @@ export const api = ky.create({
   prefixUrl: API_BASE_URL,
   credentials: "include",
   retry: 0,
+
   hooks: {
     afterResponse: [
       async (request, options, response) => {
@@ -31,10 +32,18 @@ export const api = ky.create({
         const data = await cloned.json().catch(() => null);
         const status = cloned.status;
 
+        // console.group("[afterResponse]");
+        // console.log("▶ status", status);
+        // console.log("▶ response.ok", response.ok);
+        // console.log("▶ full response", response);
+        // console.log("▶ parsed json", data);
+        // console.groupEnd();
+
         if (!response.ok && data.code) {
           const code = data.code as string;
 
           if (code === "AU001") {
+            // console.log(code);
             const success = await refreshAccessToken();
 
             if (success) {
