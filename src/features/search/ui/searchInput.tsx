@@ -1,8 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import { Input } from "@/shared/components/ui/input";
 import { Button } from "@/shared/components/ui/button";
 import { ArrowLeft, SearchIcon } from "lucide-react";
 import { useSearchContext } from "../hooks/useSearchContext";
-import { useNavigate } from "react-router-dom";
 
 export default function SearchInput() {
   const navigate = useNavigate();
@@ -53,7 +53,7 @@ export default function SearchInput() {
               />
               <div className="flex flex-row items-center justify-center gap-1 pr-2">
                 <Button size="icon" variant="ghost" className="text-foreground cursor-pointer" onClick={handleSearch}>
-                  <SearchIcon className="w-6 h-6" />
+                  <SearchIcon className="w-6 h-6 cursor-pointer" />
                 </Button>
               </div>
             </div>

@@ -2,7 +2,14 @@ import React from "react";
 import { useSearchParams } from "react-router-dom";
 import { useSearchContext } from "../hooks/useSearchContext";
 import { sampleProductMock } from "@/features/product/mocks/sampleProductMock";
-import { SearchInput, SearchRecentKeyword, SearchResult } from "@/features/search/ui";
+import {
+  GreenFilterToggle,
+  SearchFilterBottomSheet,
+  SearchFilterTrigger,
+  SearchInput,
+  SearchRecentKeyword,
+  SearchResult,
+} from "@/features/search/ui";
 
 interface SlotProps {
   children: React.ReactNode;
@@ -75,3 +82,6 @@ SearchView.WhenHasRecentKeywords = WhenHasRecentKeywords;
 SearchView.WhenNoRecentKeywords = WhenNoRecentKeywords;
 SearchView.WhenHasResults = WhenHasResults;
 SearchView.WhenNoResults = WhenNoResults;
+SearchView.FilterTrigger = SearchFilterTrigger;
+SearchView.FilterBottomSheet = SearchFilterBottomSheet;
+SearchView.GreenToggle = GreenFilterToggle;

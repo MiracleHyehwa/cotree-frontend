@@ -1,35 +1,43 @@
-import { SearchProvider } from "@/features/search/context";
+import { SearchFilterProvider, SearchProvider } from "@/features/search/context";
 import { SearchView } from "@/features/search/ui";
 import { SearchLayout } from "@/shared/layout";
 
 export default function SearchPage() {
   return (
     <SearchProvider>
-      <SearchLayout>
-        <SearchView>
-          <SearchView.Input />
+      <SearchFilterProvider>
+        <SearchLayout>
+          <SearchView>
+            <SearchView.Input />
+            <div className="w-full max-w-limit mt-3 flex items-center gap-2">
+              <SearchView.FilterTrigger />
+              <SearchView.GreenToggle />
+            </div>
 
-          <SearchView.WhenIdle>
-            <SearchView.WhenHasRecentKeywords>
-              <SearchView.RecentKeywords />
-            </SearchView.WhenHasRecentKeywords>
+            <SearchView.FilterBottomSheet />
 
-            <SearchView.WhenNoRecentKeywords>
-              <SearchView.EmptyRecentKeywordMessage />
-            </SearchView.WhenNoRecentKeywords>
-          </SearchView.WhenIdle>
+            <SearchView.WhenIdle>
+              <SearchView.WhenHasRecentKeywords>
+                <SearchView.RecentKeywords />
+              </SearchView.WhenHasRecentKeywords>
 
-          <SearchView.WhenActive>
-            <SearchView.WhenHasResults>
-              <SearchView.ResultList />
-            </SearchView.WhenHasResults>
+              <SearchView.WhenNoRecentKeywords>
+                <SearchView.EmptyRecentKeywordMessage />
+              </SearchView.WhenNoRecentKeywords>
+            </SearchView.WhenIdle>
 
-            <SearchView.WhenNoResults>
-              <SearchView.EmptyResultMessage />
-            </SearchView.WhenNoResults>
-          </SearchView.WhenActive>
-        </SearchView>
-      </SearchLayout>
+            <SearchView.WhenActive>
+              <SearchView.WhenHasResults>
+                <SearchView.ResultList />
+              </SearchView.WhenHasResults>
+
+              <SearchView.WhenNoResults>
+                <SearchView.EmptyResultMessage />
+              </SearchView.WhenNoResults>
+            </SearchView.WhenActive>
+          </SearchView>
+        </SearchLayout>
+      </SearchFilterProvider>
     </SearchProvider>
   );
 }
