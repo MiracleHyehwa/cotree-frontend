@@ -22,14 +22,6 @@ export interface ProductSummary {
   isGreen: "Y" | "N";
 }
 
-export interface ProductMeta {
-  code: string;
-  origin: string;
-  delivery: {
-    info: string;
-  };
-}
-
 export type ProductDetailItem = { type: "text"; content: string } | { type: "image"; content: string };
 
 export interface ProductDetail {

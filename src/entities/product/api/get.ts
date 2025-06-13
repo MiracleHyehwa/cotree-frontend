@@ -54,7 +54,15 @@ export const getProductDetail = async (id: string, displayMode: DisplayMode = "f
     const res = await api.get(`items/${id}`).json<ApiResponse<RawProductDetail>>();
     const raw = res.data;
 
-    const parsedDescription = JSON.parse(raw.description) as ProductDetailItem[];
+    const parsedDescription = (JSON.parse(raw.description) as Array<{ text?: string; image?: string }>).map((item) => {
+      if (item.text) {
+        return { type: "text", content: item.text } as ProductDetailItem;
+      }
+      if (item.image) {
+        return { type: "image", content: item.image } as ProductDetailItem;
+      }
+      throw new Error("Invalid item format in product description");
+    });
 
     return {
       ...raw,
