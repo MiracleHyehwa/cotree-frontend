@@ -34,8 +34,8 @@ export default function AppRouter() {
         <Route path="/product/:id" element={<ProductDetailPage />} />
 
         <Route path="/order/completed/:id" element={<OrderCompletedPage />} />
-        <Route path="/order/:id" element={<OrderCreatePage />} />
-        <Route path="/order" element={<OrderHistoryPage />} />
+        <Route path="/order" element={<OrderCreatePage />} />
+        <Route path="/orders" element={<OrderHistoryPage />} />
 
         <Route path="/cart" element={<CartPage />} />
 

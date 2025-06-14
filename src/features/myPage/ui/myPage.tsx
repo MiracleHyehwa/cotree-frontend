@@ -83,7 +83,7 @@ function OrderStatusItem({ status, count }: { status: "PENDING" | "PAID" | "DELI
 
   return (
     <Link
-      to={`/order?status=${status}`}
+      to={`/orders?status=${status}`}
       className="flex flex-col items-center justify-center aspect-square cursor-pointer"
     >
       <Icon className="w-6 h-6 text-primary mb-2" />

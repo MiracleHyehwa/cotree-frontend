@@ -19,7 +19,7 @@ const menuItems = [
     label: "주문내역",
     icon: Package,
     description: "주문한 상품을 확인하세요",
-    to: "/order?status=ALL",
+    to: "/orders?status=ALL",
   },
   {
     label: "포인트 내역",

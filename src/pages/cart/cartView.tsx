@@ -8,7 +8,7 @@ export default function CartView() {
   const { data: catrItems } = useCartItems();
 
   const handleOrderClick = () => {
-    navigate("/order/1");
+    navigate("/order");
   };
 
   return (

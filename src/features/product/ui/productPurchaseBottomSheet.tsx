@@ -23,7 +23,7 @@ export default function ProductPurchaseBottomSheet({ open, setOpen, product }: P
   const handlePurchase = () => {
     setOpen(false);
     setTimeout(() => {
-      navigate("/order/1");
+      navigate("/order");
     }, 300);
   };
 
