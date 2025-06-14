@@ -1,5 +1,6 @@
 import { MyPage } from "@/features/myPage/ui";
-import { User, Package, Gift } from "lucide-react";
+import { api } from "@/shared/lib/api/ky";
+import { User, Package, Gift, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const user = {
@@ -32,6 +33,15 @@ const menuItems = [
     icon: Gift,
     description: "지급된 리워드를 확인하세요",
     to: "/mypage/rewards",
+  },
+  {
+    label: "로그아웃",
+    icon: LogOut,
+    description: "로그아웃 후 메인페이지로 이동합니다.",
+    action: async () => {
+      await api.post("auth/logout");
+      window.location.href = "/";
+    },
   },
 ];
 

@@ -6,7 +6,6 @@ export const refreshAccessToken = async (): Promise<boolean> => {
       method: "POST",
       credentials: "include",
     });
-    console.log(`refreshAccessToken res: ${res}`);
 
     const data = await res.json();
     return res.ok && data?.code === "AU100";

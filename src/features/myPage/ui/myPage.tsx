@@ -111,18 +111,26 @@ function QuickMenuItem({
   description,
   icon: Icon,
   to,
+  action,
 }: {
   label: string;
   description: string;
   icon: React.ElementType;
-  to: string;
+  to?: string;
+  action?: () => void;
 }) {
   const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (action) action();
+    else if (to) navigate(to);
+  };
+
   return (
     <li>
       <button
         className="w-full flex items-center justify-between hover:bg-muted/50 transition-colors py-4 px-4 cursor-pointer"
-        onClick={() => navigate(to)}
+        onClick={handleClick}
       >
         <div className="flex items-center gap-4">
           <div className="w-10 h-10 bg-muted rounded-full flex items-center justify-center shrink-0">
