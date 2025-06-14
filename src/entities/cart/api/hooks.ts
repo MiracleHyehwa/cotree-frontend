@@ -40,12 +40,15 @@ export const useDeleteCartItem = (displayMode: DisplayMode = "toast") => {
 
 export const useAddToCart = (displayMode: DisplayMode = "toast") => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: ({ itemId, quantity }: { itemId: number; quantity: number }) =>
       addToCart(itemId, quantity, displayMode),
 
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: cartKeys.getCartItemCount });
+
       toast("장바구니에 담았습니다.", {
         position: "top-center",
         duration: 2000,
