@@ -16,3 +16,20 @@ export const updateMemberProfile = async (formData: FormData, displayMode: Displ
     throw err;
   }
 };
+
+export const updateAgeAndGender = async (
+  gender: string,
+  ageRange: string,
+  displayMode: DisplayMode = "toast"
+): Promise<void> => {
+  try {
+    await api.patch("members/age-gender", {
+      json: { gender, ageRange },
+    });
+  } catch (err) {
+    if (err instanceof BaseApiError) {
+      err.displayMode = displayMode;
+    }
+    throw err;
+  }
+};

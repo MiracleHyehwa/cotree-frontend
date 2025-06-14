@@ -100,7 +100,7 @@ export default function EditProfileDialog({ open, setOpen, defaultValues }: Edit
 
     updateProfile(formData, {
       onSuccess: () => {
-        setOpen(false); // 저장 후 모달 닫기
+        setOpen(false);
       },
     });
   };
@@ -162,7 +162,7 @@ export default function EditProfileDialog({ open, setOpen, defaultValues }: Edit
         </div>
       </div>
 
-      <Button type="submit" disabled={!isValid} className="w-full">
+      <Button type="submit" disabled={!isValid} className="w-full cursor-pointer">
         저장하기
       </Button>
     </form>

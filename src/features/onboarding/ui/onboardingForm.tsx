@@ -1,6 +1,9 @@
 import { Button } from "@/shared/components/ui/button";
 import { cn } from "@/shared/lib/utils";
 import { useOnboardingContext } from "../hooks";
+import { useUpdateAgeGender } from "@/entities/member/api/hooks";
+import { useNavigate } from "react-router-dom";
+import Spinner from "@/shared/components/ui/spinner";
 
 const genderOptions = [
   { value: "M", label: "남성" },
@@ -8,12 +11,12 @@ const genderOptions = [
 ];
 
 const ageOptions = [
-  { value: "10s", label: "10대" },
-  { value: "20s", label: "20대" },
-  { value: "30s", label: "30대" },
-  { value: "40s", label: "40대" },
-  { value: "50s", label: "50대" },
-  { value: "60s", label: "60대 이상" },
+  { value: "10", label: "10대" },
+  { value: "20", label: "20대" },
+  { value: "30", label: "30대" },
+  { value: "40", label: "40대" },
+  { value: "50", label: "50대" },
+  { value: "60", label: "60대 이상" },
 ];
 
 export default function OnboardingForm({ children }: { children: React.ReactNode }) {
@@ -76,20 +79,29 @@ function AgeSelector() {
   );
 }
 
-function Submit({ onSubmit }: { onSubmit: (payload: { gender: string; age: string }) => void }) {
+function Submit() {
+  const { mutate: updateAgeAndGender, isPending } = useUpdateAgeGender();
   const { gender, age } = useOnboardingContext();
+  const navigate = useNavigate();
   const isValid = gender && age;
 
   const handleSubmit = () => {
-    if (!isValid) return;
-    onSubmit({ gender: gender!, age: age! });
-  };
+    if (!isValid || isPending) return;
 
+    updateAgeAndGender(
+      { gender: gender!, ageRange: age! },
+      {
+        onSuccess: () => {
+          navigate("/");
+        },
+      }
+    );
+  };
   return (
     <div className="w-full max-w-limit fixed bottom-0 left-1/2 -translate-x-1/2 bg-background border-t border-border z-50">
       <div className="max-w-limit mx-auto px-4 py-4">
         <Button disabled={!isValid} onClick={handleSubmit} className="w-full h-12">
-          완료
+          {isPending ? <Spinner /> : "완료"}
         </Button>
       </div>
     </div>

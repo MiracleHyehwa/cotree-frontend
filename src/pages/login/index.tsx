@@ -14,7 +14,7 @@ export default function LoginPage() {
   };
 
   const handleCancel = () => {
-    navigate(-1);
+    navigate("/");
   };
 
   return (
