@@ -11,14 +11,17 @@ import {
   GreenPointApiError,
   GreenPointError,
   GreenPointErrorCode,
+  OrderApiError,
+  OrderError,
+  OrderErrorCode,
+  MemberApiError,
+  MemberError,
+  MemberErrorCode,
+  ValidationApiError,
+  ValidationError,
+  ValidationErrorCode,
 } from "@/shared/lib/api/errors";
 import { refreshAccessToken } from "@/shared/lib/api/auth";
-import { OrderError, OrderErrorCode } from "./errors/orderErrorCode";
-import { OrderApiError } from "./errors/orderApiError";
-import { MemberError, MemberErrorCode } from "./errors/memberErrorCode";
-import { MemberApiError } from "./errors/memberApiError";
-import { ValidationError, ValidationErrorCode } from "./errors/validationErrorCode";
-import { ValidationApiError } from "./errors/validationApiError";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
