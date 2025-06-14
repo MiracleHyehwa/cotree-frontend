@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   OrderAgreementConfirmationCheckbox,
@@ -12,7 +12,7 @@ import {
 import { FormProvider, useForm } from "react-hook-form";
 import { orderFormSchema, OrderFormValues } from "@/features/order/model/schema";
 import { useNavigate } from "react-router-dom";
-import { clearOrderSession, getOrderSession } from "@/entities/order/lib";
+import { clearOrderSession, getOrderSession, shouldRedirectOrderPage } from "@/entities/order/lib";
 import { useCreateOrder } from "@/entities/order/api/hooks";
 
 const DISCOUNT = 0;
@@ -54,6 +54,12 @@ export default function OrderCreateView() {
       },
     });
   };
+
+  useEffect(() => {
+    if (shouldRedirectOrderPage()) {
+      navigate("/", { replace: true });
+    }
+  }, [navigate]);
 
   return (
     <FormProvider {...methods}>

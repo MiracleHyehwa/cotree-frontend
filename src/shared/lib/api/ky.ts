@@ -13,6 +13,8 @@ import {
   GreenPointErrorCode,
 } from "@/shared/lib/api/errors";
 import { refreshAccessToken } from "@/shared/lib/api/auth";
+import { OrderError, OrderErrorCode } from "./errors/orderErrorCode";
+import { OrderApiError } from "./errors/orderApiError";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -68,6 +70,10 @@ export const api = ky.create({
 
           if (code in GreenPointError) {
             throw new GreenPointApiError(code as GreenPointErrorCode, status);
+          }
+
+          if (code in OrderError) {
+            throw new OrderApiError(code as OrderErrorCode, status);
           }
 
           throw new Error("알 수 없는 에러가 발생했습니다.");
