@@ -64,7 +64,7 @@ function List() {
     <>
       {cartItems.map((item) => {
         const finalPrice = item.price - item.discount;
-        const point = item.isGreen === "Y" ? Math.floor(finalPrice * 0.05 * item.quantity) : 0;
+        const point = item.isGreen === "Y" ? Math.floor(finalPrice * 0.01 * item.quantity) : 0;
 
         return (
           <div key={item.basketItemId} className="border-b px-4 py-4">
@@ -137,7 +137,7 @@ function Summary() {
   const totalDiscount = selectedItems.reduce((sum, item) => sum + item.discount * item.quantity, 0);
   const finalTotalPrice = totalPrice - totalDiscount;
   const totalPoints = selectedItems.reduce((sum, item) => {
-    const point = item.isGreen === "Y" ? Math.floor((item.price - item.discount) * 0.05 * item.quantity) : 0;
+    const point = item.isGreen === "Y" ? Math.floor((item.price - item.discount) * 0.01 * item.quantity) : 0;
     return sum + point;
   }, 0);
 
