@@ -12,13 +12,15 @@ import {
 import { FormProvider, useForm } from "react-hook-form";
 import { orderFormSchema, OrderFormValues } from "@/features/order/model/schema";
 import { useNavigate } from "react-router-dom";
-import { getOrderSession } from "@/entities/order/lib";
+import { clearOrderSession, getOrderSession } from "@/entities/order/lib";
+import { useCreateOrder } from "@/entities/order/api/hooks";
 
 const DISCOUNT = 0;
 const USED_POINT = 0;
 const SHIPPING_FEE = 0;
 
 export default function OrderCreateView() {
+  const { mutate: submitOrder } = useCreateOrder();
   const navigate = useNavigate();
 
   const [isChecked, setIsChecked] = useState(false);
@@ -45,12 +47,12 @@ export default function OrderCreateView() {
   const onSubmit = (data: OrderFormValues) => {
     const { ...rest } = data;
 
-    const payload = {
-      ...rest,
-    };
-
-    console.log(`백엔드 데이터 전송 : ${payload}`);
-    navigate("/order/completed/1");
+    submitOrder(rest, {
+      onSuccess: () => {
+        clearOrderSession();
+        navigate("/order/completed/1");
+      },
+    });
   };
 
   return (
