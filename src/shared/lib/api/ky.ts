@@ -17,6 +17,8 @@ import { OrderError, OrderErrorCode } from "./errors/orderErrorCode";
 import { OrderApiError } from "./errors/orderApiError";
 import { MemberError, MemberErrorCode } from "./errors/memberErrorCode";
 import { MemberApiError } from "./errors/memberApiError";
+import { ValidationError, ValidationErrorCode } from "./errors/validationErrorCode";
+import { ValidationApiError } from "./errors/validationApiError";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -73,6 +75,9 @@ export const api = ky.create({
 
           if (code in MemberError) {
             throw new MemberApiError(code as MemberErrorCode, status);
+          }
+          if (code in ValidationError) {
+            throw new ValidationApiError(code as ValidationErrorCode, status);
           }
 
           throw new Error("알 수 없는 에러가 발생했습니다.");

@@ -1,5 +1,5 @@
 import { useMemberDashboard } from "@/entities/member/api/hooks";
-import { MyPage } from "@/features/myPage/ui";
+import { EditProfileDialog, MyPage } from "@/features/myPage/ui";
 import { api } from "@/shared/lib/api/ky";
 import { User, Gift, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -31,21 +31,40 @@ const menuItems = [
 export default function MyPageView() {
   const navigate = useNavigate();
   const { data } = useMemberDashboard();
-
-  const user = {
-    name: data.nickname,
-    profileImage: data.profileImage,
-    point: data.greenPoint,
-  };
+  const {
+    nickname: name,
+    gender,
+    ageRange: age,
+    profileImage,
+    greenPoint: point,
+    orderStatusPendingCount,
+    orderStatusPaidCount,
+  } = data;
+  const user = { name, profileImage, point };
 
   const orderStatuses = [
-    { status: "ALL", count: data.orderStatusPendingCount + data.orderStatusPaidCount },
-    { status: "PENDING", count: data.orderStatusPendingCount },
-    { status: "PAID", count: data.orderStatusPaidCount },
+    { status: "ALL", count: orderStatusPendingCount + orderStatusPaidCount },
+    { status: "PENDING", count: orderStatusPendingCount },
+    { status: "PAID", count: orderStatusPaidCount },
   ] as const;
+
   return (
     <MyPage>
-      <MyPage.Profile user={user} />
+      <MyPage.Profile user={user}>
+        {({ open, setOpen }) => (
+          <EditProfileDialog
+            open={open}
+            setOpen={setOpen}
+            defaultValues={{
+              name,
+              gender: gender as "M" | "F",
+              age: age as "10" | "20" | "30" | "40" | "50" | "60",
+              profileImage,
+            }}
+          />
+        )}
+      </MyPage.Profile>
+
       <MyPage.GreenTree onClick={() => navigate("/mypage/environment")} />
       <MyPage.Points value={user.point} />
 

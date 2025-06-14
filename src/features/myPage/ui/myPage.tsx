@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ChevronRight, Clock, CreditCard, Package, Pencil } from "lucide-react";
 
@@ -6,24 +6,37 @@ function MyPageRoot({ children }: { children: ReactNode }) {
   return <div className="py-6 space-y-6">{children}</div>;
 }
 
-function Profile({ user }: { user: { name: string; profileImage: string } }) {
+interface ProfileProps {
+  user: { name: string; profileImage: string };
+  children?: (args: { open: boolean; setOpen: (v: boolean) => void }) => ReactNode;
+}
+
+function Profile({ user, children }: ProfileProps) {
+  const [open, setOpen] = useState(false);
+
   return (
-    <div className="flex items-center gap-4 px-4">
-      <div className="relative">
-        <img
-          src={user.profileImage}
-          alt="프로필 이미지"
-          className="w-20 h-20 rounded-full object-cover border-4 border-primary/20"
-        />
-        <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-primary rounded-full flex items-center justify-center shadow-sm cursor-pointer">
-          <Pencil className="w-3 h-3 text-primary-foreground" />
+    <>
+      <div className="flex items-center gap-4 px-4">
+        <div className="relative">
+          <img
+            src={user.profileImage}
+            alt="프로필 이미지"
+            className="w-20 h-20 rounded-full object-cover border-4 border-primary/20"
+          />
+          <div
+            className="absolute -bottom-1 -right-1 w-6 h-6 bg-primary rounded-full flex items-center justify-center shadow-sm cursor-pointer"
+            onClick={() => setOpen(true)}
+          >
+            <Pencil className="w-3 h-3 text-primary-foreground" />
+          </div>
+        </div>
+        <div className="flex flex-col justify-center">
+          <p className="text-xl font-bold text-foreground mb-1">{user.name} 님</p>
+          <p className="text-sm text-muted-foreground">안녕하세요! 좋은 하루 되세요 ✨</p>
         </div>
       </div>
-      <div className="flex flex-col justify-center">
-        <p className="text-xl font-bold text-foreground mb-1">{user.name} 님</p>
-        <p className="text-sm text-muted-foreground">안녕하세요! 좋은 하루 되세요 ✨</p>
-      </div>
-    </div>
+      {children?.({ open, setOpen })}
+    </>
   );
 }
 
