@@ -15,6 +15,8 @@ import {
 import { refreshAccessToken } from "@/shared/lib/api/auth";
 import { OrderError, OrderErrorCode } from "./errors/orderErrorCode";
 import { OrderApiError } from "./errors/orderApiError";
+import { MemberError, MemberErrorCode } from "./errors/memberErrorCode";
+import { MemberApiError } from "./errors/memberApiError";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -67,6 +69,10 @@ export const api = ky.create({
 
           if (code in OrderError) {
             throw new OrderApiError(code as OrderErrorCode, status);
+          }
+
+          if (code in MemberError) {
+            throw new MemberApiError(code as MemberErrorCode, status);
           }
 
           throw new Error("알 수 없는 에러가 발생했습니다.");

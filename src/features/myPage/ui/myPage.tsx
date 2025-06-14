@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ChevronRight, Clock, CreditCard, Pencil, Truck } from "lucide-react";
+import { ChevronRight, Clock, CreditCard, Package, Pencil } from "lucide-react";
 
 function MyPageRoot({ children }: { children: ReactNode }) {
   return <div className="py-6 space-y-6">{children}</div>;
@@ -72,11 +72,11 @@ function OrderStatus({ children }: { children: ReactNode }) {
   );
 }
 
-function OrderStatusItem({ status, count }: { status: "PENDING" | "PAID" | "DELIVERED"; count: number }) {
+function OrderStatusItem({ status, count }: { status: "PENDING" | "PAID" | "ALL"; count: number }) {
   const statusInfo = {
     PENDING: { label: "주문대기", icon: Clock },
     PAID: { label: "결제완료", icon: CreditCard },
-    DELIVERED: { label: "배송완료", icon: Truck },
+    ALL: { label: "전체조회", icon: Package },
   }[status];
 
   const Icon = statusInfo.icon;

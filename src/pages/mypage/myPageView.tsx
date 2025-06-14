@@ -1,27 +1,10 @@
+import { useMemberDashboard } from "@/entities/member/api/hooks";
 import { MyPage } from "@/features/myPage/ui";
 import { api } from "@/shared/lib/api/ky";
 import { User, Package, Gift, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-const user = {
-  name: "한*준",
-  profileImage: "https://placehold.co/64x64.png",
-  point: 10000,
-};
-
-const orderStatuses = [
-  { status: "PENDING", count: 0 },
-  { status: "PAID", count: 0 },
-  { status: "DELIVERED", count: 0 },
-] as const;
-
 const menuItems = [
-  {
-    label: "주문내역",
-    icon: Package,
-    description: "주문한 상품을 확인하세요",
-    to: "/orders?status=ALL",
-  },
   {
     label: "포인트 내역",
     icon: User,
@@ -47,6 +30,19 @@ const menuItems = [
 
 export default function MyPageView() {
   const navigate = useNavigate();
+  const { data } = useMemberDashboard();
+
+  const user = {
+    name: data.nickname,
+    profileImage: data.profileImage,
+    point: data.greenPoint,
+  };
+
+  const orderStatuses = [
+    { status: "ALL", count: data.orderStatusPendingCount + data.orderStatusPaidCount },
+    { status: "PENDING", count: data.orderStatusPendingCount },
+    { status: "PAID", count: data.orderStatusPaidCount },
+  ] as const;
   return (
     <MyPage>
       <MyPage.Profile user={user} />
