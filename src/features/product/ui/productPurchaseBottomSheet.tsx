@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription } from "@/shared/components/ui/drawer";
 import { Button } from "@/shared/components/ui/button";
@@ -31,6 +31,10 @@ export default function ProductPurchaseBottomSheet({ open, setOpen, product }: P
     addToCart({ itemId: id, quantity });
     setOpen(false);
   };
+
+  useEffect(() => {
+    if (!open) setQuantity(1);
+  }, [open]);
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
