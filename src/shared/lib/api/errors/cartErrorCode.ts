@@ -54,6 +54,11 @@ export const CartError = {
     devMessage: "basketItemId가 null 또는 0 이하",
     message: "잘못된 요청입니다.",
   },
+  SB012: {
+    code: "SB012",
+    devMessage: "장바구니에 담으려는 수량이 상품 재고보다 많음",
+    message: "재고보다 많은 수량은 담을 수 없어요.",
+  },
 } as const;
 
 export type CartErrorCode = keyof typeof CartError;

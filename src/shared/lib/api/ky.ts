@@ -43,7 +43,6 @@ export const api = ky.create({
           const code = data.code as string;
 
           if (code === "AU001") {
-            // console.log(code);
             const success = await refreshAccessToken();
 
             if (success) {

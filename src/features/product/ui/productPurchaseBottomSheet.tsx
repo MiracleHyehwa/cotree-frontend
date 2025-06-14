@@ -4,6 +4,7 @@ import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription } f
 import { Button } from "@/shared/components/ui/button";
 import { ProductDetail } from "@/entities/product/model";
 import { Input } from "@/shared/components/ui/input";
+import { useAddToCart } from "@/entities/cart/api/hooks";
 
 interface ProductPurchaseBottomSheetProps {
   open: boolean;
@@ -12,9 +13,10 @@ interface ProductPurchaseBottomSheetProps {
 }
 
 export default function ProductPurchaseBottomSheet({ open, setOpen, product }: ProductPurchaseBottomSheetProps) {
-  const { name, price, salePrice, discountRate, quantity: stockQuantity } = product;
+  const { id, name, price, salePrice, discountRate, quantity: stockQuantity } = product;
   const [quantity, setQuantity] = useState(1);
   const maxQuantity = stockQuantity;
+  const { mutate: addToCart } = useAddToCart();
 
   const navigate = useNavigate();
 
@@ -25,12 +27,11 @@ export default function ProductPurchaseBottomSheet({ open, setOpen, product }: P
     }, 300);
   };
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
+    addToCart({ itemId: id, quantity });
     setOpen(false);
-    setTimeout(() => {
-      navigate("/cart");
-    }, 300);
   };
+
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerContent className="max-w-limit mx-auto w-full">

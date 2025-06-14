@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/shared/components/ui/button";
 import { ShoppingCart } from "lucide-react";
 import { ProductDetail } from "@/entities/product/model";
+import { useAddToCart } from "@/entities/cart/api/hooks";
 
 interface ProductPurchaseActionBarProps {
   product: ProductDetail;
@@ -15,10 +16,8 @@ interface ProductPurchaseActionBarProps {
 
 export default function ProductPurchaseActionBar({ product, children }: ProductPurchaseActionBarProps) {
   const [open, setOpen] = useState(false);
-
-  const handleAddToCart = () => {
-    console.log("장바구니 추가 버튼 클릭");
-  };
+  const { id } = product;
+  const { mutate: addToCart } = useAddToCart();
 
   const handleOpenDrawer = () => {
     if (document.activeElement instanceof HTMLElement) {
@@ -35,7 +34,7 @@ export default function ProductPurchaseActionBar({ product, children }: ProductP
             <Button
               className="flex-1 max-w-[25%] h-12 bg-background flex items-center justify-center cursor-pointer"
               variant="outline"
-              onClick={handleAddToCart}
+              onClick={() => addToCart({ itemId: id, quantity: 1 })}
             >
               <ShoppingCart className="w-5 h-5 text-muted-foreground" />
             </Button>
