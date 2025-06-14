@@ -38,7 +38,7 @@ export default function OrderCreateView() {
       orderItems: products.map((p) => ({
         itemId: p.itemId,
         quantity: p.quantity,
-      })), //
+      })),
     },
   });
 
@@ -75,6 +75,7 @@ export default function OrderCreateView() {
             ]}
           />
           <OrderPaymentForm.CardFields />
+          <OrderPaymentForm.RequestField />
         </OrderPaymentForm>
         <OrderAgreementConfirmationCheckbox checked={isChecked} onChange={setIsChecked} />
       </div>

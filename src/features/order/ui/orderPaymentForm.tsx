@@ -1,4 +1,9 @@
-import { OrderPaymentCardInputFields, OrderPaymentMethodSelector, OrderPaymentTypeOptions } from "@/features/order/ui";
+import {
+  OrderPaymentCardInputFields,
+  OrderPaymentMethodSelector,
+  OrderPaymentRequestField,
+  OrderPaymentTypeOptions,
+} from "@/features/order/ui";
 
 interface OrderPaymentFormProps {
   title: string;
@@ -26,4 +31,8 @@ OrderPaymentForm.MethodSelector = function MethodSelector(
 
 OrderPaymentForm.CardFields = function CardFields() {
   return <OrderPaymentCardInputFields />;
+};
+
+OrderPaymentForm.RequestField = function RequestField() {
+  return <OrderPaymentRequestField />;
 };

@@ -11,3 +11,4 @@ export { default as OrderPaymentTypeOptions } from "./orderPaymentTypeOptions";
 export { default as OrderPaymentMethodSelector } from "./orderPaymentMethodSelector";
 export { default as OrderPaymentForm } from "./orderPaymentForm";
 export { default as OrderCompleted } from "./orderCompleted";
+export { default as OrderPaymentRequestField } from "./orderPaymentRequestFiled";
