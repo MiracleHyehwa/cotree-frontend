@@ -5,6 +5,7 @@ import { Button } from "@/shared/components/ui/button";
 import { ProductDetail } from "@/entities/product/model";
 import { Input } from "@/shared/components/ui/input";
 import { useAddToCart } from "@/entities/cart/api/hooks";
+import { setOrderSession, toOrderItemFromProductDetail } from "@/entities/order/lib";
 
 interface ProductPurchaseBottomSheetProps {
   open: boolean;
@@ -21,6 +22,9 @@ export default function ProductPurchaseBottomSheet({ open, setOpen, product }: P
   const navigate = useNavigate();
 
   const handlePurchase = () => {
+    const orderItem = toOrderItemFromProductDetail(product, quantity);
+    setOrderSession([orderItem]);
+
     setOpen(false);
     setTimeout(() => {
       navigate("/order");

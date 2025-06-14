@@ -1,5 +1,6 @@
 import type { ProductSummary } from "@/entities/product/model";
 import { Badge } from "@/shared/components/ui/badge";
+import { calculateGreenReward } from "@/shared/lib/greenpoint";
 
 interface ProductSummaryProps {
   product: ProductSummary;
@@ -8,7 +9,7 @@ interface ProductSummaryProps {
 export default function ProductSummary({ product }: ProductSummaryProps) {
   const { name, price, salePrice, discountRate, brandName, isGreen } = product;
   const showDiscount = salePrice > 0 && discountRate > 0;
-  const point = isGreen === "Y" ? Math.floor(salePrice * 0.01) : 0;
+  const point = calculateGreenReward(salePrice, isGreen);
 
   return (
     <div>

@@ -12,37 +12,17 @@ import {
 import { FormProvider, useForm } from "react-hook-form";
 import { orderFormSchema, OrderFormValues } from "@/features/order/model/schema";
 import { useNavigate } from "react-router-dom";
+import { getOrderSession } from "@/entities/order/lib";
 
 const DISCOUNT = 0;
 const USED_POINT = 0;
 const SHIPPING_FEE = 0;
 
-const products = [
-  {
-    id: 1,
-    name: "친환경 국산 사과즙 100%",
-    image: "https://dummyimage.com/120x160/ffffe0/000&text=사과즙",
-    brand: "자연애",
-    option: "1박스 / 30포",
-    price: 12000,
-    quantity: 1,
-  },
-  {
-    id: 2,
-    name: "무농약 유기농 바나나",
-    image: "https://dummyimage.com/120x160/fffae0/000&text=바나나",
-    brand: "그린팜",
-    option: "1kg / 봉지",
-    price: 5800,
-    quantity: 2,
-  },
-];
-
 export default function OrderCreateView() {
   const navigate = useNavigate();
 
   const [isChecked, setIsChecked] = useState(false);
-
+  const products = getOrderSession();
   const productTotal = products.reduce((sum, p) => sum + p.price * p.quantity, 0);
   const total = productTotal - DISCOUNT - USED_POINT + SHIPPING_FEE;
 
@@ -50,29 +30,25 @@ export default function OrderCreateView() {
     resolver: zodResolver(orderFormSchema),
     defaultValues: {
       cardNumber: "",
-      recipientPhone: "",
-      cardType: "",
-      installment: "1",
-      shippingAddress: "",
-      products: products.map((p) => ({
-        id: p.id,
+      receiverName: "",
+      receiverTel: "",
+      destination: "",
+      bankName: "",
+      request: "",
+      orderItems: products.map((p) => ({
+        itemId: p.itemId,
         quantity: p.quantity,
-      })),
-      totalAmount: total,
+      })), //
     },
   });
 
   const onSubmit = (data: OrderFormValues) => {
-    const { recipientName, recipientPhone, cardNumber, shippingAddress, products, totalAmount } = data;
+    const { ...rest } = data;
 
     const payload = {
-      recipientName,
-      recipientPhone,
-      cardNumber,
-      shippingAddress,
-      products,
-      totalAmount,
+      ...rest,
     };
+
     console.log(`백엔드 데이터 전송 : ${payload}`);
     navigate("/order/completed/1");
   };

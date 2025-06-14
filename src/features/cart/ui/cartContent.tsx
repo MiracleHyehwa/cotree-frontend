@@ -7,6 +7,8 @@ import { Trash2 } from "lucide-react";
 import { Badge } from "@/shared/components/ui/badge";
 import { Link } from "react-router-dom";
 import { useDeleteCartItem } from "@/entities/cart/api/hooks";
+import { setOrderSession, toOrderItemFromCart } from "@/entities/order/lib";
+import { calculateGreenReward } from "@/shared/lib/greenpoint";
 
 interface CartContentProps {
   children: ReactNode;
@@ -63,50 +65,56 @@ function List() {
   return (
     <>
       {cartItems.map((item) => {
-        const finalPrice = item.price - item.discount;
-        const point = item.isGreen === "Y" ? Math.floor(finalPrice * 0.01 * item.quantity) : 0;
+        const {
+          basketItemId,
+          itemId,
+          itemName,
+          brandName,
+          price,
+          discount,
+          quantity,
+          isGreen,
+          selected,
+          thumbnailImage,
+        } = item;
+        const finalPrice = price - discount;
+        const point = calculateGreenReward(finalPrice * quantity, isGreen);
 
         return (
-          <div key={item.basketItemId} className="border-b px-4 py-4">
+          <div key={basketItemId} className="border-b px-4 py-4">
             <div className="flex items-start gap-4">
               <Checkbox
-                checked={item.selected}
-                onCheckedChange={(checked) => handleSelectItem(item.basketItemId, checked)}
+                checked={selected}
+                onCheckedChange={(checked) => handleSelectItem(basketItemId, checked)}
                 className="shrink-0"
               />
 
-              <img
-                src={item.thumbnailImage}
-                alt={item.itemName}
-                className="w-32 h-32 object-cover rounded-md border shrink-0"
-              />
+              <img src={thumbnailImage} alt={itemName} className="w-32 h-32 object-cover rounded-md border shrink-0" />
 
               <div className="flex-1 space-y-1">
                 <div className="flex items-center gap-2">
-                  {item.isGreen === "Y" && <Badge className="text-xs bg-primary text-primary-foreground">친환경</Badge>}
-                  <span className="text-sm font-semibold text-foreground">{item.brandName}</span>
+                  {isGreen === "Y" && <Badge className="text-xs bg-primary text-primary-foreground">친환경</Badge>}
+                  <span className="text-sm font-semibold text-foreground">{brandName}</span>
                 </div>
 
-                <Link to={`/product/${item.itemId}`} className="block">
+                <Link to={`/product/${itemId}`} className="block">
                   <div className="text-sm font-medium text-foreground leading-snug line-clamp-2 hover:underline">
-                    {item.itemName}
+                    {itemName}
                   </div>
                 </Link>
 
-                <div className="text-xs text-muted-foreground">수량: {item.quantity}</div>
+                <div className="text-xs text-muted-foreground">수량: {quantity}</div>
 
                 <div className="mt-1">
                   <div className="text-base font-bold text-foreground">
-                    {(finalPrice * item.quantity).toLocaleString()}원
+                    {(finalPrice * quantity).toLocaleString()}원
                   </div>
-                  {item.discount > 0 && (
-                    <div className="text-xs text-gray-400 line-through">
-                      {(item.price * item.quantity).toLocaleString()}원
-                    </div>
+                  {discount > 0 && (
+                    <div className="text-xs text-gray-400 line-through">{(price * quantity).toLocaleString()}원</div>
                   )}
                 </div>
 
-                {item.isGreen === "Y" && (
+                {isGreen === "Y" && (
                   <div className="text-xs text-foreground font-medium mt-1">
                     🌿 그린포인트 {point.toLocaleString()}P 적립 예정
                   </div>
@@ -117,7 +125,7 @@ function List() {
                 size="icon"
                 variant="ghost"
                 className="shrink-0 mt-1 cursor-pointer"
-                onClick={() => mutateDeleteCartItem(item.basketItemId)}
+                onClick={() => mutateDeleteCartItem(basketItemId)}
               >
                 <Trash2 size={16} className="cursor-pointer" />
               </Button>
@@ -158,6 +166,9 @@ function ActionBar({ onClick }: { onClick: () => void }) {
 
   const handleClick = () => {
     if (selectedCount === 0) return;
+
+    const orderItems = selectedItems.map(toOrderItemFromCart);
+    setOrderSession(orderItems);
     onClick();
   };
 

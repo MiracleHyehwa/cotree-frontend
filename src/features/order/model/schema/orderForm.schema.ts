@@ -1,24 +1,23 @@
 import { z } from "zod";
 
 export const orderFormSchema = z.object({
-  recipientName: z.string().min(1, "이름을 입력해주세요"),
-  recipientPhone: z
+  receiverName: z.string().min(1, "이름을 입력해주세요"),
+  receiverTel: z
     .string()
     .min(1, "전화번호를 입력해주세요")
     .regex(/^010\d{8}$/, "전화번호 형식이 올바르지 않습니다"),
-  cardNumber: z.string().min(16, "카드 번호는 16자리를 입력해주세요"),
-  cardType: z.string().min(1, "카드사를 선택해주세요"),
-  installment: z.string().min(1, "할부 개월을 선택해주세요"),
-  shippingAddress: z.string().min(1, "배송지를 입력해주세요"),
-  products: z
+  destination: z.string().min(1, "배송지를 입력해주세요"),
+  cardNumber: z.string().regex(/^\d{16}$/, "카드 번호는 숫자 16자리여야 합니다"),
+  bankName: z.string().min(1, "은행명을 입력해주세요"),
+  request: z.string().optional(),
+  orderItems: z
     .array(
       z.object({
-        id: z.number(),
+        itemId: z.number(),
         quantity: z.number().min(1, "수량은 1 이상이어야 합니다"),
       })
     )
     .min(1, "주문 상품이 없습니다"),
-  totalAmount: z.number().min(1, "총 결제 금액이 0원일 수 없습니다"),
 });
 
 export type OrderFormValues = z.infer<typeof orderFormSchema>;

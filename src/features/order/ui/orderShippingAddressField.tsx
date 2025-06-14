@@ -11,11 +11,11 @@ export default function OrderShippingAddressField({ children }: Props) {
   const [address, setAddress] = useState<string | null>(null);
 
   const { setValue, formState } = useFormContext();
-  const error = formState.errors.shippingAddress?.message as string | undefined;
+  const error = formState.errors.destination?.message as string | undefined;
 
   const handleSelect = (addr: string) => {
     setAddress(addr);
-    setValue("shippingAddress", addr);
+    setValue("destination", addr);
   };
 
   return (

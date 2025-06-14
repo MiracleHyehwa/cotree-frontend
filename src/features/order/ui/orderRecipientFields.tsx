@@ -18,7 +18,7 @@ export default function OrderRecipientFields() {
     setSegments(updated);
 
     const fullNumber = updated.join("");
-    setValue("recipientPhone", fullNumber);
+    setValue("receiverTel", fullNumber);
 
     if (sanitized.length === (index === 0 ? 3 : 4) && index < 2) {
       refs[index + 1].current?.focus();
@@ -47,18 +47,18 @@ export default function OrderRecipientFields() {
             이름
           </Label>
           <Input
-            id="recipientName"
-            {...register("recipientName")}
+            id="receiverName"
+            {...register("receiverName")}
             placeholder="홍길동"
             className="w-full placeholder:text-muted-foreground/50"
           />
-          {errors.recipientName && (
-            <p className="text-sm text-destructive mt-1">{errors.recipientName.message as string}</p>
+          {errors.receiverName && (
+            <p className="text-sm text-destructive mt-1">{errors.receiverName.message as string}</p>
           )}
         </div>
 
         <div>
-          <Label htmlFor="recipientPhone" className="block text-sm font-medium mb-1">
+          <Label htmlFor="receiverTel" className="block text-sm font-medium mb-1">
             전화번호
           </Label>
           <div className="flex gap-2">
@@ -75,8 +75,8 @@ export default function OrderRecipientFields() {
               />
             ))}
           </div>
-          {errors.recipientPhone && (
-            <p className="text-sm text-destructive mt-1">{errors.recipientPhone.message as string}</p>
+          {errors.receiverTel && (
+            <p className="text-sm text-destructive mt-1">{errors.receiverTel.message as string}</p>
           )}
         </div>
       </div>

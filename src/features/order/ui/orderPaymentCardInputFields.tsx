@@ -5,6 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Controller, useFormContext } from "react-hook-form";
 
 export default function OrderPaymentCardInputFields() {
+  const [installment, setInstallment] = useState("1");
   const [isTouched, setIsTouched] = useState(false);
   const { setValue, control, formState } = useFormContext();
   const { errors } = formState;
@@ -65,7 +66,7 @@ export default function OrderPaymentCardInputFields() {
 
       <div className="w-full">
         <Controller
-          name="cardType"
+          name="bankName"
           control={control}
           render={({ field }) => (
             <Select value={field.value} onValueChange={field.onChange}>
@@ -73,37 +74,28 @@ export default function OrderPaymentCardInputFields() {
                 <SelectValue placeholder="은행을 선택하세요" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="shinhan">신한은행</SelectItem>
-                <SelectItem value="kb">국민은행</SelectItem>
-                <SelectItem value="hana">하나은행</SelectItem>
-                <SelectItem value="woori">우리은행</SelectItem>
+                <SelectItem value="신한은행">신한은행</SelectItem>
+                <SelectItem value="국민은행">국민은행</SelectItem>
+                <SelectItem value="하나은행">하나은행</SelectItem>
+                <SelectItem value="우리은행">우리은행</SelectItem>
               </SelectContent>
             </Select>
           )}
         />
-        {errors.cardType && <p className="text-sm text-destructive mt-1">{errors.cardType.message as string}</p>}
+        {errors.bankName && <p className="text-sm text-destructive mt-1">{errors.bankName.message as string}</p>}
       </div>
 
-      <div>
-        <Controller
-          name="installment"
-          control={control}
-          render={({ field }) => (
-            <Select value={field.value} onValueChange={field.onChange}>
-              <SelectTrigger className="w-full max-w-limit">
-                <SelectValue placeholder="일시불" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="1">일시불</SelectItem>
-                <SelectItem value="2">2개월</SelectItem>
-                <SelectItem value="3">3개월</SelectItem>
-                <SelectItem value="6">6개월</SelectItem>
-              </SelectContent>
-            </Select>
-          )}
-        />
-        {errors.installment && <p className="text-sm text-destructive mt-1">{errors.installment.message as string}</p>}
-      </div>
+      <Select value={installment} onValueChange={setInstallment}>
+        <SelectTrigger className="w-full max-w-limit">
+          <SelectValue placeholder="일시불" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="1">일시불</SelectItem>
+          <SelectItem value="2">2개월</SelectItem>
+          <SelectItem value="3">3개월</SelectItem>
+          <SelectItem value="6">6개월</SelectItem>
+        </SelectContent>
+      </Select>
     </div>
   );
 }
