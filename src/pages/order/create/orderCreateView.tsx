@@ -70,6 +70,7 @@ export default function OrderCreateView() {
           )}
         </OrderShippingAddressField>
         <OrderRecipientFields />
+        <OrderPaymentForm.RequestField />
         <OrderProductSummary products={products} />
         <OrderPaymentForm title="결제수단">
           <OrderPaymentForm.TypeOptions value="general" disabled />
@@ -83,7 +84,6 @@ export default function OrderCreateView() {
             ]}
           />
           <OrderPaymentForm.CardFields />
-          <OrderPaymentForm.RequestField />
         </OrderPaymentForm>
         <OrderAgreementConfirmationCheckbox checked={isChecked} onChange={setIsChecked} />
       </div>
