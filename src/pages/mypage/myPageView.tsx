@@ -1,5 +1,6 @@
 import { useMemberDashboard } from "@/entities/member/api/hooks";
 import { EditProfileDialog, MyPage } from "@/features/myPage/ui";
+import { AgeRange, Gender } from "@/shared/constants";
 import { api } from "@/shared/lib/api/ky";
 import { User, Gift, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -57,8 +58,8 @@ export default function MyPageView() {
             setOpen={setOpen}
             defaultValues={{
               name,
-              gender: gender as "M" | "F",
-              age: age as "10" | "20" | "30" | "40" | "50" | "60",
+              gender: gender as Gender,
+              age: age as AgeRange,
               profileImage,
             }}
           />

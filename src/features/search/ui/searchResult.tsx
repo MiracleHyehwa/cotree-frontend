@@ -3,7 +3,7 @@ import { useSearchFilterContext } from "../hooks";
 import { ProductCard } from "@/features/product/ui/variants";
 import { useSearchedProducts } from "@/entities/product/api/hooks";
 import { useInfiniteScroll } from "@/shared/hooks";
-import Spinner from "@/shared/components/ui/spinner";
+import { Spinner } from "@/shared/components/ui/spinner";
 import SearchView from "./searchView";
 
 export default function SearchResult() {

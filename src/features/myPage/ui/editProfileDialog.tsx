@@ -20,6 +20,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { editProfileSchema, EditProfileFormValues } from "../model/schema";
 import { useRef, useState } from "react";
 import { useUpdateProfile } from "@/entities/member/api/hooks";
+import { ageOptions, genderOptions } from "@/shared/constants";
+import { SpinnerIcon } from "@/shared/components/ui/spinner";
+import { useQueryClient } from "@tanstack/react-query";
+import { memberKeys } from "@/entities/member/api/queryOptions";
 
 interface EditProfileDialogProps {
   open: boolean;
@@ -27,23 +31,10 @@ interface EditProfileDialogProps {
   defaultValues: EditProfileFormValues;
 }
 
-const genderOptions = [
-  { value: "M", label: "남성" },
-  { value: "F", label: "여성" },
-] as const;
-
-const ageOptions = [
-  { value: "10", label: "10대" },
-  { value: "20", label: "20대" },
-  { value: "30", label: "30대" },
-  { value: "40", label: "40대" },
-  { value: "50", label: "50대" },
-  { value: "60", label: "60대 이상" },
-] as const;
-
 export default function EditProfileDialog({ open, setOpen, defaultValues }: EditProfileDialogProps) {
+  const queryClient = useQueryClient();
   const isCompact = useIsCompact();
-  const { mutate: updateProfile } = useUpdateProfile();
+  const { mutate: updateProfile, isPending } = useUpdateProfile();
 
   const {
     register,
@@ -94,12 +85,13 @@ export default function EditProfileDialog({ open, setOpen, defaultValues }: Edit
     formData.append("ageRange", data.age);
     if (imageFile instanceof File) {
       formData.append("profileImage", imageFile);
-    } else if (profileImage) {
-      formData.append("profileImageUrl", profileImage ?? "");
     }
 
     updateProfile(formData, {
-      onSuccess: () => {
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
+          queryKey: memberKeys.getMemberDashboard(),
+        });
         setOpen(false);
       },
     });
@@ -162,15 +154,20 @@ export default function EditProfileDialog({ open, setOpen, defaultValues }: Edit
         </div>
       </div>
 
-      <Button type="submit" disabled={!isValid} className="w-full cursor-pointer">
-        저장하기
+      <Button type="submit" disabled={!isValid || isPending} className="w-full cursor-pointer">
+        {isPending ? <SpinnerIcon className="border-muted border-t-primary" /> : "저장하기"}
       </Button>
     </form>
   );
 
   if (isCompact) {
     return (
-      <Drawer open={open} onOpenChange={setOpen}>
+      <Drawer
+        open={open}
+        onOpenChange={(v) => {
+          if (!isPending) setOpen(v);
+        }}
+      >
         <DrawerContent>
           <DrawerHeader>
             <DrawerTitle>회원정보 수정</DrawerTitle>
@@ -188,7 +185,12 @@ export default function EditProfileDialog({ open, setOpen, defaultValues }: Edit
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog
+      open={open}
+      onOpenChange={(v) => {
+        if (!isPending) setOpen(v);
+      }}
+    >
       <DialogContent className="w-full !max-w-[425px] mx-auto">
         <DialogHeader>
           <DialogTitle>회원정보 수정</DialogTitle>

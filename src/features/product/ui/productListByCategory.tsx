@@ -1,7 +1,7 @@
 import { useProductsByCategory } from "@/entities/product/api/hooks";
 import { useInfiniteScroll } from "@/shared/hooks";
 import { ProductCard } from "./variants";
-import Spinner from "@/shared/components/ui/spinner";
+import { Spinner } from "@/shared/components/ui/spinner";
 
 interface ProductListByCategoryProps {
   categoryId: string;

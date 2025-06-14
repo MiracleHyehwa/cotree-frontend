@@ -1,7 +1,7 @@
 import { useEcoProductByPage } from "@/entities/product/api/hooks";
 import { ProductCard } from "./variants";
 import { useInfiniteScroll } from "@/shared/hooks";
-import Spinner from "@/shared/components/ui/spinner";
+import { Spinner } from "@/shared/components/ui/spinner";
 
 export default function RecommendProductList() {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useEcoProductByPage();

@@ -1,7 +1,7 @@
 import { usePointHistory, usePointSummary } from "@/entities/greenpoint/api/hooks";
 import { useInfiniteScroll } from "@/shared/hooks";
 import PointHistory from "@/features/myPage/ui/pointHistory";
-import Spinner from "@/shared/components/ui/spinner";
+import { Spinner } from "@/shared/components/ui/spinner";
 
 export default function PointHistoryView() {
   const { data: summary } = usePointSummary();
