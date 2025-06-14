@@ -1,7 +1,7 @@
 import { useMemberDashboard } from "@/entities/member/api/hooks";
 import { MyPage } from "@/features/myPage/ui";
 import { api } from "@/shared/lib/api/ky";
-import { User, Package, Gift, LogOut } from "lucide-react";
+import { User, Gift, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const menuItems = [
