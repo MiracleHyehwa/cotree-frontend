@@ -1,5 +1,5 @@
-import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
-import { cartKeys, cartQueryOptions } from "./queries";
+import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import { cartKeys, cartQueryOptions } from "./queryOptions";
 import { CartItem } from "../model";
 import { DisplayMode } from "@/shared/lib/api/errors/baseApiError";
 import { useCartContext } from "@/features/cart/hooks";
@@ -58,4 +58,8 @@ export const useAddToCart = (displayMode: DisplayMode = "toast") => {
 
     meta: { displayMode, position: "top-right" },
   });
+};
+
+export const useCartItemCount = (displayMode: DisplayMode = "toast") => {
+  return useQuery<number>(cartQueryOptions.getCartItemCount(displayMode));
 };

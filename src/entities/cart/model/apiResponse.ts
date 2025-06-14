@@ -11,3 +11,7 @@ export interface CartItem {
 }
 
 export type CartItemResponse = CartItem[];
+
+export interface CartItemCountResponse {
+  count: number;
+}

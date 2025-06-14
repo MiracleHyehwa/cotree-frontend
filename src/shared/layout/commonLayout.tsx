@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BottomNavigation } from "@/shared/layout";
 import { Button } from "@/shared/components/ui/button";
 import { Search, ShoppingCart } from "lucide-react";
+import { useCartItemCount } from "@/entities/cart/api/hooks";
 
 interface CommonLayoutProps {
   children: React.ReactNode;
@@ -11,11 +12,12 @@ interface CommonLayoutProps {
 
 export default function CommonLayout({ children, title = "", withBottomNav = false }: CommonLayoutProps) {
   const navigate = useNavigate();
+  const { data: count = 0, isLoading } = useCartItemCount();
 
   return (
     <div id="main-container" className="flex min-h-screen w-full flex-col items-center justify-start">
       <header id="main-header" className="sticky top-0 z-20 flex w-full flex-col items-center justify-center">
-        <div className="relative z-20 flex w-full max-w-limit flex-row items-center justify-between gap-4 transition-colors bg-white h-[52px] max-h-[52px] min-h-[52px] px-24">
+        <div className="relative z-20 flex w-full max-w-limit flex-row items-center justify-between gap-4 transition-colors bg-background h-[52px] max-h-[52px] min-h-[52px] px-24">
           <div className="absolute bottom-0 left-3 top-0 flex flex-row items-center justify-center">
             <Link to={"/"} className="fflex flex-1 items-center justify-center p-2">
               <span className="sr-only">Home</span>
@@ -40,11 +42,19 @@ export default function CommonLayout({ children, title = "", withBottomNav = fal
               onClick={() => navigate("/search")}
             >
               <span className="sr-only">Search</span>
-              <Search className="!w-6 !h-6 text-black" />
+              <Search className="!w-6 !h-6 text-foreground" />
             </Button>
             <Link to={"/cart"} className="relative -m-2 flex h-10 w-10 items-center justify-center p-2">
               <span className="sr-only">ShoppingCart</span>
-              <ShoppingCart className="!w-6 !h-6 text-black" />
+              <ShoppingCart className="!w-6 !h-6 text-foreground" />
+              <span className="absolute -top-0.5 -right-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-destructive text-xs text-primary-foreground">
+                <span
+                  className={`transition-opacity duration-200 
+                    ${!isLoading && count > 0 ? "opacity-100" : "opacity-0"}`}
+                >
+                  {count}
+                </span>
+              </span>
             </Link>
           </div>
         </div>

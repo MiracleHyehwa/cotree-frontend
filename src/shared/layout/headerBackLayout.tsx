@@ -1,3 +1,4 @@
+import { useCartItemCount } from "@/entities/cart/api/hooks";
 import { Button } from "@/shared/components/ui/button";
 import { ArrowLeft, ShoppingCart } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,6 +10,7 @@ interface HeaderBackLayoutProps {
 
 export default function HeaderBackLayout({ children, title = "" }: HeaderBackLayoutProps) {
   const navigate = useNavigate();
+  const { data: count = 0, isLoading } = useCartItemCount();
 
   return (
     <div id="main-container" className="flex min-h-screen w-full flex-col items-center justify-start">
@@ -28,6 +30,14 @@ export default function HeaderBackLayout({ children, title = "" }: HeaderBackLay
             <Link to={"/cart"} className="relative -m-2 flex h-10 w-10 items-center justify-center p-2">
               <span className="sr-only">ShoppingCart</span>
               <ShoppingCart className="!w-6 !h-6 text-black" />
+              <span className="absolute -top-0.5 -right-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-destructive text-xs text-primary-foreground">
+                <span
+                  className={`transition-opacity duration-200 
+                    ${!isLoading && count > 0 ? "opacity-100" : "opacity-0"}`}
+                >
+                  {count}
+                </span>
+              </span>
             </Link>
           </div>
         </div>
