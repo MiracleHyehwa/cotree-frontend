@@ -1,5 +1,6 @@
 "use client";
 
+import { usePointStats } from "@/entities/admin/api/hooks";
 import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/shared/components/ui/card";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/shared/components/ui/chart";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/components/ui/select";
@@ -25,26 +26,8 @@ const chartConfig = {
 export default function ChartAreaInteractive() {
   const isMobile = useIsMobile();
   const [timeRange, setTimeRange] = useState("7d");
+  const { data: chartData } = usePointStats(timeRange);
 
-  const generateChartData = () => {
-    const start = new Date("2024-03-01");
-    const end = new Date("2024-06-30");
-    const data = [];
-
-    for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
-      data.push({
-        date: new Date(d).toISOString().split("T")[0],
-        used: Math.floor(Math.random() * 10000 + 20000),
-        rewarded: Math.floor(Math.random() * 10000 + 15000),
-      });
-    }
-
-    return data;
-  };
-
-  const chartData = generateChartData();
-
-  console.log(chartData);
   useEffect(() => {
     if (isMobile) {
       setTimeRange("7d");
@@ -52,7 +35,7 @@ export default function ChartAreaInteractive() {
   }, [isMobile]);
 
   const filteredData = chartData.filter((item) => {
-    const date = new Date(item.date);
+    const date = new Date(item.statDate);
     const referenceDate = new Date("2024-06-01");
     let daysToSubtract = 90;
     if (timeRange === "30d") daysToSubtract = 30;
@@ -61,6 +44,11 @@ export default function ChartAreaInteractive() {
     startDate.setDate(startDate.getDate() - daysToSubtract);
     return date >= startDate;
   });
+
+  const transformedData = filteredData.map((item) => ({
+    ...item,
+    date: item.statDate,
+  }));
 
   return (
     <Card className="@container/card">
@@ -114,7 +102,7 @@ export default function ChartAreaInteractive() {
       </CardHeader>
       <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
         <ChartContainer config={chartConfig} className="aspect-auto h-[250px] w-full">
-          <AreaChart data={filteredData}>
+          <AreaChart data={transformedData}>
             <defs>
               <linearGradient id="fillUsed" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor="var(--color-used)" stopOpacity={1.0} />
