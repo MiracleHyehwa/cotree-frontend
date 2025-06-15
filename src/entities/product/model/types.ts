@@ -22,8 +22,6 @@ export interface ProductSummary {
   isGreen: "Y" | "N";
 }
 
-export type ProductDetailItem = { type: "text"; content: string } | { type: "image"; content: string };
-
 export interface ProductDetail {
   id: number;
   name: string;
@@ -35,9 +33,5 @@ export interface ProductDetail {
   brandName: string;
   isGreen: "Y" | "N";
   quantity: number;
-  description: ProductDetailItem[];
-}
-
-export interface RawProductDetail extends Omit<ProductDetail, "description"> {
   description: string;
 }
