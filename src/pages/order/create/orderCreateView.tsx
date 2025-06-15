@@ -14,6 +14,8 @@ import { orderFormSchema, OrderFormValues } from "@/features/order/model/schema"
 import { useNavigate } from "react-router-dom";
 import { clearOrderSession, getOrderSession, shouldRedirectOrderPage } from "@/entities/order/lib";
 import { useCreateOrder } from "@/entities/order/api/hooks";
+import { useQueryClient } from "@tanstack/react-query";
+import { cartKeys } from "@/entities/cart/api/queryOptions";
 
 const DISCOUNT = 0;
 const USED_POINT = 0;
@@ -21,6 +23,7 @@ const SHIPPING_FEE = 0;
 
 export default function OrderCreateView() {
   const { mutate: submitOrder } = useCreateOrder();
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   const [isChecked, setIsChecked] = useState(false);
@@ -50,6 +53,8 @@ export default function OrderCreateView() {
     submitOrder(rest, {
       onSuccess: () => {
         clearOrderSession();
+        queryClient.invalidateQueries({ queryKey: cartKeys.getCartItems });
+        queryClient.invalidateQueries({ queryKey: cartKeys.getCartItemCount });
         navigate("/order/completed/1");
       },
     });
