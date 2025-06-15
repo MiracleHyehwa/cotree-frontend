@@ -20,6 +20,9 @@ import {
   ValidationApiError,
   ValidationError,
   ValidationErrorCode,
+  ItemError,
+  ItemApiError,
+  ItemErrorCode,
 } from "@/shared/lib/api/errors";
 import { refreshAccessToken } from "@/shared/lib/api/auth";
 
@@ -76,6 +79,9 @@ export const api = ky.create({
             throw new OrderApiError(code as OrderErrorCode, status);
           }
 
+          if (code in ItemError) {
+            throw new ItemApiError(code as ItemErrorCode, status);
+          }
           if (code in MemberError) {
             throw new MemberApiError(code as MemberErrorCode, status);
           }
