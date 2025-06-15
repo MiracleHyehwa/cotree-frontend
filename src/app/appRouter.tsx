@@ -1,8 +1,7 @@
 import { lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ErrorFallback, ScrollToTop } from "@/shared/components";
+import { ScrollToTop } from "@/shared/components";
 import ProtectedRoutes from "./protectedRoutes";
-import { ErrorBoundary } from "react-error-boundary";
 
 const HomePage = lazy(() => import("@/pages/home"));
 const EcoPage = lazy(() => import("@/pages/eco"));
@@ -28,13 +27,7 @@ export default function AppRouter() {
     <BrowserRouter>
       <ScrollToTop />
       <Routes>
-        <Route
-          element={
-            <ErrorBoundary FallbackComponent={ErrorFallback}>
-              <ProtectedRoutes />
-            </ErrorBoundary>
-          }
-        >
+        <Route element={<ProtectedRoutes />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/eco" element={<EcoPage />} />
           <Route path="/recommend" element={<RecommendPage />} />
