@@ -46,14 +46,6 @@ export default function LoginPage() {
                 </Button>
               </div>
             </div>
-            <div className="flex w-full flex-col items-center justify-center">
-              <Button
-                className="w-full h-12 px-4 py-3 text-foreground bg-gray-100 rounded-md hover:bg-gray-200 cursor-pointer"
-                size="lg"
-              >
-                게스트 계정으로 로그인하기
-              </Button>
-            </div>
           </div>
 
           <div className="flex h-full w-full flex-row items-center justify-center gap-3 pt-5 text-muted-foreground">

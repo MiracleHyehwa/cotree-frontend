@@ -7,3 +7,4 @@ export { default as OnlyHeaderBackLayout } from "./onlyHeaderBackLayout";
 export { default as BottomNavigation } from "./bottomNavigation";
 export { default as RestrictedLayout } from "./restrictedLayout";
 export { default as EnvironmentLayout } from "./environmentLayout";
+export { default as AdminLayout } from "./adminLayout";

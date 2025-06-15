@@ -23,7 +23,7 @@ export const updateAgeAndGender = async (
   displayMode: DisplayMode = "toast"
 ): Promise<void> => {
   try {
-    await api.patch("members/age-gender", {
+    await api.patch("members/basic-info", {
       json: { gender, ageRange },
     });
   } catch (err) {

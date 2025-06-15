@@ -44,6 +44,7 @@ export default function ChartAreaInteractive() {
 
   const chartData = generateChartData();
 
+  console.log(chartData);
   useEffect(() => {
     if (isMobile) {
       setTimeRange("7d");

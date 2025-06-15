@@ -1,7 +1,7 @@
 import { lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ScrollToTop } from "@/shared/components";
-import ProtectedRoutes from "./protectedRoutes";
+import { AdminLayout } from "@/shared/layout";
 
 const HomePage = lazy(() => import("@/pages/home"));
 const EcoPage = lazy(() => import("@/pages/eco"));
@@ -20,38 +20,42 @@ const SearchPage = lazy(() => import("@/pages/search"));
 const NotFoundPage = lazy(() => import("@/pages/notFound"));
 const OnboardingPage = lazy(() => import("@/pages/onboarding"));
 const EnvironmentPage = lazy(() => import("@/pages/mypage/environment"));
+
 const AdminPage = lazy(() => import("@/pages/admin"));
+const AdminNotFound = lazy(() => import("@/pages/adminNotFound"));
 
 export default function AppRouter() {
   return (
     <BrowserRouter>
       <ScrollToTop />
       <Routes>
-        <Route element={<ProtectedRoutes />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/eco" element={<EcoPage />} />
-          <Route path="/recommend" element={<RecommendPage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/eco" element={<EcoPage />} />
+        <Route path="/recommend" element={<RecommendPage />} />
 
-          <Route path="/category" element={<CategoryPage />} />
-          <Route path="/product/:id" element={<ProductDetailPage />} />
+        <Route path="/category" element={<CategoryPage />} />
+        <Route path="/product/:id" element={<ProductDetailPage />} />
 
-          <Route path="/order/completed/:id" element={<OrderCompletedPage />} />
-          <Route path="/order" element={<OrderCreatePage />} />
-          <Route path="/orders" element={<OrderHistoryPage />} />
+        <Route path="/order/completed/:id" element={<OrderCompletedPage />} />
+        <Route path="/order" element={<OrderCreatePage />} />
+        <Route path="/orders" element={<OrderHistoryPage />} />
 
-          <Route path="/cart" element={<CartPage />} />
+        <Route path="/cart" element={<CartPage />} />
 
-          <Route path="/mypage" element={<MyPage />} />
-          <Route path="/mypage/points" element={<PointHistoryPage />} />
-          <Route path="/mypage/rewards" element={<RewardHistoryPage />} />
-          <Route path="/mypage/environment" element={<EnvironmentPage />} />
+        <Route path="/mypage" element={<MyPage />} />
+        <Route path="/mypage/points" element={<PointHistoryPage />} />
+        <Route path="/mypage/rewards" element={<RewardHistoryPage />} />
+        <Route path="/mypage/environment" element={<EnvironmentPage />} />
 
-          <Route path="/search" element={<SearchPage />} />
+        <Route path="/search" element={<SearchPage />} />
+
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<AdminPage />} />
+          <Route path="*" element={<AdminNotFound />} />
         </Route>
 
         <Route path="/login/onboarding" element={<OnboardingPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/admin" element={<AdminPage />} />
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
