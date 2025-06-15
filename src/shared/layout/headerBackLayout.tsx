@@ -30,14 +30,11 @@ export default function HeaderBackLayout({ children, title = "" }: HeaderBackLay
             <Link to={"/cart"} className="relative -m-2 flex h-10 w-10 items-center justify-center p-2">
               <span className="sr-only">ShoppingCart</span>
               <ShoppingCart className="!w-6 !h-6 text-black" />
-              <span className="absolute -top-0.5 -right-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-destructive text-xs text-primary-foreground">
-                <span
-                  className={`transition-opacity duration-200 
-                    ${!isLoading && count > 0 ? "opacity-100" : "opacity-0"}`}
-                >
+              {!isLoading && count > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-destructive text-xs text-primary-foreground">
                   {count}
                 </span>
-              </span>
+              )}
             </Link>
           </div>
         </div>
