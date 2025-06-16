@@ -6,6 +6,7 @@ export { default as OrderShippingAddressField } from "./orderShippingAddressFiel
 export { default as OrderRecipientFields } from "./orderRecipientFields";
 export { default as OrderStatusContent } from "./orderStatusContent";
 export { default as OrderStatusList } from "./orderStatusList";
+export { default as OrderStatusListSkeleton } from "./orderStatusListSkeleton";
 export { default as OrderProductSummary } from "./orderProductSummary";
 export { default as OrderPaymentTypeOptions } from "./orderPaymentTypeOptions";
 export { default as OrderPaymentMethodSelector } from "./orderPaymentMethodSelector";
