@@ -50,8 +50,26 @@ export default function OrderStatusList({ status }: OrderStatusListProps) {
                     <div className="text-sm font-medium text-foreground">{item.itemName}</div>
                     {item.isGreen === "Y" && <Badge>친환경</Badge>}
                     <div className="text-xs text-muted-foreground mt-1"></div>
-                    <div className="text-sm font-semibold mt-2">
-                      {item.price.toLocaleString()}원 / {item.quantity}개
+                    <div className="text-sm font-semibold mt-2 flex flex-col gap-1">
+                      {item.discount > 0 ? (
+                        <>
+                          <div className="flex items-center gap-1">
+                            <span className="text-sm text-muted-foreground line-through mr-1">
+                              {item.price.toLocaleString()}원
+                            </span>
+                            <p className="px-2 py-0.5 text-xs bg-destructive/10 text-destructive rounded-full font-semibold">
+                              -{Math.floor((item.discount / item.price) * 100)}%
+                            </p>
+                          </div>
+                          <div className="text-foreground font-bold">
+                            {(item.price - item.discount).toLocaleString()}원 / {item.quantity}개
+                          </div>
+                        </>
+                      ) : (
+                        <div>
+                          {item.price.toLocaleString()}원 / {item.quantity}개
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

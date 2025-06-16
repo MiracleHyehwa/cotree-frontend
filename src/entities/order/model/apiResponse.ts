@@ -12,4 +12,5 @@ export interface OrderListItemProduct {
   isGreen: "Y" | "N";
   price: number;
   quantity: number;
+  discount: number;
 }
