@@ -2,6 +2,7 @@ import { lazy } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ScrollToTop } from "@/shared/components";
 import { AdminLayout } from "@/shared/layout";
+import AdminLoginPage from "@/pages/admin/login";
 
 const HomePage = lazy(() => import("@/pages/home"));
 const EcoPage = lazy(() => import("@/pages/eco"));
@@ -48,6 +49,8 @@ export default function AppRouter() {
         <Route path="/mypage/environment" element={<EnvironmentPage />} />
 
         <Route path="/search" element={<SearchPage />} />
+
+        <Route path="/admin/login" element={<AdminLoginPage />} />
 
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Navigate to="/admin/dashboard" replace />} />
