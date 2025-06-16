@@ -5,3 +5,4 @@ export { default as HomeCategorySwiperErrorFallback } from "./homeCategorySwiper
 export { default as HomeEcoProductSwiper } from "./homeEcoProductSwiper";
 export { default as HomeEcoProductSwiperSkeleton } from "./homeEcoProductSwiperSkeleton";
 export { default as HomeRecommendedProductSection } from "./homeRecommendedProductSection";
+export { default as TreeOverlay } from "./treeOverlay";
