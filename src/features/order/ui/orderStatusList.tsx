@@ -2,6 +2,7 @@ import { useOrderList } from "@/entities/order/api/hooks";
 import { OrderStatusKey } from "../constants";
 import { Badge } from "@/shared/components/ui/badge";
 import { PackageX } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface OrderStatusListProps {
   status: OrderStatusKey;
@@ -31,7 +32,13 @@ export default function OrderStatusList({ status }: OrderStatusListProps) {
           <div className="flex items-center justify-between text-sm text-muted-foreground border-b pb-2">
             <span className="font-mono font-semibold text-sm">
               주문번호
-              <span className="text-primary ml-2">{order.orderNumber}</span>
+              <Link
+                to={`/order/completed/${order.orderNumber}`}
+                state={{ from: "order-status" }}
+                className="text-primary ml-2"
+              >
+                {order.orderNumber}
+              </Link>
             </span>
           </div>
 

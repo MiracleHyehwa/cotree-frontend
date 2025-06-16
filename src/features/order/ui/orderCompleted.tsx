@@ -1,18 +1,28 @@
 import { Button } from "@/shared/components/ui/button";
+import { ClipboardList, PartyPopper } from "lucide-react";
+import { useLocation } from "react-router-dom";
 
 export default function OrderCompleted({ children }: { children: React.ReactNode }) {
   return <div className="w-full max-w-limit mx-auto p-4 space-y-2 pb-16">{children}</div>;
 }
 
 OrderCompleted.Message = function Message() {
+  const location = useLocation();
+  const isFromOrderSuccess = location.state?.from === "order-success";
+  const isDirectAccess = document.referrer === "" || !document.referrer.includes("/order");
+  const isCompleted = isFromOrderSuccess && !isDirectAccess;
+
   return (
     <div className="text-center space-y-2 py-2">
       <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto">
-        <svg className="w-6 h-6 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-        </svg>
+        {isCompleted ? (
+          <PartyPopper className="w-6 h-6 text-primary-foreground" />
+        ) : (
+          <ClipboardList className="w-6 h-6 text-primary-foreground" />
+        )}
       </div>
-      <h1 className="text-xl font-bold text-foreground">주문이 완료되었습니다</h1>
+      <h1 className="text-xl font-bold text-foreground">{isCompleted ? "주문이 완료되었습니다" : "주문 상세 정보"}</h1>
+      {!isCompleted && <p className="text-sm text-muted-foreground">해당 주문의 상세 내역입니다</p>}
     </div>
   );
 };
