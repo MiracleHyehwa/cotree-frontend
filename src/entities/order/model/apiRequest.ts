@@ -10,3 +10,9 @@ export interface OrderRequest {
   }[];
   request?: string;
 }
+
+export interface RetryOrderPaymentRequest {
+  bank: string;
+  orderNumber: string;
+  cardNumber: string;
+}

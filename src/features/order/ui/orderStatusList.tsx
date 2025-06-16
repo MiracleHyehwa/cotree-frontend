@@ -2,7 +2,11 @@ import { useOrderList } from "@/entities/order/api/hooks";
 import { OrderStatusKey } from "../constants";
 import { Badge } from "@/shared/components/ui/badge";
 import { PackageX } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Button } from "@/shared/components/ui/button";
+import { useState } from "react";
+import { OrderListItem } from "@/entities/order/model";
+import PaymentFailRetryPaymentBottomSheet from "./paymentFailRetryPaymentBottomSheet";
 
 interface OrderStatusListProps {
   status: OrderStatusKey;
@@ -10,6 +14,10 @@ interface OrderStatusListProps {
 
 export default function OrderStatusList({ status }: OrderStatusListProps) {
   const { data: orders } = useOrderList(status === "ALL" ? undefined : status);
+  const navigate = useNavigate();
+
+  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(true);
+  const [selectedOrder, setSelectedOrder] = useState<OrderListItem | null>(null);
 
   if (orders.length === 0) {
     return (
@@ -32,13 +40,20 @@ export default function OrderStatusList({ status }: OrderStatusListProps) {
           <div className="flex items-center justify-between text-sm text-muted-foreground border-b pb-2">
             <span className="font-mono font-semibold text-sm">
               주문번호
-              <Link
-                to={`/order/completed/${order.orderNumber}`}
-                state={{ from: "order-status" }}
-                className="text-primary ml-2"
+              <Button
+                variant="link"
+                className="p-0 h-auto text-primary ml-2 text-sm cursor-pointer"
+                onClick={() => {
+                  if (order.orderStatus === "PAID") {
+                    navigate(`/order/completed/${order.orderNumber}`, { state: { from: "order-status" } });
+                  } else {
+                    setSelectedOrder(order);
+                    setIsBottomSheetOpen(true);
+                  }
+                }}
               >
                 {order.orderNumber}
-              </Link>
+              </Button>
             </span>
           </div>
 
@@ -54,7 +69,12 @@ export default function OrderStatusList({ status }: OrderStatusListProps) {
                 />
                 <div className="flex-1 flex flex-col justify-between">
                   <div>
-                    <div className="text-sm font-medium text-foreground">{item.itemName}</div>
+                    <Link
+                      to={`/product/${item.itemId}`}
+                      className="text-sm font-medium text-foreground hover:underline"
+                    >
+                      {item.itemName}
+                    </Link>
                     {item.isGreen === "Y" && <Badge>친환경</Badge>}
                     <div className="text-xs text-muted-foreground mt-1"></div>
                     <div className="text-sm font-semibold mt-2 flex flex-col gap-1">
@@ -85,6 +105,11 @@ export default function OrderStatusList({ status }: OrderStatusListProps) {
           })}
         </div>
       ))}
+      <PaymentFailRetryPaymentBottomSheet
+        open={isBottomSheetOpen}
+        onClose={() => setIsBottomSheetOpen(false)}
+        order={selectedOrder}
+      />
     </div>
   );
 }

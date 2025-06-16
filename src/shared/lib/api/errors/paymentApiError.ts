@@ -1,8 +1,8 @@
 import { BaseApiError } from "./baseApiError";
-import { PaymentErorrCode, PaymentError } from "./paymentErrorCode";
+import { PaymentErrorCode, PaymentError } from "./paymentErrorCode";
 
 export class PaymentApiError extends BaseApiError {
-  constructor(code: PaymentErorrCode, status: number) {
+  constructor(code: PaymentErrorCode, status: number) {
     const { message } = PaymentError[code];
     super(code, message, status);
   }

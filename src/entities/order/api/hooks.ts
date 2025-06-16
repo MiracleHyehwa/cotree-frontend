@@ -1,6 +1,6 @@
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
-import { createOrder } from "./create";
-import { OrderRequest } from "../model";
+import { createOrder, retryOrderPayment } from "./create";
+import { OrderRequest, RetryOrderPaymentRequest } from "../model";
 import { DisplayMode } from "@/shared/lib/api/errors/baseApiError";
 import { orderQueryOptions } from "./queryOptions";
 
@@ -17,4 +17,11 @@ export const useOrderList = (status?: string, displayMode: DisplayMode = "fallba
 
 export const useOrderDetail = (orderId: string, displayMode: DisplayMode = "fallback") => {
   return useSuspenseQuery(orderQueryOptions.getOrderDetail(orderId, displayMode));
+};
+
+export const useRetryOrderPayment = (displayMode: DisplayMode = "toast") => {
+  return useMutation({
+    mutationFn: (payload: RetryOrderPaymentRequest) => retryOrderPayment(payload, displayMode),
+    meta: { displayMode, position: "top-right" },
+  });
 };

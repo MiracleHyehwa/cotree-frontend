@@ -2,6 +2,7 @@ export interface OrderListItem {
   orderId: number;
   orderDate: string;
   orderNumber: string;
+  orderStatus: "PAID" | "PENDING";
   orderItemResponses: OrderListItemProduct[];
 }
 
@@ -25,10 +26,10 @@ export interface OrderDetail {
   status: "PAID" | "PENDING";
   totalPrice: number;
   rewardGreenPoint: number;
-  orderItems: OrderItem[];
+  orderItems: OrderDetailItem[];
 }
 
-export interface OrderItem {
+export interface OrderDetailItem {
   itemId: number;
   itemName: string;
   itemThumbnailImage: string;

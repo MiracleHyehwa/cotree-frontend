@@ -51,11 +51,13 @@ export default function OrderCreateView() {
     const { ...rest } = data;
 
     submitOrder(rest, {
-      onSuccess: () => {
+      onSuccess: (orderNumber) => {
         clearOrderSession();
         queryClient.invalidateQueries({ queryKey: cartKeys.getCartItems });
         queryClient.invalidateQueries({ queryKey: cartKeys.getCartItemCount });
-        navigate("/order/completed/1");
+        navigate(`/order/completed/${orderNumber}`, {
+          state: { from: "order-success" },
+        });
       },
     });
   };
