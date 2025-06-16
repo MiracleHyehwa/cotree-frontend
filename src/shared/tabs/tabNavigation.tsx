@@ -1,10 +1,13 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/shared/components/ui/button";
 import { cn } from "@/shared/lib/utils";
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { TreeOverlay } from "@/pages/home/sections";
 import { TreeCanvas } from "@/pages/home/tree/treeCanvas";
 import { ErrorBoundary } from "react-error-boundary";
+import { useQueryClient } from "@tanstack/react-query";
+import { environmentKeys } from "@/entities/environment/api/queryOptions";
+import { getMyTreeSummary } from "@/entities/environment/api/get";
 
 interface Tab {
   key: string;
@@ -25,6 +28,15 @@ export default function TabNavigation() {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
 
   const activeTab = TABS.find((tab) => tab.path === location.pathname)?.key ?? "home";
+
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    queryClient.prefetchQuery({
+      queryKey: environmentKeys.getMyTreeSummary,
+      queryFn: () => getMyTreeSummary(),
+    });
+  }, [queryClient]);
 
   return (
     <>
