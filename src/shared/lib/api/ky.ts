@@ -23,6 +23,9 @@ import {
   ItemError,
   ItemApiError,
   ItemErrorCode,
+  PaymentError,
+  PaymentApiError,
+  PaymentErrorCode,
 } from "@/shared/lib/api/errors";
 import { refreshAccessToken } from "@/shared/lib/api/auth";
 
@@ -85,6 +88,11 @@ export const api = ky.create({
           if (code in MemberError) {
             throw new MemberApiError(code as MemberErrorCode, status);
           }
+
+          if (code in PaymentError) {
+            throw new PaymentApiError(code as PaymentErrorCode, status);
+          }
+
           if (code in ValidationError) {
             throw new ValidationApiError(code as ValidationErrorCode, status);
           }

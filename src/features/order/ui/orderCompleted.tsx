@@ -31,23 +31,17 @@ OrderCompleted.OrderNumber = function OrderNumber({ value }: { value: string }) 
 OrderCompleted.Items = function Items({
   items,
 }: {
-  items: { id: number; name: string; brand: string; option: string; quantity: number; price: number }[];
+  items: { id: number; image: string; name: string; quantity: number; price: number }[];
 }) {
   return (
     <div className="space-y-2 border-b py-4">
       <p className="font-semibold text-foreground text-lg">주문 상품</p>
       {items.map((item) => (
         <div className="flex gap-4" key={item.id}>
-          <img
-            src={`https://dummyimage.com/80x100/f8f9fa/6c757d&text=${encodeURIComponent(item.name.slice(0, 3))}`}
-            alt={item.name}
-            className="w-20 h-25 object-cover rounded-md"
-          />
+          <img src={`${item.image}`} alt={item.name} className="w-20 h-25 object-cover rounded-md" />
           <div className="flex-1 space-y-1">
             <h3 className="font-medium text-foreground">{item.name}</h3>
-            <p className="text-sm text-muted-foreground">
-              {item.brand} · {item.option}
-            </p>
+
             <p>{item.quantity}개</p>
             <p className="text-base font-semibold text-foreground">{(item.price * item.quantity).toLocaleString()}원</p>
           </div>
@@ -86,7 +80,7 @@ OrderCompleted.Delivery = function Delivery({
         </div>
         <div className="flex justify-between items-center gap-4">
           <span className="text-muted-foreground">배송 메모</span>
-          <span className="text-foreground font-medium text-right">{memo}</span>
+          <span className="text-foreground font-medium text-right">{memo ?? "요청사항이 없습니다"}</span>
         </div>
       </div>
     </div>
@@ -109,21 +103,12 @@ OrderCompleted.Payment = function Payment({ total, point }: { total: number; poi
   );
 };
 
-OrderCompleted.Actions = function Actions({
-  left,
-  right,
-}: {
-  left: { label: string; onClick?: () => void };
-  right: { label: string; onClick?: () => void };
-}) {
+OrderCompleted.Actions = function Actions({ label, onClick }: { label: string; onClick: () => void }) {
   return (
     <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-limit border-t border-border bg-background z-50">
       <div className="flex gap-3 p-4">
-        <Button variant="outline" className="flex-1 h-12" onClick={left.onClick}>
-          {left.label}
-        </Button>
-        <Button className="flex-1 h-12" onClick={right.onClick}>
-          {right.label}
+        <Button className="flex-1 h-12 cursor-pointer" onClick={onClick}>
+          {label}
         </Button>
       </div>
     </div>

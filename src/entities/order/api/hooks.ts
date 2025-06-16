@@ -14,3 +14,7 @@ export const useCreateOrder = (displayMode: DisplayMode = "toast") => {
 export const useOrderList = (status?: string, displayMode: DisplayMode = "fallback") => {
   return useSuspenseQuery(orderQueryOptions.getOrderList(status, displayMode));
 };
+
+export const useOrderDetail = (orderId: string, displayMode: DisplayMode = "fallback") => {
+  return useSuspenseQuery(orderQueryOptions.getOrderDetail(orderId, displayMode));
+};

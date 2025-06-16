@@ -37,7 +37,7 @@ export default function AppRouter() {
         <Route path="/category" element={<CategoryPage />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />
 
-        <Route path="/order/completed/:id" element={<OrderCompletedPage />} />
+        <Route path="/order/completed/:orderId" element={<OrderCompletedPage />} />
         <Route path="/order" element={<OrderCreatePage />} />
         <Route path="/orders" element={<OrderHistoryPage />} />
 

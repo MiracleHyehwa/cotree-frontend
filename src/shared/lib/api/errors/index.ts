@@ -16,3 +16,5 @@ export * from "./itemApiError";
 export * from "./itemErrorCode";
 export * from "./adminApiError";
 export * from "./adminErrorCode";
+export * from "./paymentApiError";
+export * from "./paymentErrorCode";

@@ -14,6 +14,16 @@ export const OrderError = {
     devMessage: "주문 상태 변경 실패",
     message: "주문 상품 처리 중 문제가 발생했습니다.",
   },
+  OR003: {
+    code: "OR003",
+    devMessage: "주문 정보 없음",
+    message: "해당 주문 정보를 찾을 수 없습니다.",
+  },
+  OR004: {
+    code: "OR004",
+    devMessage: "주문 상품 정보 없음",
+    message: "주문한 상품 정보를 찾을 수 없습니다.",
+  },
 } as const;
 
 export type OrderErrorCode = keyof typeof OrderError;
