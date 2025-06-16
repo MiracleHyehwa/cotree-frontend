@@ -1,9 +1,10 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/shared/components/ui/button";
 import { cn } from "@/shared/lib/utils";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { TreeOverlay } from "@/pages/home/sections";
 import { TreeCanvas } from "@/pages/home/tree/treeCanvas";
+import { ErrorBoundary } from "react-error-boundary";
 
 interface Tab {
   key: string;
@@ -47,8 +48,12 @@ export default function TabNavigation() {
         })}
       </div>
       <TreeOverlay open={isOverlayOpen} onClose={() => setIsOverlayOpen(false)}>
-        <TreeOverlay.Header ecoCount={5} />
-        <TreeCanvas exp={10000} />
+        <ErrorBoundary fallback={<div>로그인이 필요해요</div>}>
+          <Suspense fallback={<div>Loading..</div>}>
+            <TreeOverlay.Header />
+            <TreeCanvas />
+          </Suspense>
+        </ErrorBoundary>
         <TreeOverlay.Footer
           onClose={() => setIsOverlayOpen(false)}
           onNavigate={() => navigate("/mypage/environment")}

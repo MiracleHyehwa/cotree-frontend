@@ -1,12 +1,12 @@
 import { useEffect, useRef } from "react";
 import { Tree } from "./tree";
 import { getTreeParametersFromExp } from "../lib";
+import { useMyTreeSummary } from "@/entities/environment/api/hooks";
 
-interface TreeCanvasProps {
-  exp: number;
-}
+export function TreeCanvas() {
+  const { data } = useMyTreeSummary();
+  const { exp } = data;
 
-export function TreeCanvas({ exp }: TreeCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const treeRef = useRef<Tree | null>(null);
 

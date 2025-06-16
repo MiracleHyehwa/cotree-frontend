@@ -1,7 +1,7 @@
 import { environmentQueryOptions } from "./queryOptions";
 import { DisplayMode } from "@/shared/lib/api/errors/baseApiError";
 import { GiveWaterRequest, GiveWaterResponse, MyTreeResponse } from "../model";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { useEnvironmentContext } from "@/features/environment/hooks";
 import { giveWater } from "./update";
 import { MAX_EXP } from "../constants";
@@ -26,4 +26,8 @@ export const useGiveWater = (displayMode: DisplayMode = "toast") => {
 
     meta: { displayMode, position: "top-right" },
   });
+};
+
+export const useMyTreeSummary = (displayMode: DisplayMode = "fallback") => {
+  return useSuspenseQuery(environmentQueryOptions.getMyTreeSummary(displayMode));
 };

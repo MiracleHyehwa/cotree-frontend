@@ -5,3 +5,8 @@ export interface TreeStatus {
 
 export type MyTreeResponse = TreeStatus;
 export type GiveWaterResponse = TreeStatus;
+
+export interface MyTreeSummaryResponse {
+  exp: number;
+  ecoCount: number;
+}

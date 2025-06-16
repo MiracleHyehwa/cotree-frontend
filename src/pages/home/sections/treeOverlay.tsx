@@ -1,14 +1,11 @@
 import { ReactNode, useEffect } from "react";
 import { Button } from "@/shared/components/ui/button";
+import { useMyTreeSummary } from "@/entities/environment/api/hooks";
 
 interface TreeOverlayProps {
   open: boolean;
   onClose: () => void;
   children: ReactNode;
-}
-
-interface TreeOverlayHeaderProps {
-  ecoCount: number;
 }
 
 export default function TreeOverlay({ open, onClose, children }: TreeOverlayProps) {
@@ -38,7 +35,10 @@ export default function TreeOverlay({ open, onClose, children }: TreeOverlayProp
   );
 }
 
-TreeOverlay.Header = function TreeOverlayHeader({ ecoCount }: TreeOverlayHeaderProps) {
+TreeOverlay.Header = function TreeOverlayHeader() {
+  const { data } = useMyTreeSummary();
+  const { ecoCount } = data;
+
   return (
     <div className="w-full max-w-limit px-6 text-center mt-6 animate-fade-in-up">
       <p className="text-2xl text-primary-foreground">
