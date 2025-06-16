@@ -1,6 +1,7 @@
 import { ReactNode, useEffect } from "react";
 import { Button } from "@/shared/components/ui/button";
 import { useMyTreeSummary } from "@/entities/environment/api/hooks";
+import { BaseApiError } from "@/shared/lib/api/errors/baseApiError";
 
 interface TreeOverlayProps {
   open: boolean;
@@ -65,5 +66,39 @@ TreeOverlay.Footer = function TreeOverlayFooter({
         닫기
       </Button>
     </div>
+  );
+};
+
+TreeOverlay.Skeleton = function TreeOverlaySkeleton() {
+  return (
+    <div className="w-full text-center py-6 animate-pulse text-primary-foreground text-base">
+      나무를 불러오는 중이에요...
+    </div>
+  );
+};
+
+TreeOverlay.ErrorFallback = function TreeOverlayErrorFallback({
+  error,
+  onClose,
+}: {
+  error: unknown;
+  onClose: () => void;
+}) {
+  const isNotLoggedIn = error instanceof BaseApiError && error.code === "TR006";
+
+  return (
+    <>
+      <div className="flex-1 flex items-center justify-center text-center px-6">
+        <p className="text-destructive text-xl">
+          {isNotLoggedIn ? "로그인이 필요한 서비스입니다." : "나무 정보를 불러오는 데 실패했어요."}
+        </p>
+      </div>
+
+      <div className="absolute inset-x-0 bottom-8 flex flex-col items-center gap-3 px-6">
+        <Button variant="default" className="w-full max-w-limit text-sm cursor-pointer h-12" onClick={onClose}>
+          닫기
+        </Button>
+      </div>
+    </>
   );
 };

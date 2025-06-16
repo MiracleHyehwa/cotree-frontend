@@ -48,16 +48,22 @@ export default function TabNavigation() {
         })}
       </div>
       <TreeOverlay open={isOverlayOpen} onClose={() => setIsOverlayOpen(false)}>
-        <ErrorBoundary fallback={<div>로그인이 필요해요</div>}>
-          <Suspense fallback={<div>Loading..</div>}>
-            <TreeOverlay.Header />
-            <TreeCanvas />
+        <ErrorBoundary
+          fallbackRender={({ error }) => (
+            <TreeOverlay.ErrorFallback error={error} onClose={() => setIsOverlayOpen(false)} />
+          )}
+        >
+          <Suspense fallback={<TreeOverlay.Skeleton />}>
+            <>
+              <TreeOverlay.Header />
+              <TreeCanvas />
+              <TreeOverlay.Footer
+                onClose={() => setIsOverlayOpen(false)}
+                onNavigate={() => navigate("/mypage/environment")}
+              />
+            </>
           </Suspense>
         </ErrorBoundary>
-        <TreeOverlay.Footer
-          onClose={() => setIsOverlayOpen(false)}
-          onNavigate={() => navigate("/mypage/environment")}
-        />
       </TreeOverlay>
     </>
   );

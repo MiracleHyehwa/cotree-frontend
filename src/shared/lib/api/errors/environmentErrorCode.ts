@@ -24,6 +24,11 @@ export const EnvironmentError = {
     devMessage: "트리 최대 경험치 도달",
     message: "더 이상 성장할 수 없습니다.",
   },
+  TR006: {
+    code: "TR006",
+    devMessage: "로그인 하지 않은상태에서 내 기여도 오픈",
+    message: "로그인이 필요합니다.",
+  },
 } as const;
 
 export type EnvironmentErrorCode = keyof typeof EnvironmentError;
