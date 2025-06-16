@@ -29,7 +29,7 @@ export default function TabNavigation() {
             asChild
             className={cn(
               "relative flex flex-col items-center mr-2 cursor-pointer rounded-full",
-              isActive && "bg-primary text-white"
+              isActive && "bg-primary text-primary-foreground"
             )}
           >
             <Link to={tab.path}>{tab.label}</Link>
