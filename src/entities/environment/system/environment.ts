@@ -4,7 +4,7 @@ import { Clouds } from "@/entities/environment/clouds";
 import { Skybox } from "@/entities/environment/skyBox";
 import { Ground } from "@/entities/environment/ground";
 import { Rocks } from "@/entities/environment/rocks";
-import { RainSystem } from "../rain/rain";
+import { RainSystem } from "@/entities/environment/rain";
 
 export class Environment extends THREE.Object3D {
   private grass: Grass;
