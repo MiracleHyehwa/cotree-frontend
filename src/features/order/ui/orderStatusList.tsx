@@ -68,14 +68,14 @@ export default function OrderStatusList({ status }: OrderStatusListProps) {
                   className="w-24 h-24 rounded-md object-cover border"
                 />
                 <div className="flex-1 flex flex-col justify-between">
-                  <div>
+                  <div className="flex flex-col">
+                    {item.isGreen === "Y" && <Badge className="mb-1">친환경</Badge>}
                     <Link
                       to={`/product/${item.itemId}`}
                       className="text-sm font-medium text-foreground hover:underline"
                     >
                       {item.itemName}
                     </Link>
-                    {item.isGreen === "Y" && <Badge>친환경</Badge>}
                     <div className="text-xs text-muted-foreground mt-1"></div>
                     <div className="text-sm font-semibold mt-2 flex flex-col gap-1">
                       {item.discount > 0 ? (

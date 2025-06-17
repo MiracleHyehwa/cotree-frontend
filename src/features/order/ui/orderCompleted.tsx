@@ -8,9 +8,7 @@ export default function OrderCompleted({ children }: { children: React.ReactNode
 
 OrderCompleted.Message = function Message() {
   const location = useLocation();
-  const isFromOrderSuccess = location.state?.from === "order-success";
-  const isDirectAccess = document.referrer === "" || !document.referrer.includes("/order");
-  const isCompleted = isFromOrderSuccess && !isDirectAccess;
+  const isCompleted = location.state?.from === "order-success";
 
   return (
     <div className="text-center space-y-2 py-2">

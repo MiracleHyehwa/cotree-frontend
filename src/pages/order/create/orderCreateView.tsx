@@ -28,7 +28,7 @@ export default function OrderCreateView() {
 
   const [isChecked, setIsChecked] = useState(false);
   const products = getOrderSession();
-  const productTotal = products.reduce((sum, p) => sum + p.price * p.quantity, 0);
+  const productTotal = products.reduce((sum, p) => sum + p.finalPrice * p.quantity, 0);
   const total = productTotal - DISCOUNT - USED_POINT + SHIPPING_FEE;
 
   const methods = useForm<OrderFormValues>({
@@ -47,18 +47,29 @@ export default function OrderCreateView() {
     },
   });
 
-  const onSubmit = (data: OrderFormValues) => {
-    const { ...rest } = data;
+  const onSubmit = async (data: OrderFormValues): Promise<void> => {
+    return new Promise((resolve) => {
+      submitOrder(data, {
+        onSuccess: (orderNumber) => {
+          queryClient.invalidateQueries({ queryKey: cartKeys.getCartItems });
+          queryClient.invalidateQueries({ queryKey: cartKeys.getCartItemCount });
 
-    submitOrder(rest, {
-      onSuccess: (orderNumber) => {
-        clearOrderSession();
-        queryClient.invalidateQueries({ queryKey: cartKeys.getCartItems });
-        queryClient.invalidateQueries({ queryKey: cartKeys.getCartItemCount });
-        navigate(`/order/completed/${orderNumber}`, {
-          state: { from: "order-success" },
-        });
-      },
+          setTimeout(() => {
+            navigate(`/order/completed/${orderNumber}`, {
+              state: { from: "order-success" },
+            });
+
+            requestAnimationFrame(() => {
+              clearOrderSession();
+            });
+
+            resolve();
+          }, 300);
+        },
+        onError: () => {
+          resolve();
+        },
+      });
     });
   };
 
@@ -94,7 +105,6 @@ export default function OrderCreateView() {
         </OrderPaymentForm>
         <OrderAgreementConfirmationCheckbox checked={isChecked} onChange={setIsChecked} />
       </div>
-
       <OrderPaymentActionBar totalAmount={total} disabled={!isChecked} onClick={methods.handleSubmit(onSubmit)} />
     </FormProvider>
   );
