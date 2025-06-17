@@ -33,3 +33,10 @@ export interface PurchaseCount {
 }
 
 export type PurchaseCountResponse = PurchaseCount[];
+
+export interface PurchaseGender {
+  gender: string;
+  count: number;
+}
+
+export type PurchaseGenderResponse = PurchaseGender[];

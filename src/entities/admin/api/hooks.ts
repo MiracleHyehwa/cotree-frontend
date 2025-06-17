@@ -30,3 +30,7 @@ export const usePurchaseCategory = () => {
 export const usePurchaseCount = () => {
   return useSuspenseQuery(adminQueryOptions.getPurchaseCount());
 };
+
+export const usePurchaseGender = () => {
+  return useSuspenseQuery(adminQueryOptions.getPurchaseGender());
+};

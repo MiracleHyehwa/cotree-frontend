@@ -1,22 +1,24 @@
 "use client";
 
-import { usePurchaseCount } from "@/entities/admin/api/hooks";
+import { usePurchaseGender } from "@/entities/admin/api/hooks";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/shared/components/ui/card";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/shared/components/ui/chart";
 import { TrendingUp } from "lucide-react";
 import { LabelList, Pie, PieChart } from "recharts";
 
-export default function PieChartLabelListWithPurchaseCount() {
-  const { data = [] } = usePurchaseCount();
+export default function PieChartLabelListWithPurchaseGender() {
+  const { data = [] } = usePurchaseGender();
+
+  console.log(data);
 
   const chartConfig = {
     value: {
-      label: "구매 수",
+      label: "성별 수",
     },
   } satisfies ChartConfig;
 
   const chartData = data.map((item, i) => ({
-    name: item.itemClassification === "ECO" ? "친환경 상품" : "일반 상품",
+    name: item.gender === "M" ? "남자" : "여자",
     value: item.count,
     fill: `var(--chart-${i + 1})`,
   }));

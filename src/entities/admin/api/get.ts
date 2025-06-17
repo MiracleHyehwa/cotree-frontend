@@ -6,6 +6,7 @@ import {
   PointStatResponse,
   PurchaseCategoryStatResponse,
   PurchaseCountResponse,
+  PurchaseGenderResponse,
 } from "../model";
 import { adminApi } from "@/shared/lib/api/adminKy";
 
@@ -70,6 +71,20 @@ export const getPurchaseCategory = async (displayMode: DisplayMode = "fallback")
 export const getPurchaseCount = async (displayMode: DisplayMode = "fallback") => {
   try {
     const res = await adminApi.get("admin/statistics/eco/purchase-count").json<ApiResponse<PurchaseCountResponse>>();
+    return res.data;
+  } catch (err) {
+    if (err instanceof BaseApiError) {
+      err.displayMode = displayMode;
+    }
+    throw err;
+  }
+};
+
+export const getPurchaseGender = async (displayMode: DisplayMode = "fallback") => {
+  try {
+    const res = await adminApi
+      .get("admin/statistics/eco/purchase-purchase-gender")
+      .json<ApiResponse<PurchaseGenderResponse>>();
     return res.data;
   } catch (err) {
     if (err instanceof BaseApiError) {
