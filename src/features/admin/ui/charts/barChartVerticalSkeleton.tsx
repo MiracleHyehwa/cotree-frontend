@@ -2,12 +2,12 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/shared/c
 import { Skeleton } from "@/shared/components/ui/skeleton";
 import { TrendingUp } from "lucide-react";
 
-export default function BarChartStackedSkeleton() {
+export default function BarChartVerticalSkeleton() {
   return (
     <Card>
       <CardHeader>
         <CardTitle>
-          <CardTitle>카테고리별 구매 건수</CardTitle>
+          <CardTitle>연령대별 구매 분포</CardTitle>
         </CardTitle>
       </CardHeader>
       <CardContent>

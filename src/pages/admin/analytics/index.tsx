@@ -4,6 +4,8 @@ import {
   BarChartStacked,
   BarChartStackedSkeleton,
   BarChartVertical,
+  BarChartVerticalSkeleton,
+  PieChartLabelListSkeleton,
   PieChartLabelListWithPurchaseCount,
   PieChartLabelListWithPurchaseGender,
 } from "@/features/admin/ui/charts";
@@ -26,9 +28,15 @@ export default function AdminAnalyticsPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <BarChartVertical />
-            <PieChartLabelListWithPurchaseCount />
-            <PieChartLabelListWithPurchaseGender />
+            <Suspense fallback={<BarChartVerticalSkeleton />}>
+              <BarChartVertical />
+            </Suspense>
+            <Suspense fallback={<PieChartLabelListSkeleton />}>
+              <PieChartLabelListWithPurchaseCount />
+            </Suspense>
+            <Suspense fallback={<PieChartLabelListSkeleton />}>
+              <PieChartLabelListWithPurchaseGender />
+            </Suspense>
           </div>
         </div>
       </div>

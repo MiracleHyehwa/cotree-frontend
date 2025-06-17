@@ -40,3 +40,10 @@ export interface PurchaseGender {
 }
 
 export type PurchaseGenderResponse = PurchaseGender[];
+
+export interface PurchaseAge {
+  count: number;
+  memberAge: "10s" | "20s" | "30s" | "40s" | "50s" | "60s";
+}
+
+export type PurchaseAgeResponse = PurchaseAge[];

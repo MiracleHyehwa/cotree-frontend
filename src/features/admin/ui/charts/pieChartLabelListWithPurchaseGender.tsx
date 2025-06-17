@@ -9,27 +9,27 @@ import { LabelList, Pie, PieChart } from "recharts";
 export default function PieChartLabelListWithPurchaseGender() {
   const { data = [] } = usePurchaseGender();
 
-  console.log(data);
-
   const chartConfig = {
     value: {
       label: "성별 수",
     },
   } satisfies ChartConfig;
 
-  const chartData = data.map((item, i) => ({
-    name: item.gender === "M" ? "남자" : "여자",
-    value: item.count,
-    fill: `var(--chart-${i + 1})`,
-  }));
+  const chartData = data
+    .map((item, i) => ({
+      name: item.gender === "M" ? "남자" : "여자",
+      value: item.count,
+      fill: `var(--chart-${i + 1})`,
+    }))
+    .filter((item) => item.value > 0);
 
   const hasData = chartData.some((item) => item.value > 0);
 
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
-        <CardTitle>상품 유형별 구매 비율</CardTitle>
-        <CardDescription className="sr-only">최근 6개월 기준</CardDescription>
+        <CardTitle>성별별 구매 비율</CardTitle>
+        <CardDescription className="sr-only">최근 30일 기준</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         {hasData ? (
@@ -52,7 +52,7 @@ export default function PieChartLabelListWithPurchaseGender() {
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 leading-none font-medium">
-          상품 유형별 구매 분포 <TrendingUp className="h-4 w-4" />
+          성별 구매 분포 <TrendingUp className="h-4 w-4" />
         </div>
         <div className="text-muted-foreground leading-none">30일간 누적 구매 수 기준</div>
       </CardFooter>

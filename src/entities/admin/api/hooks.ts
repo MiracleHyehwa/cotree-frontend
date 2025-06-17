@@ -34,3 +34,7 @@ export const usePurchaseCount = () => {
 export const usePurchaseGender = () => {
   return useSuspenseQuery(adminQueryOptions.getPurchaseGender());
 };
+
+export const usePurchaseAge = () => {
+  return useSuspenseQuery(adminQueryOptions.getPurchaseAge());
+};

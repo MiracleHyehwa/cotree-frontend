@@ -3,6 +3,7 @@ import {
   getEcoPopularItems,
   getInsightOverview,
   getPointStats,
+  getPurchaseAge,
   getPurchaseCategory,
   getPurchaseCount,
   getPurchaseGender,
@@ -15,6 +16,7 @@ export const adminKeys = {
   getPurchaseCategory: ["admin", "eco", "purcharse", "category"] as const,
   getPurchaseCount: ["admin", "purchase", "count"] as const,
   getPurchaseGender: ["admin", "purchase", "gender"] as const,
+  getPurchaseAge: ["admin", "purchase", "age"] as const,
 };
 
 export const adminQueryOptions = {
@@ -51,6 +53,12 @@ export const adminQueryOptions = {
   getPurchaseGender: (displayMode: DisplayMode = "fallback") => ({
     queryKey: adminKeys.getPurchaseGender,
     queryFn: () => getPurchaseGender(displayMode),
+    meta: { displayMode },
+  }),
+
+  getPurchaseAge: (displayMode: DisplayMode = "fallback") => ({
+    queryKey: adminKeys.getPurchaseAge,
+    queryFn: () => getPurchaseAge(displayMode),
     meta: { displayMode },
   }),
 };

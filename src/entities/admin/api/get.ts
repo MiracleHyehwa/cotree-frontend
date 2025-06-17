@@ -4,6 +4,7 @@ import {
   EcoPopularItemResponse,
   InsightOverviewResponse,
   PointStatResponse,
+  PurchaseAgeResponse,
   PurchaseCategoryStatResponse,
   PurchaseCountResponse,
   PurchaseGenderResponse,
@@ -82,9 +83,19 @@ export const getPurchaseCount = async (displayMode: DisplayMode = "fallback") =>
 
 export const getPurchaseGender = async (displayMode: DisplayMode = "fallback") => {
   try {
-    const res = await adminApi
-      .get("admin/statistics/eco/purchase-purchase-gender")
-      .json<ApiResponse<PurchaseGenderResponse>>();
+    const res = await adminApi.get("admin/statistics/eco/purchase-gender").json<ApiResponse<PurchaseGenderResponse>>();
+    return res.data;
+  } catch (err) {
+    if (err instanceof BaseApiError) {
+      err.displayMode = displayMode;
+    }
+    throw err;
+  }
+};
+
+export const getPurchaseAge = async (displayMode: DisplayMode = "fallback") => {
+  try {
+    const res = await adminApi.get("admin/statistics/eco/purchase-age").json<ApiResponse<PurchaseAgeResponse>>();
     return res.data;
   } catch (err) {
     if (err instanceof BaseApiError) {
