@@ -1,6 +1,11 @@
 import { ApiResponse } from "@/shared/model/commonApiResponse";
 import { BaseApiError, DisplayMode } from "@/shared/lib/api/errors/baseApiError";
-import { EcoPopularItemResponse, InsightOverviewResponse, PointStatResponse } from "../model";
+import {
+  EcoPopularItemResponse,
+  InsightOverviewResponse,
+  PointStatResponse,
+  PurchaseCategoryStatResponse,
+} from "../model";
 import { adminApi } from "@/shared/lib/api/adminKy";
 
 export const getPointStats = async (
@@ -38,6 +43,20 @@ export const getInsightOverview = async (displayMode: DisplayMode = "fallback"):
 export const getEcoPopularItems = async (displayMode: DisplayMode = "fallback") => {
   try {
     const res = await adminApi.get("admin/statistics/eco/popular-item").json<ApiResponse<EcoPopularItemResponse>>();
+    return res.data;
+  } catch (err) {
+    if (err instanceof BaseApiError) {
+      err.displayMode = displayMode;
+    }
+    throw err;
+  }
+};
+
+export const getPurchaseCategory = async (displayMode: DisplayMode = "fallback") => {
+  try {
+    const res = await adminApi
+      .get("admin/statistics/eco/purchase-category")
+      .json<ApiResponse<PurchaseCategoryStatResponse>>();
     return res.data;
   } catch (err) {
     if (err instanceof BaseApiError) {

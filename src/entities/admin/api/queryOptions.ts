@@ -1,10 +1,11 @@
 import { DisplayMode } from "@/shared/lib/api/errors/baseApiError";
-import { getEcoPopularItems, getInsightOverview, getPointStats } from "./get";
+import { getEcoPopularItems, getInsightOverview, getPointStats, getPurchaseCategory } from "./get";
 
 export const adminKeys = {
   getInsightOverview: ["admin", "insight", "overview"] as const,
   getPointStats: (range: string) => ["admin", "insight", "points", range] as const,
   getEcoPopularItems: ["admin", "eco", "popular", "items"] as const,
+  getPurchaseCategory: ["admin", "eco", "purcharse", "category"] as const,
 };
 
 export const adminQueryOptions = {
@@ -23,6 +24,12 @@ export const adminQueryOptions = {
   getEcoPopularItems: (displayMode: DisplayMode = "fallback") => ({
     queryKey: adminKeys.getEcoPopularItems,
     queryFn: () => getEcoPopularItems(displayMode),
+    meta: { displayMode },
+  }),
+
+  getPurchaseCategory: (displayMode: DisplayMode = "fallback") => ({
+    queryKey: adminKeys.getPurchaseCategory,
+    queryFn: () => getPurchaseCategory(displayMode),
     meta: { displayMode },
   }),
 };

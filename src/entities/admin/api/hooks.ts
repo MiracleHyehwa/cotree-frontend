@@ -22,3 +22,7 @@ export const useAdminLogin = (displayMode: DisplayMode = "toast") => {
 export const useEcoPopularItems = () => {
   return useSuspenseQuery(adminQueryOptions.getEcoPopularItems());
 };
+
+export const usePurchaseCategory = () => {
+  return useSuspenseQuery(adminQueryOptions.getPurchaseCategory());
+};

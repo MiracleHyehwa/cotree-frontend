@@ -18,3 +18,11 @@ export interface EcoPopularItem {
 }
 
 export type EcoPopularItemResponse = EcoPopularItem[];
+
+export interface PurchaseCategoryStat {
+  categoryName: string;
+  ecoItemPurchaseCount: number;
+  normalItemPurchaseCount: number;
+}
+
+export type PurchaseCategoryStatResponse = PurchaseCategoryStat[];
