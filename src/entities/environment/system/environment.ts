@@ -4,6 +4,7 @@ import { Clouds } from "@/entities/environment/clouds";
 import { Skybox } from "@/entities/environment/skyBox";
 import { Ground } from "@/entities/environment/ground";
 import { Rocks } from "@/entities/environment/rocks";
+import { RainSystem } from "../rain/rain";
 
 export class Environment extends THREE.Object3D {
   private grass: Grass;
@@ -11,6 +12,8 @@ export class Environment extends THREE.Object3D {
   private ground: Ground;
   private rocks: Rocks;
   private skybox: Skybox;
+  private rain: RainSystem;
+  private raining = false;
 
   private readyPromise: Promise<void>;
 
@@ -37,6 +40,10 @@ export class Environment extends THREE.Object3D {
     this.clouds.rotation.x = Math.PI / 2;
     this.add(this.clouds);
 
+    this.rain = new RainSystem();
+    this.rain.mesh.visible = false;
+    this.add(this.rain.mesh);
+
     this.readyPromise = grassReady;
   }
 
@@ -44,9 +51,12 @@ export class Environment extends THREE.Object3D {
     await this.readyPromise;
   }
 
-  update(elapsedTime: number) {
+  update(elapsedTime: number, camera: THREE.Camera) {
     this.grass.update(elapsedTime);
     this.clouds.update(elapsedTime);
+    if (this.raining) {
+      this.rain.update(elapsedTime, camera);
+    }
   }
 
   setGrassAmount(amount: number) {
@@ -55,5 +65,14 @@ export class Environment extends THREE.Object3D {
 
   getGrass() {
     return this.grass;
+  }
+
+  public startRain() {
+    this.raining = true;
+    this.rain.mesh.visible = true;
+  }
+  public stopRain() {
+    this.raining = false;
+    this.rain.mesh.visible = false;
   }
 }

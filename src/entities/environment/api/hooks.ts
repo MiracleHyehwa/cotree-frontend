@@ -15,13 +15,20 @@ export const useMyTree = (displayMode: DisplayMode = "fallback") => {
 
 export const useGiveWater = (displayMode: DisplayMode = "toast") => {
   const navigate = useNavigate();
-  const { exp, setExp, setRemainingWaterUnit, syncGrowthFromExp } = useEnvironmentContext();
+  const { exp, setExp, setRemainingWaterUnit, syncGrowthFromExp, startRain, stopRain } = useEnvironmentContext();
 
   return useMutation<GiveWaterResponse, Error, GiveWaterRequest>({
     mutationFn: (payload) => giveWater(payload, displayMode),
 
-    onSuccess: ({ exp: serverExp, remainingWaterUnit: serverUnit }) => {
+    onSuccess: ({ exp: serverExp, remainingWaterUnit: serverUnit }, variables) => {
       if (serverExp >= MAX_EXP && exp >= MAX_EXP) return;
+
+      if (variables.action === "GIVE_ALL_WATER") {
+        startRain();
+        setTimeout(() => {
+          stopRain();
+        }, 5000);
+      }
 
       const prevLevel = calculateLevel(exp);
       const newLevel = calculateLevel(serverExp);

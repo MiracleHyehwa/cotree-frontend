@@ -1,6 +1,7 @@
 import { createContext, RefObject } from "react";
 import type { Grass } from "@/entities/environment/grass";
 import type { Tree } from "@/entities/environment/tree";
+import { Environment } from "@/entities/environment/system";
 
 export interface EnvironmentContextValue {
   exp: number;
@@ -12,6 +13,9 @@ export interface EnvironmentContextValue {
   grassRef: RefObject<Grass | null>;
   isReady: boolean;
   setIsReady: (ready: boolean) => void;
+  startRain: () => void;
+  stopRain: () => void;
+  registerEnv: (env: Environment) => void;
 }
 
 export const EnvironmentContext = createContext<EnvironmentContextValue | null>(null);

@@ -6,7 +6,7 @@ import { createScene } from "@/entities/environment/system/createScene";
 export default function EnvironmentCanvas() {
   const mountRef = useRef<HTMLDivElement>(null);
   const alreadyInitializedRef = useRef(false);
-  const { baseTreeRef, grassRef, setIsReady, exp } = useEnvironmentContext();
+  const { registerEnv, baseTreeRef, grassRef, setIsReady, exp } = useEnvironmentContext();
 
   useEffect(() => {
     if (alreadyInitializedRef.current) return;
@@ -28,6 +28,8 @@ export default function EnvironmentCanvas() {
         renderer: createdRenderer,
       } = await createScene(container, exp);
 
+      registerEnv(environment);
+
       baseTreeRef.current = baseTree;
       grassRef.current = environment.getGrass();
       setIsReady(true);
@@ -38,10 +40,9 @@ export default function EnvironmentCanvas() {
 
       const animate = () => {
         requestAnimationFrame(animate);
-        const t = clock.getElapsedTime();
-
-        environment.update(t);
-        baseTree.update(t);
+        const delta = clock.getDelta();
+        environment.update(delta, camera);
+        baseTree.update(delta);
         controls.update();
         renderer!.render(scene, camera);
       };

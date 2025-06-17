@@ -3,6 +3,7 @@ import { EnvironmentContext, EnvironmentContextValue } from "./environmentContex
 import { calculateGrassAmount } from "@/features/environment/utils";
 import type { Tree } from "@/entities/environment/tree";
 import type { Grass } from "@/entities/environment/grass";
+import { Environment } from "@/entities/environment/system";
 
 interface EnvironmentProviderProps {
   children: React.ReactNode;
@@ -17,6 +18,7 @@ export default function EnvironmentProvider({
 }: EnvironmentProviderProps) {
   const [exp, setExp] = useState(initialExp);
   const [remainingWaterUnit, setRemainingWaterUnit] = useState(initialRemainingWaterUnit);
+  const [envInstance, setEnvInstance] = useState<Environment | null>(null);
 
   const baseTreeRef = useRef<Tree>(null);
   const grassRef = useRef<Grass>(null);
@@ -43,6 +45,9 @@ export default function EnvironmentProvider({
     grassRef,
     isReady,
     setIsReady,
+    startRain: () => envInstance?.startRain(),
+    stopRain: () => envInstance?.stopRain(),
+    registerEnv: (env) => setEnvInstance(env),
   };
 
   return <EnvironmentContext.Provider value={value}>{children}</EnvironmentContext.Provider>;
