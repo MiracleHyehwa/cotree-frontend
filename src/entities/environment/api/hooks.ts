@@ -5,12 +5,16 @@ import { useMutation, useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { useEnvironmentContext } from "@/features/environment/hooks";
 import { giveWater } from "./update";
 import { MAX_EXP } from "../constants";
+import { calculateLevel } from "@/features/environment/utils";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 export const useMyTree = (displayMode: DisplayMode = "fallback") => {
   return useQuery<MyTreeResponse>(environmentQueryOptions.getMyTree(displayMode));
 };
 
 export const useGiveWater = (displayMode: DisplayMode = "toast") => {
+  const navigate = useNavigate();
   const { exp, setExp, setRemainingWaterUnit, syncGrowthFromExp } = useEnvironmentContext();
 
   return useMutation<GiveWaterResponse, Error, GiveWaterRequest>({
@@ -19,9 +23,23 @@ export const useGiveWater = (displayMode: DisplayMode = "toast") => {
     onSuccess: ({ exp: serverExp, remainingWaterUnit: serverUnit }) => {
       if (serverExp >= MAX_EXP && exp >= MAX_EXP) return;
 
+      const prevLevel = calculateLevel(exp);
+      const newLevel = calculateLevel(serverExp);
+
       setExp(serverExp);
       syncGrowthFromExp(serverExp);
       setRemainingWaterUnit(serverUnit);
+
+      if (newLevel > prevLevel) {
+        toast(`🎉 나무가 ${newLevel}레벨로 성장했어요!`, {
+          position: "top-center",
+          duration: 3000,
+          action: {
+            label: "보상 확인",
+            onClick: () => navigate("/mypage/rewards"),
+          },
+        });
+      }
     },
 
     meta: { displayMode, position: "top-right" },
