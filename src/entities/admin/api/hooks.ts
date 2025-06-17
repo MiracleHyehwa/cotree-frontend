@@ -26,3 +26,7 @@ export const useEcoPopularItems = () => {
 export const usePurchaseCategory = () => {
   return useSuspenseQuery(adminQueryOptions.getPurchaseCategory());
 };
+
+export const usePurchaseCount = () => {
+  return useSuspenseQuery(adminQueryOptions.getPurchaseCount());
+};

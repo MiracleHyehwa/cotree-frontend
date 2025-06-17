@@ -26,3 +26,10 @@ export interface PurchaseCategoryStat {
 }
 
 export type PurchaseCategoryStatResponse = PurchaseCategoryStat[];
+
+export interface PurchaseCount {
+  count: number;
+  itemClassification: "GENERAL" | "ECO";
+}
+
+export type PurchaseCountResponse = PurchaseCount[];

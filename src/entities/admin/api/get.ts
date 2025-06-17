@@ -5,6 +5,7 @@ import {
   InsightOverviewResponse,
   PointStatResponse,
   PurchaseCategoryStatResponse,
+  PurchaseCountResponse,
 } from "../model";
 import { adminApi } from "@/shared/lib/api/adminKy";
 
@@ -57,6 +58,18 @@ export const getPurchaseCategory = async (displayMode: DisplayMode = "fallback")
     const res = await adminApi
       .get("admin/statistics/eco/purchase-category")
       .json<ApiResponse<PurchaseCategoryStatResponse>>();
+    return res.data;
+  } catch (err) {
+    if (err instanceof BaseApiError) {
+      err.displayMode = displayMode;
+    }
+    throw err;
+  }
+};
+
+export const getPurchaseCount = async (displayMode: DisplayMode = "fallback") => {
+  try {
+    const res = await adminApi.get("admin/statistics/eco/purchase-count").json<ApiResponse<PurchaseCountResponse>>();
     return res.data;
   } catch (err) {
     if (err instanceof BaseApiError) {

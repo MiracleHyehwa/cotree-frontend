@@ -4,7 +4,7 @@ import {
   BarChartStacked,
   BarChartStackedSkeleton,
   BarChartVertical,
-  PieChartLabelList,
+  PieChartLabelListWithPurchaseCount,
 } from "@/features/admin/ui/charts";
 import BarChartCustomLabelSkeleton from "@/features/admin/ui/charts/barChartCustomLabelSkeleon";
 import { Suspense } from "react";
@@ -26,8 +26,8 @@ export default function AdminAnalyticsPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <BarChartVertical />
-            <PieChartLabelList />
-            <PieChartLabelList />
+            <PieChartLabelListWithPurchaseCount />
+            {/* <PieChartLabelList /> */}
           </div>
         </div>
       </div>
