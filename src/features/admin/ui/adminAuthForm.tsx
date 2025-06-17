@@ -56,7 +56,7 @@ export default function AdminAuthForm() {
             {errors.password && <p className="text-sm text-destructive">{errors.password.message}</p>}
           </div>
 
-          <Button type="submit" disabled={isSubmitting}>
+          <Button type="submit" disabled={isSubmitting} className="cursor-pointer">
             {isSubmitting && <SpinnerIcon />}
             로그인
           </Button>

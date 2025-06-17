@@ -1,14 +1,14 @@
-import { api } from "@/shared/lib/api/ky";
 import { ApiResponse } from "@/shared/model/commonApiResponse";
 import { BaseApiError, DisplayMode } from "@/shared/lib/api/errors/baseApiError";
 import { InsightOverviewResponse, PointStatResponse } from "../model";
+import { adminApi } from "@/shared/lib/api/adminKy";
 
 export const getPointStats = async (
   range: string,
   displayMode: DisplayMode = "fallback"
 ): Promise<PointStatResponse[]> => {
   try {
-    const res = await api
+    const res = await adminApi
       .get("admin/insights/points", {
         searchParams: { range },
       })
@@ -25,7 +25,7 @@ export const getPointStats = async (
 
 export const getInsightOverview = async (displayMode: DisplayMode = "fallback"): Promise<InsightOverviewResponse> => {
   try {
-    const res = await api.get("admin/insights/overview").json<ApiResponse<InsightOverviewResponse>>();
+    const res = await adminApi.get("admin/insights/overview").json<ApiResponse<InsightOverviewResponse>>();
     return res.data;
   } catch (err) {
     if (err instanceof BaseApiError) {

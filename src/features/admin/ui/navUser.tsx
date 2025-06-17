@@ -9,6 +9,7 @@ import {
 } from "@/shared/components/ui/dropdown-menu";
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "@/shared/components/ui/sidebar";
 import { LogOut } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function NavUser({
   user,
@@ -20,6 +21,12 @@ export default function NavUser({
   };
 }) {
   const { isMobile } = useSidebar();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/admin/login", { replace: true });
+  };
 
   return (
     <SidebarMenu>
@@ -60,8 +67,8 @@ export default function NavUser({
             </DropdownMenuLabel>
 
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <LogOut />
+            <DropdownMenuItem onClick={handleLogout}>
+              <LogOut className="mr-2 h-4 w-4" />
               Log out
             </DropdownMenuItem>
           </DropdownMenuContent>

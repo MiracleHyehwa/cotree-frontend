@@ -5,13 +5,15 @@ const ADMIN_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const adminApi = ky.create({
   prefixUrl: ADMIN_API_BASE_URL,
+  credentials: "include",
   retry: 0,
   hooks: {
     beforeRequest: [
       (request) => {
+        console.log(request);
         const token = localStorage.getItem("token");
         if (token) {
-          request.headers.set("Authorization", `Bearer ${token}`);
+          request.headers.set("admin-token", `${token}`);
         }
       },
     ],
