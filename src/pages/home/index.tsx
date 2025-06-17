@@ -5,7 +5,7 @@ import {
   HomeCategorySwiperSkeleton,
   HomeEcoProductSwiper,
   HomeEcoProductSwiperSkeleton,
-  HomeRecommendedProductSection,
+  HomeTodayProductSection,
 } from "@/pages/home/sections";
 import { TabNavigation } from "@/shared/tabs";
 import { Suspense } from "react";
@@ -26,7 +26,7 @@ export default function HomePage() {
           <HomeEcoProductSwiper />
         </Suspense>
         <Suspense fallback={<ProductCard.GridSkeleton />}>
-          <HomeRecommendedProductSection />
+          <HomeTodayProductSection />
         </Suspense>
       </ErrorBoundary>
     </CommonLayout>

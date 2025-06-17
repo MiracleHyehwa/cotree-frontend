@@ -26,6 +26,10 @@ export const useProductsByCategory = (categoryId: string, displayMode: DisplayMo
   });
 };
 
+export const useTodayProducts = (displayMode: DisplayMode = "fallback") => {
+  return useSuspenseQuery<ProductListResponse>(productQueryOptions.getTodayProducts(displayMode));
+};
+
 export const useEcoProducts = (displayMode: DisplayMode = "fallback") => {
   return useSuspenseQuery<ProductListResponse>(productQueryOptions.getEcoProducts(displayMode));
 };
