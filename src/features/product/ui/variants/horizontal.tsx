@@ -8,13 +8,21 @@ export default function ProductCardListHorizontal() {
   return (
     <div className="w-full max-w-limit bg-background divide-y py-4">
       {products.map((product, index) => {
-        const { id, name, price, salePrice, discountRate, thumbnailImage, brandName, isGreen } = product;
+        const { id, name, price, salePrice, discountRate, quantity, thumbnailImage, brandName, isGreen } = product;
+        const isSoldOut = quantity === 0;
 
         return (
           <Link
             key={id}
             to={`/product/${id}`}
-            className={`flex gap-4 group items-start py-4 ${index === 0 ? "pt-0" : ""}`}
+            className={`flex gap-4 group items-start py-4 ${index === 0 ? "pt-0" : ""} ${
+              isSoldOut ? "pointer-events-none opacity-60 cursor-not-allowed" : ""
+            }`}
+            onClick={(e) => {
+              if (isSoldOut) {
+                e.preventDefault();
+              }
+            }}
           >
             <div className="w-[140px] h-[140px] relative overflow-hidden rounded-md flex-shrink-0">
               <img
@@ -23,6 +31,11 @@ export default function ProductCardListHorizontal() {
                 className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300"
               />
               {isGreen === "Y" && <Badge className="absolute bottom-2 right-2 text-xs font-semibold">친환경</Badge>}
+              {isSoldOut && (
+                <div className="absolute inset-0 bg-black/50 text-white flex items-center justify-center text-sm font-semibold z-10">
+                  품절
+                </div>
+              )}
             </div>
 
             <div className="flex flex-col justify-between flex-1 min-w-0">

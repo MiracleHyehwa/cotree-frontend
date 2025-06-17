@@ -9,12 +9,12 @@ export default function EcoProductList() {
   const ecoProducts = data?.pages.flat() ?? [];
 
   return (
-    <div className="w-full max-w-limit px-4">
+    <>
       <ProductCard.List products={ecoProducts}>
         <ProductCard.Highlighted />
       </ProductCard.List>
       <div ref={ref} className="h-12" />
       {isFetchingNextPage && <Spinner />}
-    </div>
+    </>
   );
 }

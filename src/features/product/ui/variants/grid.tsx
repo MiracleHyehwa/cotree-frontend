@@ -8,11 +8,23 @@ export default function ProductCardGrid() {
   return (
     <div className="grid grid-cols-2 gap-4 py-4">
       {products.map((product) => {
-        const { id, name, price, salePrice, discountRate, origin, thumbnailImage, brandName, isGreen } = product;
+        const { id, name, price, salePrice, discountRate, origin, thumbnailImage, brandName, isGreen, quantity } =
+          product;
+
+        const isSoldOut = quantity === 0;
         const hasDiscount = discountRate > 0;
 
         return (
-          <Link key={id} to={`/product/${id}`} className="relative bg-background overflow-hidden">
+          <Link
+            key={id}
+            to={`/product/${id}`}
+            className="relative bg-background overflow-hidden"
+            onClick={(e) => {
+              if (quantity === 0) {
+                e.preventDefault();
+              }
+            }}
+          >
             <div className="relative w-full aspect-[3/4]">
               <img src={thumbnailImage} alt={name} className="absolute inset-0 w-full h-full object-cover" />
               {isGreen === "Y" && (
@@ -20,8 +32,12 @@ export default function ProductCardGrid() {
                   친환경
                 </Badge>
               )}
+              {isSoldOut && (
+                <div className="absolute inset-0 bg-black/50 text-white text-sm font-semibold flex items-center justify-center z-10">
+                  품절
+                </div>
+              )}
             </div>
-
             <div className="pt-2 pb-3 space-y-1">
               <div className="text-xs text-muted-foreground">{brandName}</div>
               <div className="text-sm font-medium leading-snug break-words line-clamp-2">{name}</div>
