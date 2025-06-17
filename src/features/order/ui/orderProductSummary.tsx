@@ -36,7 +36,7 @@ export default function OrderProductSummary({ products }: OrderProductSummaryPro
 
               <div className="mt-2 font-bold text-base flex flex-col gap-1">
                 {isDiscounted && (
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-2">
                     <span className="text-sm text-muted-foreground line-through">{price.toLocaleString()}원</span>
                     <span className="px-2 py-0.5 text-xs bg-destructive/10 text-destructive rounded-full font-semibold">
                       -{discountRate}%
@@ -44,7 +44,7 @@ export default function OrderProductSummary({ products }: OrderProductSummaryPro
                   </div>
                 )}
                 <div className="text-foreground font-bold">
-                  {totalPrice.toLocaleString()}원 / {quantity}개
+                  {finalPrice.toLocaleString()}원 / {quantity}개
                 </div>
               </div>
 
