@@ -35,3 +35,16 @@ export interface ProductDetail {
   quantity: number;
   description: string;
 }
+
+export interface RawRecommendation {
+  product_id: number;
+  name: string;
+  price: number;
+  salePrice: number;
+  discountRate: number;
+  origin: string;
+  thumbnail_image: string;
+  brand: string;
+  is_green: string;
+  quantity: number;
+}

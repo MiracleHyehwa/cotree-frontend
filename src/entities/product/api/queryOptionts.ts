@@ -4,6 +4,7 @@ import {
   getEcoProducts,
   getProductDetail,
   getProductsByCategory,
+  getRecommendProducts,
   getSearchedProducts,
   getTodayProducts,
 } from "./get";
@@ -17,6 +18,7 @@ export const productKeys = {
   getSearchedProducts: (keyword: string, categoryId: number | null, isGreen: string | null, page: number) =>
     ["products", "search", keyword, categoryId, isGreen, page] as (string | number)[],
   getProductDetail: (id: string) => ["products", "detail", id] as (string | number)[],
+  getRecommendProducts: ["products", "recommend"] as (string | number)[],
 };
 
 export const productQueryOptions = {
@@ -55,6 +57,12 @@ export const productQueryOptions = {
   getSearchedProducts: (params: GetSearchedProductsParams, displayMode: DisplayMode = "fallback") => ({
     queryKey: productKeys.getSearchedProducts(params.keyword, params.categoryId, params.isGreen, params.page),
     queryFn: () => getSearchedProducts(params, displayMode),
+    meta: { displayMode },
+  }),
+
+  getRecommendProducts: (displayMode: DisplayMode = "fallback") => ({
+    queryKey: productKeys.getRecommendProducts,
+    queryFn: () => getRecommendProducts(),
     meta: { displayMode },
   }),
 };

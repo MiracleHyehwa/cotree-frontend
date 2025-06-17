@@ -1,7 +1,8 @@
 import { BaseApiError, DisplayMode } from "@/shared/lib/api/errors/baseApiError";
 import { api } from "@/shared/lib/api/ky";
 import { ApiResponse } from "@/shared/model/commonApiResponse";
-import { GetSearchedProductsParams, ProductDetail, ProductListResponse } from "../model";
+import { GetSearchedProductsParams, ProductDetail, ProductListResponse, RawRecommendation } from "../model";
+import { pythonApi } from "@/shared/lib/api/pythonKy";
 
 export const getProductsByCategory = async (
   categoryId: string,
@@ -100,3 +101,12 @@ export const getSearchedProducts = async (
     throw err;
   }
 };
+
+interface RecommendResponse {
+  recommendations: RawRecommendation[];
+}
+
+export async function getRecommendProducts(): Promise<RawRecommendation[]> {
+  const res = await pythonApi.get("items/recommend").json<RecommendResponse>();
+  return res.recommendations;
+}

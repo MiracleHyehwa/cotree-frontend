@@ -88,3 +88,7 @@ export const useSearchedProducts = (
     meta: { displayMode },
   });
 };
+
+export const useRecommendProducts = (displayMode: DisplayMode = "fallback") => {
+  return useSuspenseQuery(productQueryOptions.getRecommendProducts(displayMode));
+};
