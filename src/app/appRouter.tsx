@@ -2,7 +2,6 @@ import { lazy } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ScrollToTop } from "@/shared/components";
 import { AdminLayout } from "@/shared/layout";
-import AdminLoginPage from "@/pages/admin/login";
 
 const HomePage = lazy(() => import("@/pages/home"));
 const EcoPage = lazy(() => import("@/pages/eco"));
@@ -22,8 +21,10 @@ const NotFoundPage = lazy(() => import("@/pages/notFound"));
 const OnboardingPage = lazy(() => import("@/pages/onboarding"));
 const EnvironmentPage = lazy(() => import("@/pages/mypage/environment"));
 
+const AdminLoginPage = lazy(() => import("@/pages/admin/login"));
 const AdminDashBoardPage = lazy(() => import("@/pages/admin/dashboard"));
 const AdminNotFound = lazy(() => import("@/pages/adminNotFound"));
+const AdminAnalyticsPage = lazy(() => import("@/pages/admin/analytics"));
 
 export default function AppRouter() {
   return (
@@ -55,6 +56,7 @@ export default function AppRouter() {
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Navigate to="/admin/dashboard" replace />} />
           <Route path="dashboard" element={<AdminDashBoardPage />} />
+          <Route path="analytics" element={<AdminAnalyticsPage />} />
           <Route path="*" element={<AdminNotFound />} />
         </Route>
 

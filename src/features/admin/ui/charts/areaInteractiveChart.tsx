@@ -23,7 +23,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export default function ChartAreaInteractive() {
+export default function AreaInteractiveChart() {
   const isMobile = useIsMobile();
 
   const [timeRange, setTimeRange] = useState("7d");

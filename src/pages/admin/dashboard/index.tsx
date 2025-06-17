@@ -1,13 +1,9 @@
 import { Suspense, useEffect } from "react";
-import {
-  SectionCards,
-  ChartAreaInteractive,
-  ChartAreaInteractiveSkeleton,
-  SectionCardsSkeleton,
-} from "@/features/admin/ui";
+import { SectionCards, SectionCardsSkeleton } from "@/features/admin/ui";
 import { ErrorBoundary } from "react-error-boundary";
-import AdminErrorFallback from "@/features/admin/ui/adminErrorFallback";
 import { useNavigate } from "react-router-dom";
+import { AreaInteractiveChart, AreaInteractiveChartSkeleton } from "@/features/admin/ui/charts";
+import AdminErrorFallback from "@/features/admin/ui/adminErrorFallback";
 
 export default function AdminDashBoardPage() {
   const navigate = useNavigate();
@@ -27,8 +23,8 @@ export default function AdminDashBoardPage() {
             <SectionCards />
           </Suspense>
           <div className="px-4 lg:px-6">
-            <Suspense fallback={<ChartAreaInteractiveSkeleton />}>
-              <ChartAreaInteractive />
+            <Suspense fallback={<AreaInteractiveChartSkeleton />}>
+              <AreaInteractiveChart />
             </Suspense>
           </div>
         </div>

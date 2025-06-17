@@ -1,7 +1,7 @@
 import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/shared/components/ui/card";
 import { Skeleton } from "@/shared/components/ui/skeleton";
 
-export default function ChartAreaInteractiveSkeleton() {
+export default function AreaInteractiveChartSkeleton() {
   return (
     <Card className="@container/card">
       <CardHeader>
