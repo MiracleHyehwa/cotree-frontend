@@ -10,3 +10,11 @@ export interface InsightOverviewResponse {
   totalOrderCount: number;
   ecoProductRate: number;
 }
+
+export interface EcoPopularItem {
+  itemId: number;
+  itemName: string;
+  purchaseCount: number;
+}
+
+export type EcoPopularItemResponse = EcoPopularItem[];

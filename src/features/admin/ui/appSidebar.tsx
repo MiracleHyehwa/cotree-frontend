@@ -43,7 +43,7 @@ export default function AppSidebar({ ...props }: React.ComponentProps<typeof Sid
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
-              <Link to="#">
+              <Link to="/admin/dashboard">
                 <span className="text-2xl font-mono font-semibold text-primary">COTREE</span>
               </Link>
             </SidebarMenuButton>

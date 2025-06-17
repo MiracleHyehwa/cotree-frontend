@@ -1,4 +1,4 @@
-export { default as BarChartHorizontalStacked } from "./barChartHorizontalStacked";
+export { default as BarChartCustomLabel } from "./barChartCustomLabel";
 export { default as BarChartStacked } from "./barChartStacked";
 export { default as BarChartVertical } from "./barChartVertical";
 export { default as PieChartLabelList } from "./pieChartLabelList";

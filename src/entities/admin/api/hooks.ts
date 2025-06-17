@@ -18,3 +18,7 @@ export const useAdminLogin = (displayMode: DisplayMode = "toast") => {
     meta: { displayMode },
   });
 };
+
+export const useEcoPopularItems = () => {
+  return useSuspenseQuery(adminQueryOptions.getEcoPopularItems());
+};

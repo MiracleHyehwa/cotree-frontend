@@ -1,9 +1,10 @@
 import { DisplayMode } from "@/shared/lib/api/errors/baseApiError";
-import { getInsightOverview, getPointStats } from "./get";
+import { getEcoPopularItems, getInsightOverview, getPointStats } from "./get";
 
 export const adminKeys = {
   getInsightOverview: ["admin", "insight", "overview"] as const,
   getPointStats: (range: string) => ["admin", "insight", "points", range] as const,
+  getEcoPopularItems: ["admin", "eco", "popular", "items"] as const,
 };
 
 export const adminQueryOptions = {
@@ -16,6 +17,12 @@ export const adminQueryOptions = {
   getInsightOverview: (displayMode: DisplayMode = "fallback") => ({
     queryKey: adminKeys.getInsightOverview,
     queryFn: () => getInsightOverview(displayMode),
+    meta: { displayMode },
+  }),
+
+  getEcoPopularItems: (displayMode: DisplayMode = "fallback") => ({
+    queryKey: adminKeys.getEcoPopularItems,
+    queryFn: () => getEcoPopularItems(displayMode),
     meta: { displayMode },
   }),
 };

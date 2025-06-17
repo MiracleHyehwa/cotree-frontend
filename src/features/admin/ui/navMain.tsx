@@ -7,6 +7,7 @@ import {
   SidebarMenuItem,
 } from "@/shared/components/ui/sidebar";
 import type { LucideIcon } from "lucide-react";
+import { Link } from "react-router-dom";
 
 type NavGroup = {
   label: string;
@@ -31,10 +32,10 @@ export default function NavMain({ groups }: { groups: NavGroup[] }) {
                     asChild
                     className="flex items-center gap-2 px-3 py-2 rounded-md text-sm hover:bg-muted transition"
                   >
-                    <a href={item.url} className="flex items-center w-full">
+                    <Link to={item.url} className="flex items-center w-full">
                       {item.icon && <item.icon className="size-4 shrink-0 text-muted-foreground" />}
                       <span className="ml-2 truncate">{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
