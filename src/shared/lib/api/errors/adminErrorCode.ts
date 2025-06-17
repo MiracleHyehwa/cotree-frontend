@@ -1,4 +1,9 @@
 export const AdminError = {
+  AD000: {
+    code: "AD000",
+    devMessage: "401 인증 실패",
+    message: "로그인이 필요합니다.",
+  },
   AD001: {
     code: "AD001",
     devMessage: "지원하지 않는 range",

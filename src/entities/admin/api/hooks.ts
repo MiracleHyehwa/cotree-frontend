@@ -4,8 +4,8 @@ import { DisplayMode } from "@/shared/lib/api/errors/baseApiError";
 import { AdminLoginFormValues } from "../model/schema";
 import { loginAdmin } from "./create";
 
-export const usePointStats = (range: string) => {
-  return useSuspenseQuery(adminQueryOptions.getPointStats(range));
+export const usePointStats = () => {
+  return useSuspenseQuery(adminQueryOptions.getPointStats("90d"));
 };
 
 export const useInsightOverview = () => {

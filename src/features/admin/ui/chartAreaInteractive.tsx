@@ -25,8 +25,9 @@ const chartConfig = {
 
 export default function ChartAreaInteractive() {
   const isMobile = useIsMobile();
+
   const [timeRange, setTimeRange] = useState("7d");
-  const { data: chartData } = usePointStats(timeRange);
+  const { data: chartData } = usePointStats();
 
   useEffect(() => {
     if (isMobile) {
@@ -36,7 +37,7 @@ export default function ChartAreaInteractive() {
 
   const filteredData = chartData.filter((item) => {
     const date = new Date(item.statDate);
-    const referenceDate = new Date("2024-06-01");
+    const referenceDate = new Date();
     let daysToSubtract = 90;
     if (timeRange === "30d") daysToSubtract = 30;
     else if (timeRange === "7d") daysToSubtract = 7;
@@ -47,9 +48,8 @@ export default function ChartAreaInteractive() {
 
   const transformedData = filteredData.map((item) => ({
     ...item,
-    date: item.statDate,
+    date: new Date(item.statDate),
   }));
-
   return (
     <Card className="@container/card">
       <CardHeader>
@@ -101,7 +101,7 @@ export default function ChartAreaInteractive() {
         </CardAction>
       </CardHeader>
       <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
-        <ChartContainer config={chartConfig} className="aspect-auto h-[250px] w-full">
+        <ChartContainer config={chartConfig} className="w-full h-[250px] aspect-auto">
           <AreaChart data={transformedData}>
             <defs>
               <linearGradient id="fillUsed" x1="0" y1="0" x2="0" y2="1">
