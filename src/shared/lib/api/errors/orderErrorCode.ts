@@ -24,6 +24,11 @@ export const OrderError = {
     devMessage: "주문 상품 정보 없음",
     message: "주문한 상품 정보를 찾을 수 없습니다.",
   },
+  OR005: {
+    code: "OR005",
+    devMessage: "잘못된 접근입니다.",
+    message: "잘못된 접근입니다.",
+  },
 } as const;
 
 export type OrderErrorCode = keyof typeof OrderError;
