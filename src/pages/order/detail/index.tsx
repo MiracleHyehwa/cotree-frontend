@@ -15,7 +15,7 @@ export default function OrderDetailPage() {
   }
 
   return (
-    <HeaderBackLayout>
+    <HeaderBackLayout title="주문상세">
       <ErrorBoundary
         fallbackRender={({ error }) => {
           if (error instanceof OrderApiError && error.code === "OR005") {
