@@ -18,6 +18,7 @@ export const orderFormSchema = z.object({
       })
     )
     .min(1, "주문 상품이 없습니다"),
+  isCart: z.boolean(),
 });
 
 export type OrderFormValues = z.infer<typeof orderFormSchema>;

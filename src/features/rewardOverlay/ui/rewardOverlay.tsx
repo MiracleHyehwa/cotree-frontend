@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useRewardOverlayContext } from "../hooks/useRewardOverlayContext";
 import { Button } from "@/shared/components/ui/button";
+import { RewardCardFirst, RewardCardSecond, RewardCardLast, RewardCardThird } from "./index.ts";
 
 interface RewardOverlayProps {
   children: React.ReactNode;
@@ -9,6 +10,18 @@ interface RewardOverlayProps {
 export default function RewardOverlay({ children }: RewardOverlayProps) {
   const { showOverlay, setShowOverlay } = useRewardOverlayContext();
 
+  useEffect(() => {
+    if (showOverlay) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [showOverlay]);
+
   if (!showOverlay) return null;
 
   return (
@@ -16,7 +29,10 @@ export default function RewardOverlay({ children }: RewardOverlayProps) {
       className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex flex-col items-center justify-center px-4"
       onClick={() => setShowOverlay(false)}
     >
-      <div onClick={(e) => e.stopPropagation()} className="relative w-full max-w-[320px] h-50 animate-scale-pop">
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="relative w-full max-w-limit h-[250px] animate-scale-pop flex items-center justify-center"
+      >
         {children}
       </div>
     </div>
@@ -24,40 +40,20 @@ export default function RewardOverlay({ children }: RewardOverlayProps) {
 }
 
 RewardOverlay.CardStack = function CardStack() {
-  const { cardCount, selectedIndex, images } = useRewardOverlayContext();
+  const { selectedIndex } = useRewardOverlayContext();
 
-  return (
-    <>
-      {[...Array(cardCount)].map((_, i) => {
-        const damped = i / (cardCount - 1 || 1);
-        const tx = -12 * damped;
-        const ty = -8 * damped;
-        const rx = -0.2 * damped;
-        const ry = 0.15 * damped;
-
-        return (
-          <div
-            key={i}
-            style={{
-              transform: `translateX(${tx}px) translateY(${ty}px) rotateX(${rx}rad) rotateY(${ry}rad)`,
-              zIndex: i,
-              opacity: i === cardCount - 1 ? 1 : 0.95,
-              transition: "transform 0.3s ease-out",
-            }}
-            className="absolute top-0 left-0 w-full h-full bg-white border border-gray-300 rounded-xl shadow-md p-4"
-          >
-            <div className="text-base font-semibold tracking-widest text-[#009987]">HYUNDAI</div>
-            <div className="text-sm text-[#1B2A33] mt-1">친환경 소비 리워드</div>
-            <img
-              src={images[selectedIndex]}
-              alt="hindy"
-              className="absolute bottom-4 right-4 w-24 h-24 object-contain pointer-events-none"
-            />
-          </div>
-        );
-      })}
-    </>
-  );
+  switch (selectedIndex) {
+    case 0:
+      return <RewardCardFirst />;
+    case 1:
+      return <RewardCardSecond />;
+    case 2:
+      return <RewardCardThird />;
+    case 3:
+      return <RewardCardLast />;
+    default:
+      return null;
+  }
 };
 
 RewardOverlay.Close = function Close() {
@@ -79,7 +75,7 @@ RewardOverlay.AutoCardAnimation = function AutoCardAnimation() {
   const { setCardCount } = useRewardOverlayContext();
 
   useEffect(() => {
-    let count = 3;
+    let count = 2;
     let increasing = true;
 
     const interval = setInterval(() => {
@@ -87,10 +83,10 @@ RewardOverlay.AutoCardAnimation = function AutoCardAnimation() {
 
       if (increasing) {
         count++;
-        if (count >= 20) increasing = false;
+        if (count >= 10) increasing = false;
       } else {
         count--;
-        if (count <= 5) increasing = true;
+        if (count <= 2) increasing = true;
       }
     }, 300);
 

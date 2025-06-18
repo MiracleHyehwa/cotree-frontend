@@ -27,7 +27,7 @@ export default function ProductPurchaseBottomSheet({ open, setOpen, product }: P
 
     setOpen(false);
     setTimeout(() => {
-      navigate("/order");
+      navigate("/order?source=detail");
     }, 300);
   };
 

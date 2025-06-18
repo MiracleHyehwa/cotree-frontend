@@ -11,7 +11,7 @@ import {
 } from "@/features/order/ui";
 import { FormProvider, useForm } from "react-hook-form";
 import { orderFormSchema, OrderFormValues } from "@/features/order/model/schema";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { clearOrderSession, getOrderSession, shouldRedirectOrderPage } from "@/entities/order/lib";
 import { useCreateOrder } from "@/entities/order/api/hooks";
 import { useQueryClient } from "@tanstack/react-query";
@@ -25,6 +25,10 @@ export default function OrderCreateView() {
   const { mutate: submitOrder } = useCreateOrder();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const isCart = params.get("source") === "cart";
+  console.log(isCart);
 
   const [isChecked, setIsChecked] = useState(false);
   const products = getOrderSession();
@@ -44,6 +48,7 @@ export default function OrderCreateView() {
         itemId: p.itemId,
         quantity: p.quantity,
       })),
+      isCart: isCart,
     },
   });
 

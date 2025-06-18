@@ -169,3 +169,42 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes card-isometric {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+  50% {
+    transform: rotateX(60deg) rotateY(0deg) rotateZ(-45deg);
+  }
+  100% {
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+}
+
+.animate-card-isometric {
+  animation: card-isometric 10s infinite;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.translate-z-30 {
+  transform: translateZ(30px);
+}
+.translate-z-60 {
+  transform: translateZ(60px);
+}
+.translate-z-90 {
+  transform: translateZ(90px);
+}
+.translate-z-95 {
+  transform: translateZ(95px);
+}
+.translate-z-65 {
+  transform: translateZ(65px);
+}
+.translate-z-35 {
+  transform: translateZ(35px);
+}
