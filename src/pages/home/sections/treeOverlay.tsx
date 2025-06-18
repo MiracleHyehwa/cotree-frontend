@@ -66,9 +66,9 @@ TreeOverlay.Header = function TreeOverlayHeader() {
   }
 
   return (
-    <div className="w-full max-w-limit px-6 text-center mt-6 animate-fade-in-up">
-      <p className="text-2xl text-primary-foreground">
-        이번 달에 <strong className="text-primary">{ecoCount}건</strong>의 친환경 상품을 구매했어요.
+    <div className="w-full max-w-limit px-6 pt-10 pb-4 text-center animate-fade-in-up">
+      <p className="text-base leading-relaxed text-primary-foreground break-words">
+        이번 달에 <strong className="text-primary font-semibold">{ecoCount}건</strong>의 친환경 상품을 구매했어요.
       </p>
     </div>
   );
