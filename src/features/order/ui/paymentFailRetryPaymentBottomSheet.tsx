@@ -50,9 +50,7 @@ export default function PaymentFailRetryPaymentBottomSheet({
 
     retryPayment(payload, {
       onSuccess: () => {
-        navigate(`/order/completed/${order.orderNumber}`, {
-          state: { from: "order-success" },
-        });
+        navigate(`/order/completed/${order.orderNumber}`);
       },
     });
   };

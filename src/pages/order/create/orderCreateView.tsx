@@ -60,16 +60,14 @@ export default function OrderCreateView() {
           queryClient.invalidateQueries({ queryKey: cartKeys.getCartItemCount });
 
           setTimeout(() => {
-            navigate(`/order/completed/${orderNumber}`, {
-              state: { from: "order-success" },
-            });
+            navigate(`/order/completed/${orderNumber}`, {});
 
             requestAnimationFrame(() => {
               clearOrderSession();
             });
 
             resolve();
-          }, 300);
+          }, 650);
         },
         onError: () => {
           resolve();

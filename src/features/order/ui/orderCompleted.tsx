@@ -1,26 +1,17 @@
 import { Button } from "@/shared/components/ui/button";
-import { ClipboardList, PartyPopper } from "lucide-react";
-import { useLocation } from "react-router-dom";
+import { PartyPopper } from "lucide-react";
 
 export default function OrderCompleted({ children }: { children: React.ReactNode }) {
   return <div className="w-full max-w-limit mx-auto p-4 space-y-2 pb-16">{children}</div>;
 }
 
 OrderCompleted.Message = function Message() {
-  const location = useLocation();
-  const isCompleted = location.state?.from === "order-success";
-
   return (
     <div className="text-center space-y-2 py-2">
       <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto">
-        {isCompleted ? (
-          <PartyPopper className="w-6 h-6 text-primary-foreground" />
-        ) : (
-          <ClipboardList className="w-6 h-6 text-primary-foreground" />
-        )}
+        <PartyPopper className="w-6 h-6 text-primary-foreground" />
       </div>
-      <h1 className="text-xl font-bold text-foreground">{isCompleted ? "주문이 완료되었습니다" : "주문 상세 정보"}</h1>
-      {!isCompleted && <p className="text-sm text-muted-foreground">해당 주문의 상세 내역입니다</p>}
+      <h1 className="text-xl font-bold text-foreground">주문이 완료되었습니다</h1>
     </div>
   );
 };
