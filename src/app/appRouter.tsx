@@ -2,6 +2,7 @@ import { lazy } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ScrollToTop } from "@/shared/components";
 import { AdminLayout } from "@/shared/layout";
+import ForbiddenPage from "@/pages/forbidden";
 
 const HomePage = lazy(() => import("@/pages/home"));
 const EcoPage = lazy(() => import("@/pages/eco"));
@@ -10,6 +11,7 @@ const CategoryPage = lazy(() => import("@/pages/category"));
 const ProductDetailPage = lazy(() => import("@/pages/productDetail"));
 const OrderHistoryPage = lazy(() => import("@/pages/order"));
 const OrderCreatePage = lazy(() => import("@/pages/order/create"));
+const OrderDetailPage = lazy(() => import("@/pages/order/detail"));
 const OrderCompletedPage = lazy(() => import("@/pages/order/completed"));
 const CartPage = lazy(() => import("@/pages/cart"));
 const MyPage = lazy(() => import("@/pages/mypage"));
@@ -40,6 +42,7 @@ export default function AppRouter() {
 
         <Route path="/order/completed/:orderId" element={<OrderCompletedPage />} />
         <Route path="/order" element={<OrderCreatePage />} />
+        <Route path="/order/detail/:orderId" element={<OrderDetailPage />} />
         <Route path="/orders" element={<OrderHistoryPage />} />
 
         <Route path="/cart" element={<CartPage />} />
@@ -63,6 +66,8 @@ export default function AppRouter() {
         <Route path="/login/onboarding" element={<OnboardingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/*" element={<NotFoundPage />} />
+
+        <Route path="/forbidden" element={<ForbiddenPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,15 +1,21 @@
-import { CommonLayout } from "@/shared/layout";
-import OrderCompletedView from "./orderCompletedView";
+import { Navigate, useParams } from "react-router-dom";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { OrderCompletedSkeleton } from "@/features/order/ui";
-import { Navigate } from "react-router-dom";
 import { ErrorFallback } from "@/shared/components";
+import { HeaderBackLayout } from "@/shared/layout";
+import { OrderDetailViewSkeleton } from "@/features/order/ui";
+import OrderDetailView from "./orderDetailView";
 import { OrderApiError } from "@/shared/lib/api/errors";
 
-export default function OrderCompletedPage() {
+export default function OrderDetailPage() {
+  const { orderId } = useParams<{ orderId: string }>();
+
+  if (!orderId) {
+    return <Navigate to="/not-found" replace />;
+  }
+
   return (
-    <CommonLayout title="주문 완료">
+    <HeaderBackLayout>
       <ErrorBoundary
         fallbackRender={({ error }) => {
           if (error instanceof OrderApiError && error.code === "OR005") {
@@ -21,10 +27,10 @@ export default function OrderCompletedPage() {
           return <ErrorFallback error={error} resetErrorBoundary={() => window.location.reload()} />;
         }}
       >
-        <Suspense fallback={<OrderCompletedSkeleton />}>
-          <OrderCompletedView />
+        <Suspense fallback={<OrderDetailViewSkeleton />}>
+          <OrderDetailView orderId={orderId} />
         </Suspense>
       </ErrorBoundary>
-    </CommonLayout>
+    </HeaderBackLayout>
   );
 }

@@ -45,7 +45,7 @@ export default function OrderStatusList({ status }: OrderStatusListProps) {
                 className="p-0 h-auto text-primary ml-2 text-sm cursor-pointer"
                 onClick={() => {
                   if (order.orderStatus === "PAID") {
-                    navigate(`/order/completed/${order.orderNumber}`, { state: { from: "order-status" } });
+                    navigate(`/order/detail/${order.orderNumber}`);
                   } else {
                     setSelectedOrder(order);
                     setIsBottomSheetOpen(true);

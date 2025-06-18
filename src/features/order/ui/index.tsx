@@ -17,3 +17,4 @@ export { default as OrderCompletedErrorFallback } from "./orderCompletedErrorFal
 export { default as OrderPaymentRequestField } from "./orderPaymentRequestFiled";
 export { default as PaymentFailRetryPaymentBottomSheet } from "./paymentFailRetryPaymentBottomSheet";
 export { default as RetryPaymentCardInputFields } from "./retryPaymentCardInputFields";
+export { default as OrderDetailViewSkeleton } from "./orderDetailViewSkeleton";
