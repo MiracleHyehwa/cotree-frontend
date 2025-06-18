@@ -51,8 +51,8 @@ export default function BarChartStacked() {
             />
             <ChartTooltip content={<ChartTooltipContent hideLabel />} />
             <ChartLegend content={<ChartLegendContent />} />
-            <Bar dataKey="eco" stackId="a" fill="var(--chart-1)" radius={[4, 4, 0, 0]} />
             <Bar dataKey="normal" stackId="a" fill="var(--chart-2)" radius={[0, 0, 4, 4]} />
+            <Bar dataKey="eco" stackId="a" fill="var(--chart-1)" radius={[4, 4, 0, 0]} />
           </BarChart>
         </ChartContainer>
       </CardContent>
