@@ -2,11 +2,11 @@ import { EffectCoverflow } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 const banners = [
-  "/banner/banner01.jpg",
-  "/banner/banner02.jpg",
-  "/banner/banner03.jpg",
-  "/banner/banner04.jpg",
-  "/banner/banner05.jpg",
+  "/banner/banner01.webp",
+  "/banner/banner02.webp",
+  "/banner/banner03.webp",
+  "/banner/banner04.webp",
+  "/banner/banner05.webp",
 ];
 
 export default function HomeBannerSwiper() {
@@ -29,8 +29,13 @@ export default function HomeBannerSwiper() {
         }}
       >
         {banners.map((banner, idx) => (
-          <SwiperSlide key={idx} className="w-full max-h-[500px] bg-background rounded-lg overflow-hidden shadow-lg">
-            <img src={banner} className="w-full h-full object-cover" alt={`slide-${idx}`} />
+          <SwiperSlide className="w-full aspect-[13/12] bg-background rounded-lg overflow-hidden shadow-lg relative">
+            <img
+              src={banner}
+              alt={`slide-${idx}`}
+              className="absolute inset-0 w-full h-full object-cover"
+              loading="eager"
+            />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10" />
           </SwiperSlide>
         ))}
