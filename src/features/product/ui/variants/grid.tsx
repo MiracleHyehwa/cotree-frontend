@@ -33,7 +33,7 @@ export default function ProductCardGrid() {
                 </Badge>
               )}
               {isSoldOut && (
-                <div className="absolute inset-0 bg-black/50 text-white text-sm font-semibold flex items-center justify-center z-10">
+                <div className="absolute inset-0 bg-black/50 text-white text-sm font-semibold flex items-center justify-center z-5">
                   품절
                 </div>
               )}

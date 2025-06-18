@@ -25,7 +25,7 @@ export default function ProductCardHighlighted() {
             <div className="relative overflow-hidden">
               <div className="aspect-square relative rounded">
                 <img src={thumbnailImage} alt={name} className="w-full h-full object-cover rounded" />
-                <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />{" "}
+                <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 {isSoldOut && (
                   <div className="absolute inset-0 bg-black/60 flex items-center justify-center text-white font-semibold z-10 text-sm">
                     품절
