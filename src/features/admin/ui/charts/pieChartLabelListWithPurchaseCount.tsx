@@ -2,7 +2,7 @@
 
 import { usePurchaseCount } from "@/entities/admin/api/hooks";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/shared/components/ui/card";
-import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/shared/components/ui/chart";
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/shared/components/ui/chart";
 import { TrendingUp } from "lucide-react";
 import { LabelList, Pie, PieChart } from "recharts";
 
@@ -10,16 +10,24 @@ export default function PieChartLabelListWithPurchaseCount() {
   const { data = [] } = usePurchaseCount();
 
   const chartConfig = {
-    value: {
-      label: "구매 수",
+    ECO: {
+      label: "친환경 상품",
+      color: "var(--chart-1)",
     },
-  } satisfies ChartConfig;
+    GENERAL: {
+      label: "일반 상품",
+      color: "var(--chart-2)",
+    },
+  } satisfies Record<"ECO" | "GENERAL", { label: string; color: string }>;
 
-  const chartData = data.map((item, i) => ({
-    name: item.itemClassification === "ECO" ? "친환경 상품" : "일반 상품",
-    value: item.count,
-    fill: `var(--chart-${i + 1})`,
-  }));
+  const chartData = data.map((item) => {
+    const config = chartConfig[item.itemClassification];
+    return {
+      name: config.label,
+      value: item.count,
+      fill: config.color,
+    };
+  });
 
   const hasData = chartData.some((item) => item.value > 0);
 

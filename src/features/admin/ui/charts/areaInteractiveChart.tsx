@@ -50,6 +50,7 @@ export default function AreaInteractiveChart() {
     ...item,
     date: new Date(item.statDate),
   }));
+
   return (
     <Card className="@container/card">
       <CardHeader>
@@ -133,11 +134,15 @@ export default function AreaInteractiveChart() {
               defaultIndex={isMobile ? -1 : 4}
               content={
                 <ChartTooltipContent
-                  labelFormatter={(value) => {
-                    return new Date(value).toLocaleDateString("ko-KR", {
-                      month: "short",
-                      day: "numeric",
-                    });
+                  labelFormatter={(_, payload) => {
+                    const raw = payload?.[0]?.payload?.date;
+                    const date = raw instanceof Date ? raw : new Date(raw);
+                    return isNaN(date.getTime())
+                      ? "날짜 없음"
+                      : date.toLocaleDateString("ko-KR", {
+                          month: "short",
+                          day: "numeric",
+                        });
                   }}
                   indicator="dot"
                 />
