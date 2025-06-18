@@ -49,7 +49,7 @@ export function TreeCanvas() {
   }, [exp]);
 
   return (
-    <div className="w-full max-w-limit aspect-[3/4] relative">
+    <div className="relative w-full max-w-limit aspect-[3/4] mb-24">
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
     </div>
   );

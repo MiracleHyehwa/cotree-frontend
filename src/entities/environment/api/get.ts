@@ -16,8 +16,24 @@ export const getMyTree = async (displayMode: DisplayMode = "fallback") => {
 
 export const getMyTreeSummary = async (displayMode: DisplayMode = "fallback") => {
   try {
-    const response = await api.get("tree/summary").json<{ data: MyTreeSummaryResponse }>();
-    return response.data;
+    const response = await api.get("tree/summary", {
+      throwHttpErrors: false,
+    });
+
+    if (response.status === 204) {
+      return {
+        isLoggedIn: false,
+        exp: 0,
+        ecoCount: 0,
+      } satisfies MyTreeSummaryResponse & { isLoggedIn: boolean };
+    }
+
+    const json = await response.json<{ data: MyTreeSummaryResponse }>();
+
+    return {
+      isLoggedIn: true,
+      ...json.data,
+    };
   } catch (err) {
     if (err instanceof BaseApiError) {
       err.displayMode = displayMode;

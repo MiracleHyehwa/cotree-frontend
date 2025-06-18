@@ -14,7 +14,7 @@ export default function LoginLayout({ children, title = "" }: LoginLayoutProps) 
             <Link to={"/"} className="fflex flex-1 items-center justify-center p-2">
               <span className="sr-only">Home</span>
               <img
-                src="/logo.png"
+                src="/header-logo.png"
                 width={60}
                 height={52}
                 alt="logo"

@@ -1,7 +1,7 @@
 import { ReactNode, useEffect } from "react";
 import { Button } from "@/shared/components/ui/button";
 import { useMyTreeSummary } from "@/entities/environment/api/hooks";
-import { BaseApiError } from "@/shared/lib/api/errors/baseApiError";
+import { useNavigate } from "react-router-dom";
 
 interface TreeOverlayProps {
   open: boolean;
@@ -36,9 +36,34 @@ export default function TreeOverlay({ open, onClose, children }: TreeOverlayProp
   );
 }
 
+TreeOverlay.OnlyWhenLoggedIn = function OnlyWhenLoggedIn({ children }: { children: ReactNode }) {
+  const { data } = useMyTreeSummary();
+
+  if (!data?.isLoggedIn) return null;
+
+  return <>{children}</>;
+};
+
 TreeOverlay.Header = function TreeOverlayHeader() {
   const { data } = useMyTreeSummary();
   const { ecoCount } = data;
+  const navigate = useNavigate();
+
+  if (!data?.isLoggedIn) {
+    return (
+      <div className="flex-1 flex flex-col items-center justify-center w-full px-6 text-center animate-fade-in-up">
+        <div className="text-5xl mb-4">🌱</div>
+
+        <p className="text-base text-primary-foreground leading-relaxed mb-6">
+          로그인하면 내 나무의 성장을 확인할 수 있어요.
+        </p>
+
+        <Button variant="link" onClick={() => navigate("/login")} className="cursor-pointer">
+          로그인하러 가기
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full max-w-limit px-6 text-center mt-6 animate-fade-in-up">
@@ -56,13 +81,20 @@ TreeOverlay.Footer = function TreeOverlayFooter({
   onClose: () => void;
   onNavigate: () => void;
 }) {
+  const { data } = useMyTreeSummary();
+  const { isLoggedIn } = data;
   return (
     <div className="absolute inset-x-0 bottom-8 flex flex-col items-center gap-3 px-6">
-      <Button variant="default" className="w-full max-w-limit cursor-pointer" onClick={onNavigate}>
-        내 실제 나무 보러가기
-      </Button>
-
-      <Button variant="outline" className="w-full max-w-limit text-sm cursor-pointer" onClick={onClose}>
+      {isLoggedIn && (
+        <Button variant="default" className="w-full max-w-limit cursor-pointer" onClick={onNavigate}>
+          내 실제 나무 보러가기
+        </Button>
+      )}
+      <Button
+        variant={isLoggedIn ? "outline" : "default"}
+        className="w-full max-w-limit text-sm cursor-pointer"
+        onClick={onClose}
+      >
         닫기
       </Button>
     </div>
@@ -77,21 +109,11 @@ TreeOverlay.Skeleton = function TreeOverlaySkeleton() {
   );
 };
 
-TreeOverlay.ErrorFallback = function TreeOverlayErrorFallback({
-  error,
-  onClose,
-}: {
-  error: unknown;
-  onClose: () => void;
-}) {
-  const isNotLoggedIn = error instanceof BaseApiError && error.code === "TR006";
-
+TreeOverlay.ErrorFallback = function TreeOverlayErrorFallback({ onClose }: { onClose: () => void }) {
   return (
     <>
       <div className="flex-1 flex items-center justify-center text-center px-6">
-        <p className="text-destructive text-xl">
-          {isNotLoggedIn ? "로그인이 필요한 서비스입니다." : "나무 정보를 불러오는 데 실패했어요."}
-        </p>
+        <p className="text-destructive text-xl">"나무 정보를 불러오는 데 실패했어요</p>
       </div>
 
       <div className="absolute inset-x-0 bottom-8 flex flex-col items-center gap-3 px-6">
