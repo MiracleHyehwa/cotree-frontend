@@ -4,13 +4,17 @@ import { OrderDetail, OrderListItem } from "../model";
 import { BaseApiError, DisplayMode } from "@/shared/lib/api/errors/baseApiError";
 
 export const getOrderList = async (
+  page: number = 1,
   status?: string,
   displayMode: DisplayMode = "fallback"
 ): Promise<OrderListItem[]> => {
   try {
     const res = await api
       .get("orders", {
-        searchParams: status ? { status } : {},
+        searchParams: {
+          page,
+          ...(status ? { status } : {}),
+        },
       })
       .json<ApiResponse<OrderListItem[]>>();
 

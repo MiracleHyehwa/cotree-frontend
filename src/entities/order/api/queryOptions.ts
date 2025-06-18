@@ -2,14 +2,15 @@ import { DisplayMode } from "@/shared/lib/api/errors/baseApiError";
 import { getOrderDetail, getOrderList } from "./get";
 
 export const orderKeys = {
-  getOrderList: (status?: string) => ["admin", "orders", status ?? "ALL"] as const,
+  getOrderListPage: (status?: string) => ["admin", "orders", status ?? "ALL"],
   getOrderDetail: (orderId: string) => ["order", "detail", orderId] as const,
 };
 
 export const orderQueryOptions = {
-  getOrderList: (status?: string, displayMode: DisplayMode = "fallback") => ({
-    queryKey: orderKeys.getOrderList(status),
-    queryFn: () => getOrderList(status, displayMode),
+  getOrderList: (status?: string, page: number = 1, displayMode: DisplayMode = "fallback") => ({
+    queryKey: orderKeys.getOrderListPage(status),
+    queryFn: () => getOrderList(page, status, displayMode),
+    meta: { displayMode },
   }),
 
   getOrderDetail: (orderId: string, displayMode: DisplayMode = "fallback") => ({

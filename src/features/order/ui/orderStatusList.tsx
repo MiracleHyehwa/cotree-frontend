@@ -1,4 +1,3 @@
-import { useOrderList } from "@/entities/order/api/hooks";
 import { OrderStatusKey } from "../constants";
 import { Badge } from "@/shared/components/ui/badge";
 import { PackageX } from "lucide-react";
@@ -7,13 +6,21 @@ import { Button } from "@/shared/components/ui/button";
 import { useState } from "react";
 import { OrderListItem } from "@/entities/order/model";
 import PaymentFailRetryPaymentBottomSheet from "./paymentFailRetryPaymentBottomSheet";
+import { useOrderListInfinite } from "@/entities/order/api/hooks";
+import { useInfiniteScroll } from "@/shared/hooks";
+import { Spinner } from "@/shared/components/ui/spinner";
 
 interface OrderStatusListProps {
   status: OrderStatusKey;
 }
 
 export default function OrderStatusList({ status }: OrderStatusListProps) {
-  const { data: orders } = useOrderList(status === "ALL" ? undefined : status);
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useOrderListInfinite(
+    status === "ALL" ? undefined : status
+  );
+  const { ref } = useInfiniteScroll({ fetchNextPage, hasNextPage, isFetchingNextPage });
+  const orders = data?.pages.flat() ?? [];
+
   const navigate = useNavigate();
 
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(true);
@@ -105,6 +112,8 @@ export default function OrderStatusList({ status }: OrderStatusListProps) {
           })}
         </div>
       ))}
+      <div ref={ref} className="h-12" />
+      {isFetchingNextPage && <Spinner />}
       <PaymentFailRetryPaymentBottomSheet
         open={isBottomSheetOpen}
         onClose={() => setIsBottomSheetOpen(false)}
