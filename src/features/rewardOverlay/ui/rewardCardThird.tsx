@@ -184,7 +184,7 @@ export default function RewardCardThird({ className = "", onCardClick }: RewardC
               }}
             />
 
-            <div className="relative w-full h-full p-6 flex flex-col text-white overflow-hidden">
+            <div className="relative w-full h-full px-4 py-2 flex flex-col text-white overflow-hidden">
               <div className="flex items-start justify-between mb-4 z-10">
                 <div>
                   <div className="text-sm font-bold tracking-widest opacity-90 mb-1">HYUNDAI</div>
@@ -241,16 +241,7 @@ export default function RewardCardThird({ className = "", onCardClick }: RewardC
                 <div className="text-sm opacity-80">교환권</div>
               </div>
 
-              <div className="flex items-end justify-between text-xs opacity-70 mt-4 z-10">
-                <div>
-                  <div>Eco Point</div>
-                  <div className="font-bold text-sm text-cyan-200">800P</div>
-                </div>
-                <div className="text-right">
-                  <div>Temp</div>
-                  <div className="font-mono text-cyan-200">65°C</div>
-                </div>
-              </div>
+           
             </div>
 
             <div className="absolute inset-0 opacity-10 pointer-events-none">
