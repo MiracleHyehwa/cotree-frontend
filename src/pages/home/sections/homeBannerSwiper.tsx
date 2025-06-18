@@ -35,7 +35,6 @@ export default function HomeBannerSwiper() {
               alt={`slide-${idx}`}
               className="absolute inset-0 w-full h-full object-cover"
               loading="eager"
-              fetchpriority="high"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10" />
           </SwiperSlide>
