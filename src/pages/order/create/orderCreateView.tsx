@@ -28,7 +28,6 @@ export default function OrderCreateView() {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const isCart = params.get("source") === "cart";
-  console.log(isCart);
 
   const [isChecked, setIsChecked] = useState(false);
   const products = getOrderSession();
