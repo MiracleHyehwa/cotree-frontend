@@ -37,7 +37,9 @@ export const useGiveWater = (displayMode: DisplayMode = "toast") => {
       syncGrowthFromExp(serverExp);
       setRemainingWaterUnit(serverUnit);
 
-      if (newLevel > prevLevel) {
+      const rewardLevels = [3, 6, 9, 10];
+
+      if (newLevel > prevLevel && rewardLevels.includes(newLevel)) {
         toast(`🎉 나무가 ${newLevel}레벨로 성장했어요!`, {
           position: "top-center",
           duration: 3000,
