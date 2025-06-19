@@ -38,5 +38,5 @@ export class SkyboxOptions {
    * 하늘의 상단 색상 (천정 방향 색상)
    * - sRGB 색 공간으로 변환됨
    */
-  skyColorHigh = new THREE.Color(0x2053ff).convertLinearToSRGB();
+  skyColorHigh = new THREE.Color(0x4f79ff).convertLinearToSRGB();
 }
