@@ -2,9 +2,8 @@ import { CommonLayout } from "@/shared/layout";
 import OrderCompletedView from "./orderCompletedView";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { OrderCompletedSkeleton } from "@/features/order/ui";
+import { OrderCompletedErrorFallback, OrderCompletedSkeleton } from "@/features/order/ui";
 import { Navigate } from "react-router-dom";
-import { ErrorFallback } from "@/shared/components";
 import { OrderApiError } from "@/shared/lib/api/errors";
 
 export default function OrderCompletedPage() {
@@ -18,7 +17,7 @@ export default function OrderCompletedPage() {
           if (error instanceof OrderApiError && error.code === "OR003") {
             return <Navigate to="/not-found" replace />;
           }
-          return <ErrorFallback error={error} resetErrorBoundary={() => window.location.reload()} />;
+          return <OrderCompletedErrorFallback error={error} />;
         }}
       >
         <Suspense fallback={<OrderCompletedSkeleton />}>
