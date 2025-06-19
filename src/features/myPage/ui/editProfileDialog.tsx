@@ -98,7 +98,7 @@ export default function EditProfileDialog({ open, setOpen, defaultValues }: Edit
   };
 
   const Form = (
-    <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6 w-full max-w-limit mx-auto">
+    <form id="edit-profile-form" onSubmit={handleSubmit(onSubmit)} className="grid gap-6 w-full max-w-limit mx-auto">
       <div className="flex justify-center">
         <div className="relative w-24 h-24 mb-2">
           <Avatar className="w-24 h-24">
@@ -153,10 +153,6 @@ export default function EditProfileDialog({ open, setOpen, defaultValues }: Edit
           ))}
         </div>
       </div>
-
-      <Button type="submit" disabled={!isValid || isPending} className="w-full cursor-pointer">
-        {isPending ? <SpinnerIcon className="border-muted border-t-primary" /> : "저장하기"}
-      </Button>
     </form>
   );
 
@@ -174,9 +170,14 @@ export default function EditProfileDialog({ open, setOpen, defaultValues }: Edit
             <DrawerDescription className="sr-only">기본 정보를 수정할 수 있어요.</DrawerDescription>
           </DrawerHeader>
           <div className="flex-1 overflow-y-auto px-4">{Form}</div>
-          <DrawerFooter className="pt-2">
+          <DrawerFooter className="pt-2 flex gap-2">
+            <Button type="submit" form="edit-profile-form" disabled={!isValid || isPending} className="flex-1">
+              {isPending ? <SpinnerIcon className="border-muted border-t-primary" /> : "저장하기"}
+            </Button>
             <DrawerClose asChild>
-              <Button variant="outline">취소</Button>
+              <Button type="button" variant="outline" className="flex-1">
+                취소
+              </Button>
             </DrawerClose>
           </DrawerFooter>
         </DrawerContent>
@@ -197,6 +198,9 @@ export default function EditProfileDialog({ open, setOpen, defaultValues }: Edit
           <DialogDescription className="sr-only">기본 정보를 수정할 수 있어요.</DialogDescription>
         </DialogHeader>
         {Form}
+        <Button type="submit" form="edit-profile-form" disabled={!isValid || isPending} className="w-full mt-6">
+          {isPending ? <SpinnerIcon className="border-muted border-t-primary" /> : "저장하기"}
+        </Button>
       </DialogContent>
     </Dialog>
   );
