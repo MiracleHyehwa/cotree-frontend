@@ -173,7 +173,7 @@ export default function EditProfileDialog({ open, setOpen, defaultValues }: Edit
             <DrawerTitle>회원정보 수정</DrawerTitle>
             <DrawerDescription className="sr-only">기본 정보를 수정할 수 있어요.</DrawerDescription>
           </DrawerHeader>
-          <div className="flex-1 overflow-y-auto px-4">{Form}</div>
+          <div className="flex-1 overflow-y-auto px-4 pb-4">{Form}</div>
           <DrawerFooter className="pt-2 flex gap-2">
             <Button type="submit" form="edit-profile-form" disabled={!isValid || isPending} className="flex-1">
               {isPending ? <SpinnerIcon className="border-muted border-t-primary" /> : "저장하기"}
