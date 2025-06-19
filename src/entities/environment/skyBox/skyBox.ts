@@ -31,7 +31,7 @@ export class Skybox extends THREE.Mesh {
       uSunSize: { value: options.sunSize },
     };
 
-    const geometry = new THREE.SphereGeometry(900, 900, 900);
+    const geometry = new THREE.SphereGeometry(900, 64, 64);
     const material = new THREE.ShaderMaterial({
       vertexShader,
       fragmentShader,
