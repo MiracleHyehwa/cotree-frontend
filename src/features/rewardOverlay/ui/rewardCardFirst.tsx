@@ -7,7 +7,7 @@ export default function RewareCardFirst() {
 
   return (
     <div
-      className="relative w-full max-w-[400px] aspect-[8/5] mx-auto [perspective:1000px]"
+      className="relative w-full max-w-[320px] aspect-[8/5] mx-auto [perspective:1000px]"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
