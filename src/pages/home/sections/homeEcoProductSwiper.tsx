@@ -33,7 +33,6 @@ export default function HomeEcoProductSwiper() {
   const { data: ecoProducts } = useEcoProducts();
   const productGroups = chunk(ecoProducts, 4);
 
-  console.log(ecoProducts);
   return (
     <div className="w-full max-w-limit mx-auto px-4">
       <h2 className="text-lg font-bold mb-4">🌱 친환경 상품</h2>
