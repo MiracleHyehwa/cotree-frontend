@@ -168,12 +168,12 @@ export default function EditProfileDialog({ open, setOpen, defaultValues }: Edit
           if (!isPending) setOpen(v);
         }}
       >
-        <DrawerContent>
+        <DrawerContent className="flex flex-col max-h-[90dvh]">
           <DrawerHeader>
             <DrawerTitle>회원정보 수정</DrawerTitle>
             <DrawerDescription className="sr-only">기본 정보를 수정할 수 있어요.</DrawerDescription>
           </DrawerHeader>
-          <div className="px-4">{Form}</div>
+          <div className="flex-1 overflow-y-auto px-4">{Form}</div>
           <DrawerFooter className="pt-2">
             <DrawerClose asChild>
               <Button variant="outline">취소</Button>
