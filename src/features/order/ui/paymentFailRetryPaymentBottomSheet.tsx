@@ -60,7 +60,7 @@ export default function PaymentFailRetryPaymentBottomSheet({
     <FormProvider {...form}>
       <Drawer open={open} onClose={onClose}>
         <DrawerContent className="max-w-limit w-full mx-auto">
-          <DrawerHeader>
+          <DrawerHeader className="flex-1 overflow-y-auto">
             <DrawerTitle className="sr-only">결제정보 수정</DrawerTitle>
             <DrawerDescription className="sr-only">결제 정보를 입력해주세요</DrawerDescription>
 
