@@ -98,7 +98,11 @@ export default function EditProfileDialog({ open, setOpen, defaultValues }: Edit
   };
 
   const Form = (
-    <form id="edit-profile-form" onSubmit={handleSubmit(onSubmit)} className="grid gap-6 w-full max-w-limit mx-auto">
+    <form
+      id="edit-profile-form"
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex-1 overflow-y-auto px-4 grid gap-6 w-full max-w-limit mx-auto"
+    >
       <div className="flex justify-center">
         <div className="relative w-24 h-24 mb-2">
           <Avatar className="w-24 h-24">
