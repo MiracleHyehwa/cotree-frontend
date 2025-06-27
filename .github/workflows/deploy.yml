@@ -1,4 +1,4 @@
-name: Deploy React App to S3 + CloudFront
+name: Deploy React App to Oracle Cloud
 
 on:
   push:
@@ -10,33 +10,45 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. GitHub에서 코드 체크아웃
       - name: Checkout source
         uses: actions/checkout@v3
 
+      # 2. Node.js 설치
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20
 
+      # 3. 의존성 설치
       - name: Install dependencies
         run: npm install
 
+      # 4. .env.production 파일 복원 (선택 사항)
       - name: Create .env.production
         run: echo "${{ secrets.FRONT_ENV }}" > .env.production
 
+      # 5. React 앱 빌드
       - name: Build React app
         run: npm run build
 
-      - name: S3 Deploy 
-        run: aws s3 sync ./dist s3://cotreebucket/ --acl bucket-owner-full-control
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
+      # 6. SSH 키 설정
+      - name: Setup SSH key
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.ORACLE_SSH_PRIVATE_KEY }}
 
-      - name: Invalidate CloudFront Cache 
-        uses: chetan/invalidate-cloudfront-action@master
-        env:
-          AWS_DISTRIBUTION: ${{ secrets.AWS_DISTRIBUTION_ID }}
-          PATHS: "/index.html"
-        continue-on-error: true
+      # 7. Oracle 인스턴스로 파일 복사 (build → 임시 디렉토리)
+      - name: Copy build files to Oracle VM
+        run: |
+          scp -o StrictHostKeyChecking=no -r ./dist ${{ secrets.ORACLE_USER }}@${{ secrets.ORACLE_HOST }}:/home/${{ secrets.ORACLE_USER }}/cotree-frontend-temp
+
+      # 8. Oracle VM 내에서 정식 디렉토리로 옮기고 Nginx 재시작
+      - name: Deploy on Oracle VM
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.ORACLE_USER }}@${{ secrets.ORACLE_HOST }} << EOF
+            sudo rm -rf /var/www/html/*
+            sudo mv ~/cotree-frontend-temp/* /var/www/html/
+            sudo rm -rf ~/cotree-frontend-temp
+            sudo systemctl restart nginx || true
+          EOF
