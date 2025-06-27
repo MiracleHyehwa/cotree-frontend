@@ -36,7 +36,7 @@ export default function LoginLayout({ children, title = "" }: LoginLayoutProps) 
       </div>
 
       <div id="scroll-background" className="pointer-events-none -z-50 flex flex-col items-center">
-        <div className="fixed inset-0 -z-50 bg-black" />
+        <div className="fixed inset-0 -z-50 bg-muted" />
         <div className="fixed bottom-0 top-0 -z-40 w-full bg-white max-w-limit" />
       </div>
     </div>
