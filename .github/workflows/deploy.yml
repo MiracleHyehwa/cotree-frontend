@@ -32,9 +32,6 @@ jobs:
       - name: Build React app
         run: npm run build
 
-      - name: Check build folder exists
-        run: ls -al ./build
-
       # 6. SSH 키 설정
       - name: Setup SSH key
         uses: webfactory/ssh-agent@v0.7.0
