@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ScrollToTop } from "@/shared/components";
 import { AdminLayout } from "@/shared/layout";
 import ForbiddenPage from "@/pages/forbidden";
+import EventToast from "@/features/event/ui/eventToast";
 
 const HomePage = lazy(() => import("@/pages/home"));
 const EcoPage = lazy(() => import("@/pages/eco"));
@@ -32,6 +33,7 @@ export default function AppRouter() {
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <EventToast />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/eco" element={<EcoPage />} />
