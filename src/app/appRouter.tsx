@@ -8,6 +8,7 @@ import EventToast from "@/features/event/ui/eventToast";
 const HomePage = lazy(() => import("@/pages/home"));
 const EcoPage = lazy(() => import("@/pages/eco"));
 const RecommendPage = lazy(() => import("@/pages/recommend"));
+const EventPage = lazy(() => import("@/pages/event"));
 const CategoryPage = lazy(() => import("@/pages/category"));
 const ProductDetailPage = lazy(() => import("@/pages/productDetail"));
 const OrderHistoryPage = lazy(() => import("@/pages/order"));
@@ -38,6 +39,7 @@ export default function AppRouter() {
         <Route path="/" element={<HomePage />} />
         <Route path="/eco" element={<EcoPage />} />
         <Route path="/recommend" element={<RecommendPage />} />
+        <Route path="/event" element={<EventPage />} />
 
         <Route path="/category" element={<CategoryPage />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />

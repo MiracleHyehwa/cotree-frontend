@@ -10,3 +10,4 @@ export { default as ProductMetaInfo } from "./productMetaInfo";
 export { default as ProductDetailSkeleton } from "./productDetailSkeleton";
 export { default as RecommendProductList } from "./recommendProductList";
 export { default as EcoProductList } from "./ecoProductList";
+export { default as EventProductList } from "./eventProductList";

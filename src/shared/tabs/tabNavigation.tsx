@@ -19,6 +19,7 @@ const TABS: Tab[] = [
   { key: "home", label: "홈", path: "/" },
   { key: "eco", label: "친환경", path: "/eco" },
   { key: "recommend", label: "추천", path: "/recommend" },
+  { key: "event", label: "특가할인", path: "/event" },
   { key: "my-tree", label: "내 기여도" },
 ];
 

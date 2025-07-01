@@ -2,6 +2,7 @@ import { GetSearchedProductsParams } from "../model";
 import {
   getEcoProductByPage,
   getEcoProducts,
+  getEventProduct,
   getProductDetail,
   getProductsByCategory,
   getRecommendProducts,
@@ -19,6 +20,7 @@ export const productKeys = {
     ["products", "search", keyword, categoryId, isGreen, page] as (string | number)[],
   getProductDetail: (id: string) => ["products", "detail", id] as (string | number)[],
   getRecommendProducts: ["products", "recommend"] as (string | number)[],
+  getEventProducts: ["products", "event"] as (string | number)[],
 };
 
 export const productQueryOptions = {
@@ -63,6 +65,12 @@ export const productQueryOptions = {
   getRecommendProducts: (displayMode: DisplayMode = "fallback") => ({
     queryKey: productKeys.getRecommendProducts,
     queryFn: () => getRecommendProducts(),
+    meta: { displayMode },
+  }),
+
+  getEventProducts: (displayMode: DisplayMode = "fallback") => ({
+    queryKey: productKeys.getEventProducts,
+    queryFn: () => getEventProduct(),
     meta: { displayMode },
   }),
 };

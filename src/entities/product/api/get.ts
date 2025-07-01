@@ -110,3 +110,15 @@ export async function getRecommendProducts(): Promise<RawRecommendation[]> {
   const res = await pythonApi.get("items/recommend").json<RecommendResponse>();
   return res.recommendations;
 }
+
+export async function getEventProduct(displayMode: DisplayMode = "fallback"): Promise<ProductListResponse> {
+  try {
+    const res = await api.get("items/event").json<ApiResponse<ProductListResponse>>();
+    return res.data;
+  } catch (err) {
+    if (err instanceof BaseApiError) {
+      err.displayMode = displayMode;
+    }
+    throw err;
+  }
+}

@@ -92,3 +92,7 @@ export const useSearchedProducts = (
 export const useRecommendProducts = (displayMode: DisplayMode = "fallback") => {
   return useSuspenseQuery(productQueryOptions.getRecommendProducts(displayMode));
 };
+
+export const useEventProducts = (displayMode: DisplayMode = "fallback") => {
+  return useSuspenseQuery(productQueryOptions.getEventProducts(displayMode));
+};
