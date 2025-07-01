@@ -13,5 +13,5 @@ export const categoryImageMap: Record<number, string> = {
 
 export const getCategoryImageUrl = (categoryId: number): string => {
   const imageKey = categoryImageMap[categoryId];
-  return `/category/${imageKey}.png`;
+  return `/categoryImage/${imageKey}.png`;
 };
