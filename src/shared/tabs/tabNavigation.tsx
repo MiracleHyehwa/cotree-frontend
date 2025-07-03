@@ -9,7 +9,6 @@ import { useQueryClient } from "@tanstack/react-query";
 import { environmentKeys } from "@/entities/environment/api/queryOptions";
 import { getMyTreeSummary } from "@/entities/environment/api/get";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectCoverflow } from "swiper/modules";
 
 interface Tab {
   key: string;
