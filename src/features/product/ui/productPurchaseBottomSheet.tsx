@@ -17,11 +17,15 @@ export default function ProductPurchaseBottomSheet({ open, setOpen, product }: P
   const { id, name, price, salePrice, discountRate, quantity: stockQuantity } = product;
   const [quantity, setQuantity] = useState(1);
   const maxQuantity = stockQuantity;
+  const isSoldOut = maxQuantity === 0;
+
   const { mutate: addToCart } = useAddToCart();
 
   const navigate = useNavigate();
 
   const handlePurchase = () => {
+    if (isSoldOut) return;
+
     const orderItem = toOrderItemFromProductDetail(product, quantity);
     setOrderSession([orderItem]);
 
@@ -32,6 +36,8 @@ export default function ProductPurchaseBottomSheet({ open, setOpen, product }: P
   };
 
   const handleAddToCart = async () => {
+    if (isSoldOut) return;
+
     addToCart({ itemId: id, quantity });
     setOpen(false);
   };
@@ -57,7 +63,7 @@ export default function ProductPurchaseBottomSheet({ open, setOpen, product }: P
                 onClick={() => setQuantity((q) => Math.max(1, q - 1))}
                 variant="ghost"
                 className="text-base cursor-pointer"
-                disabled={quantity <= 1}
+                disabled={quantity <= 1 || isSoldOut}
               >
                 −
               </Button>
@@ -74,12 +80,13 @@ export default function ProductPurchaseBottomSheet({ open, setOpen, product }: P
                 className="w-16 h-10 text-center text-lg font-medium"
                 min={1}
                 max={maxQuantity}
+                disabled={isSoldOut}
               />
               <Button
                 onClick={() => setQuantity((q) => Math.min(maxQuantity, q + 1))}
                 variant="ghost"
                 className=" text-base cursor-pointer"
-                disabled={quantity >= maxQuantity}
+                disabled={quantity >= maxQuantity || isSoldOut}
               >
                 +
               </Button>
@@ -96,8 +103,13 @@ export default function ProductPurchaseBottomSheet({ open, setOpen, product }: P
             </div>
           </div>
 
-          {maxQuantity <= 5 && (
-            <div className="text-right text-sm text-destructive">최대 {maxQuantity}개까지 구매 가능합니다</div>
+          {isSoldOut ? (
+            <div className="text-right text-base font-semibold text-destructive">품절된 상품입니다.</div>
+          ) : (
+            maxQuantity > 0 &&
+            maxQuantity <= 5 && (
+              <div className="text-right text-sm text-destructive">최대 {maxQuantity}개까지 구매 가능합니다.</div>
+            )
           )}
 
           <div className="flex justify-between pt-4 border-t border-border">
@@ -106,10 +118,15 @@ export default function ProductPurchaseBottomSheet({ open, setOpen, product }: P
           </div>
 
           <div className="grid grid-cols-2 gap-3 pt-4">
-            <Button className="h-12 text-base font-medium cursor-pointer" onClick={handlePurchase}>
+            <Button className="h-12 text-base font-medium cursor-pointer" onClick={handlePurchase} disabled={isSoldOut}>
               바로 구매
             </Button>
-            <Button className="h-12 rounded-lg cursor-pointer" variant="outline" onClick={handleAddToCart}>
+            <Button
+              className="h-12 rounded-lg cursor-pointer"
+              variant="outline"
+              onClick={handleAddToCart}
+              disabled={isSoldOut}
+            >
               장바구니 담기
             </Button>
           </div>
