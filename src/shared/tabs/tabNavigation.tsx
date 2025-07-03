@@ -8,6 +8,8 @@ import { ErrorBoundary } from "react-error-boundary";
 import { useQueryClient } from "@tanstack/react-query";
 import { environmentKeys } from "@/entities/environment/api/queryOptions";
 import { getMyTreeSummary } from "@/entities/environment/api/get";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCoverflow } from "swiper/modules";
 
 interface Tab {
   key: string;
@@ -41,24 +43,30 @@ export default function TabNavigation() {
 
   return (
     <>
-      <div className="flex items-center justify-start w-full px-4 py-2">
-        {TABS.map((tab) => {
-          const isActive = activeTab === tab.key;
-          const className = cn(
-            "relative flex flex-col items-center mr-2 cursor-pointer rounded-full",
-            isActive && "bg-primary text-primary-foreground"
-          );
+      <div className="w-full px-4 py-2 bg-background">
+        <Swiper slidesPerView="auto" spaceBetween={8} className="w-full">
+          {TABS.map((tab) => {
+            const isActive = activeTab === tab.key;
+            const className = cn(
+              "relative flex flex-col items-center px-4 py-1.5 text-sm rounded-full whitespace-nowrap transition-colors",
+              isActive ? "bg-primary text-primary-foreground" : " text-muted-foreground"
+            );
 
-          return tab.path ? (
-            <Button key={tab.key} asChild variant={isActive ? "default" : "ghost"} className={className}>
-              <Link to={tab.path}>{tab.label}</Link>
-            </Button>
-          ) : (
-            <Button key={tab.key} variant="ghost" onClick={() => setIsOverlayOpen(true)} className={className}>
-              {tab.label}
-            </Button>
-          );
-        })}
+            return (
+              <SwiperSlide key={tab.key} className="!w-auto">
+                {tab.path ? (
+                  <Button asChild variant="ghost" className={className}>
+                    <Link to={tab.path}>{tab.label}</Link>
+                  </Button>
+                ) : (
+                  <Button variant="ghost" onClick={() => setIsOverlayOpen(true)} className={className}>
+                    {tab.label}
+                  </Button>
+                )}
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
       </div>
       <TreeOverlay open={isOverlayOpen} onClose={() => setIsOverlayOpen(false)}>
         <ErrorBoundary fallbackRender={() => <TreeOverlay.ErrorFallback onClose={() => setIsOverlayOpen(false)} />}>
