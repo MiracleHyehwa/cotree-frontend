@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cotree-deployment
+  labels:
+    app: cotree
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cotree
+  template:
+    metadata:
+      labels:
+        app: cotree
+    spec:
+      containers:
+        - name: cotree-container
+          image: hansajgun/cotree-front:latest
+          ports:
+            - containerPort: 3000
