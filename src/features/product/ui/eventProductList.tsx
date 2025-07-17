@@ -3,6 +3,7 @@ import { ProductCard } from "./variants";
 
 export default function EventProductList() {
   const { data: eventProducts } = useEventProducts();
+
   return (
     <ProductCard.List products={eventProducts}>
       <ProductCard.Highlighted />
